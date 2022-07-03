@@ -129,6 +129,16 @@
     };
   };
 
+  xresources.extraConfig = builtins.readFile (
+    pkgs.fetchFromGitHub
+      {
+        owner = "catppuccin";
+        repo = "xresources";
+        rev = "86843e1452f247b1440fc04a883ed920378e4c6b";
+        sha256 = "8tOtRWUBRSwzRX5VA5oPKT5GJgP9g/L3vsD0naPdam8=";
+      } + "/Xresources"
+  );
+
 
   xdg.configFile = {
     nvim = {

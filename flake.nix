@@ -7,14 +7,18 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nh = {
+      url = "github:viperML/nh";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, neovim-nightly-overlay, nh, ... }:
     let
       system = "x86_64-linux";
       overlays = [
-        inputs.neovim-nightly-overlay.overlay
+        neovim-nightly-overlay.overlay
       ];
       pkgs = import nixpkgs {
         inherit system;
@@ -33,6 +37,7 @@
             ./users/tntman/home.nix
             {
               nixpkgs.overlays = overlays;
+              home.packages = [ nh.packages.${system}.default ];
             }
           ];
         };

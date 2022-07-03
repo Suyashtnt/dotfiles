@@ -188,6 +188,7 @@
   environment.systemPackages = with pkgs; [
     neovim
   ];
+  environment.variables.FLAKE = "~/dotfiles";
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
