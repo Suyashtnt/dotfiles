@@ -1,0 +1,201 @@
+local fn = vim.fn
+local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+local local_packer = nil
+
+if fn.empty(fn.glob(install_path)) > 0 then
+	local_packer = fn.system({
+		"git",
+		"clone",
+		"--depth",
+		"1",
+		"https://github.com/wbthomason/packer.nvim",
+		install_path,
+	})
+end
+
+return require("packer").startup(function(use) -- Packer can manage itself
+	use("wbthomason/packer.nvim")
+
+	use({
+		"kyazdani42/nvim-web-devicons",
+		config = function()
+			require("plugins.devicons")
+		end,
+	}) -- Icons n stuff
+
+	use({
+		"suyashtnt/nvim-1",
+		branch = "feature/leap",
+		as = "catppuccin",
+		config = function()
+			require("plugins.catppuccin")
+		end,
+	}) -- Colourscheme
+
+	use({
+		"rebelot/heirline.nvim",
+		config = function()
+			require("plugins.heirline")
+		end,
+	}) -- (win|status)bar
+
+	use({
+		"ray-x/navigator.lua",
+		requires = { -- All plugins used/using LSP stuff
+			{ "ray-x/guihua.lua", run = "cd lua/fzy && make" }, -- UI libs navigator uses
+			{ "neovim/nvim-lspconfig" }, -- configure LSPs
+			{ "williamboman/nvim-lsp-installer" }, -- Install LSP stuff for you
+			{ "ray-x/lsp_signature.nvim" }, -- Signature hints
+			{ "simrat39/rust-tools.nvim" }, -- Extra rust utils/support
+			{ "jose-elias-alvarez/typescript.nvim" }, -- Better typescript support
+			{ "SmiteshP/nvim-navic" }, -- Where you are in the document, initialzed via LSP
+			{ "j-hui/fidget.nvim" }, -- Nicer LSP status
+			{ "tamago324/nlsp-settings.nvim" }, -- LSP settings
+			{ "jose-elias-alvarez/null-ls.nvim" }, -- Generic formatting and stuff
+			{ "b0o/schemastore.nvim" }, -- Plugin for better JSON autocomplete
+			{ "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" }, -- code folding but better
+		},
+		config = function()
+			require("plugins.lsp")
+		end,
+	}) -- Makes LSPs not a pain to look nice
+
+	use({
+		"Saecki/crates.nvim",
+		tag = "v0.2.1",
+		requires = { "nvim-lua/plenary.nvim" },
+		config = function()
+			require("plugins.crates")
+		end,
+	}) -- Crates.io support
+
+	use({
+		"folke/trouble.nvim",
+		requires = "kyazdani42/nvim-web-devicons",
+		config = function()
+			require("plugins.trouble")
+		end,
+	}) -- <space>xx to see exactly where you have missed your semicolons
+
+	use({
+		"folke/which-key.nvim",
+		config = function()
+			require("which-key").setup()
+		end,
+	}) -- UI for keybinds
+
+	use({ "mrjones2014/legendary.nvim" }) -- Keybinding manager/lookup(<leader><Shift-k>)
+
+	use({
+		"nvim-treesitter/nvim-treesitter",
+		requires = {
+			{ "windwp/nvim-ts-autotag" }, -- auto close html tags and stuff
+			{ "p00f/nvim-ts-rainbow" },
+		},
+		run = ":TSUpdate",
+		config = function()
+			require("plugins.treesitter")
+		end,
+	}) -- the all-mighty treesitter
+
+	use({
+		"nvim-telescope/telescope.nvim",
+		requires = {
+			{ "nvim-lua/plenary.nvim" },
+			{ "nvim-telescope/telescope-file-browser.nvim" },
+			{ "nvim-telescope/telescope-media-files.nvim" },
+		},
+		config = function()
+			require("plugins.telescope")
+		end,
+	}) -- file picker and other stuff
+
+	use("ms-jpq/coq_nvim") -- autocomplete on some steroids
+	use("ms-jpq/coq.artifacts") -- Snippets
+	use("ms-jpq/coq.thirdparty") -- Custom extensions
+
+	use("jiangmiao/auto-pairs") -- auto pairs
+	use({ "andymass/vim-matchup", event = "VimEnter" }) -- bracket auto close
+	use("famiu/bufdelete.nvim") -- better buffer deletion
+	use("nanotee/zoxide.vim") -- zoxide support
+	use("alvan/vim-closetag") -- auto close HTML tags
+	use("mrjones2014/smart-splits.nvim") -- smarter spliting and stuff
+	use("ziontee113/syntax-tree-surfer") -- treesitter syntax finder
+
+	use({
+		"mfussenegger/nvim-dap",
+		config = function()
+			require("plugins.dap")
+		end,
+	}) -- debugging momen
+	use({ "rcarriga/nvim-dap-ui" }) -- vscode debugger UI
+	use("theHamsta/nvim-dap-virtual-text") -- virtual text for debugging
+	use("nvim-telescope/telescope-dap.nvim") -- I forgor what this does
+
+	use({
+		"numToStr/Comment.nvim",
+		config = function()
+			require("plugins.commenter")
+		end,
+	}) -- `gc` commenting plugin
+
+	use("stevearc/dressing.nvim") -- make builtin UI look good
+
+	use({
+		"ggandor/leap.nvim",
+		config = function()
+			require("plugins.leap")
+		end,
+	}) -- replaces f/F with a better single search and replaces the s/S key with a super-powered quicksearch
+
+	use({
+		"sidebar-nvim/sidebar.nvim",
+		config = function()
+			require("plugins.sidebar")
+		end,
+		rocks = { "luatz" },
+	}) -- sidebar
+
+	use("tpope/vim-surround") -- Surround text with ease
+
+	use({
+		"andweeb/presence.nvim",
+		config = function()
+			require("plugins.discord")
+		end,
+	}) --  Discord Rich Presence
+
+	use({
+		"rcarriga/nvim-notify",
+		config = function()
+			require("plugins.notify")
+		end,
+	}) -- better notification handler
+
+	use({
+		"folke/zen-mode.nvim",
+		config = function()
+			require("plugins.zenmode")
+		end,
+	}) -- enter t h e c o d e z o n e
+	use({
+		"folke/twilight.nvim",
+		config = function()
+			require("plugins.twilight")
+		end,
+	}) -- dim everything except for the code portion you are working on. Helps with t h e c o d e z o n e
+
+	use({
+		"glepnir/dashboard-nvim",
+		config = function()
+			require("plugins.dashboard")
+		end,
+	}) -- startup dashboard thingy
+
+	use("github/copilot.vim") -- sell your soul to the devil for funni ai
+
+	-- first time install thing
+	if local_packer then
+		require("packer").sync()
+	end
+end)

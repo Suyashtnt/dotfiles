@@ -1,0 +1,12 @@
+[submodule "users/tntman/config/awesome/bling"]
+	path = users/tntman/config/awesome/bling
+	url = https://github.com/BlingCorp/Bling
+[submodule "users/tntman/config/awesome/awesome-buttons"]
+	path = users/tntman/config/awesome/awesome-buttons
+	url = https://github.com/streetturtle/awesome-buttons
+[submodule "users/tntman/config/awesome/awesome-wm-widgets"]
+	path = users/tntman/config/awesome/awesome-wm-widgets
+	url = https://github.com/streetturtle/awesome-wm-widgets
+[submodule "users/tntman/config/awesome/layout-machi"]
+	path = users/tntman/config/awesome/layout-machi
+	url = https://github.com/xinhaoyuan/layout-machi
