@@ -19,6 +19,7 @@
     stateVersion = "22.05";
 
     packages = with pkgs; [
+      firefox
       alacritty
       atuin
       exa
