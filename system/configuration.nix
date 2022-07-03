@@ -2,7 +2,7 @@
 
 {
   nix = {
-    package = pkgs.nixFlakes; # or versioned attributes like nixVersions.nix_2_8
+    package = pkgs.nixFlakes;
     autoOptimiseStore = true;
     gc = {
       automatic = true;
@@ -15,9 +15,7 @@
 
   imports =
     [
-      # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      <home-manager/nixos>
     ];
 
   # Bootloader.

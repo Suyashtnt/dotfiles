@@ -1,6 +1,9 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "discord"
+    "gitkraken"
+  ];
 
   home = {
     # Home Manager needs a bit of information about you and the
@@ -43,6 +46,7 @@
       zoxide
       ripgrep
       neovim-nightly
+      neovide
       gcc
       (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     ];
@@ -144,11 +148,4 @@
       recursive = true;
     };
   };
-
-  nixpkgs.overlays = [
-    (import (builtins.fetchTarball {
-      url = https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz;
-    }))
-  ];
-
 }

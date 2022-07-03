@@ -1,6 +1,6 @@
 #!/bin/sh
 
 pushd ~/dotfiles/
-home-manager switch -f ./users/tntman/home.nix
+home-manager switch --flake .#GAMER-PC
 systemctl --user restart picom.service
 popd
