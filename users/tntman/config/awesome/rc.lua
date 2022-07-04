@@ -57,7 +57,8 @@ require("modules.tasklist")
 require("modules.layoutbox")
 require("modules.wibar")
 
-require("widgets.musicbar")
+require("widgets.leftbar")
+require("widgets.rightbar")
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it

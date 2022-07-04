@@ -5,17 +5,61 @@ local wibox = require("wibox")
 local gears = require("gears")
 local weather_widget = require("awesome-wm-widgets.weather-widget.weather")
 
--- Create the music sidebar
-local music_sidebar = wibox({ visible = false, ontop = true, type = "dock", screen = screen.primary })
-music_sidebar.bg = "#00000000" -- For anti aliasing
-music_sidebar.fg = x.color7
-music_sidebar.opacity = 1
-music_sidebar.height = screen.primary.geometry.height / 1.5
-music_sidebar.width = dpi(350)
-music_sidebar.y = 0
+-- Create the sidebar_right
+local sidebar_right = wibox({ visible = false, ontop = true, type = "dock", screen = screen.primary })
+sidebar_right.bg = "#00000000" -- For anti aliasing
+sidebar_right.fg = x.color7
+sidebar_right.opacity = 1
+sidebar_right.height = screen.primary.geometry.height / 1.5
+sidebar_right.width = dpi(300)
+sidebar_right.y = 0
 
-awful.placement.right(music_sidebar)
-awful.placement.maximize_vertically(sidebar, { honor_workarea = true, margins = { top = dpi(5) * 2 } })
+awful.placement.right(sidebar_right)
+
+sidebar_right:buttons(gears.table.join(
+	-- Middle click - Hide sidebar_right
+	awful.button({}, 2, function()
+		sidebar_right_hide()
+	end)
+))
+
+sidebar_right:connect_signal("mouse::leave", function()
+	sidebar_right_hide()
+end)
+
+sidebar_right_show = function()
+	sidebar_right.visible = true
+end
+
+sidebar_right_hide = function()
+	sidebar_right.visible = false
+end
+
+sidebar_right_toggle = function()
+	if sidebar_right.visible then
+		sidebar_right_hide()
+	else
+		sidebar_right_show()
+	end
+end
+
+-- Activate sidebar_right by moving the mouse at the edge of the screen
+
+local sidebar_right_activator = wibox({
+	y = sidebar_right.y,
+	width = 1,
+	visible = true,
+	ontop = false,
+	opacity = 0,
+	below = true,
+	screen = screen.primary,
+})
+
+sidebar_right_activator.height = sidebar_right.height
+sidebar_right_activator:connect_signal("mouse::enter", function()
+	sidebar_right.visible = true
+end)
+awful.placement.right(sidebar_right_activator)
 
 local create_button = function(symbol, color, command, playpause)
 	local icon = wibox.widget({
@@ -72,51 +116,6 @@ local playerctl_play_symbol = create_button("", x.color4, play_command, true)
 
 local playerctl_prev_symbol = create_button("玲", x.color4, prev_command, false)
 local playerctl_next_symbol = create_button("怜", x.color4, next_command, false)
-
-music_sidebar:buttons(gears.table.join(
-	-- Middle click - Hide sidebar
-	awful.button({}, 2, function()
-		music_sidebar_hide()
-	end)
-))
-
-music_sidebar:connect_signal("mouse::leave", function()
-	music_sidebar_hide()
-end)
-
-music_sidebar_show = function()
-	music_sidebar.visible = true
-end
-
-music_sidebar_hide = function()
-	music_sidebar.visible = false
-end
-
-music_sidebar_toggle = function()
-	if music_sidebar.visible then
-		music_sidebar_hide()
-	else
-		music_sidebar.visible = true
-	end
-end
-
--- Activate sidebar by moving the mouse at the edge of the screen
-
-local music_sidebar_activator = wibox({
-	y = music_sidebar.y,
-	width = 1,
-	visible = true,
-	ontop = false,
-	opacity = 0,
-	below = true,
-	screen = screen.primary,
-})
-
-music_sidebar_activator.height = music_sidebar.height
-music_sidebar_activator:connect_signal("mouse::enter", function()
-	music_sidebar.visible = true
-end)
-awful.placement.right(music_sidebar_activator)
 
 local art = wibox.widget({
 	image = "default_image.png",
@@ -176,8 +175,8 @@ local time_bar = wibox.widget({
 	widget = wibox.widget.slider,
 })
 
--- Music sidebar placement
-music_sidebar:setup({
+-- sidebar_right placement
+sidebar_right:setup({
 	{
 		{
 			{
@@ -214,7 +213,7 @@ music_sidebar:setup({
 		helpers.vertical_pad(dpi(25)),
 		{
 			weather_widget({
-				api_key = helpers.read_file(os.getenv("HOME") .. "/dotfiles/.secrets/weatherapikey.txt"),
+				api_key = helpers.read_file(os.getenv("HOME") .. "/dotfiles/.secrets/weatherapikey.txt")[1],
 				coordinates = { -26.2041, 28.0473 }, -- CHANGE THIS TO YOUR LOCATION/NEAR YOUR LOCATION (currently: center of JHB, South Africa)
 				font_name = "JetBrainsMono Nerd Font Mono",
 				show_hourly_forecast = true,

@@ -2,14 +2,23 @@ local wibox = require("wibox")
 local gears = require("gears")
 local helpers = {}
 
-helpers.read_file = function(path)
-	local file = io.open(path, "rb") -- r read mode and b binary mode
-	if not file then
-		return nil
+function file_exists(file)
+	local f = io.open(file, "rb")
+	if f then
+		f:close()
 	end
-	local content = file:read("*a") -- *a or *all reads the whole file
-	file:close()
-	return content
+	return f ~= nil
+end
+
+helpers.read_file = function(file)
+	if not file_exists(file) then
+		return {}
+	end
+	local lines = {}
+	for line in io.lines(file) do
+		lines[#lines + 1] = line
+	end
+	return lines
 end
 
 helpers.colorize_text = function(text, color)

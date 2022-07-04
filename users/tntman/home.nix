@@ -3,6 +3,7 @@
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "discord"
     "gitkraken"
+    "unityhub"
   ];
 
   home = {
@@ -36,10 +37,7 @@
       openssl
       pinentry_qt
       pkg-config
-      cargo
-      rustc
       unzip
-      nodejs
       rofi
       stylua
       ncspot
@@ -63,7 +61,7 @@
       };
       oh-my-zsh = {
         enable = true;
-        plugins = [ "git" "zoxide" "npm" "rust" ];
+        plugins = [ "git" "zoxide" "npm" "rust" "direnv" ];
         theme = "robbyrussell";
       };
       initExtra = ''
@@ -77,6 +75,8 @@
     };
 
 
+    direnv.enable = true;
+    direnv.nix-direnv.enable = true;
     gpg.enable = true;
     git.enable = true;
     starship.enable = true;
