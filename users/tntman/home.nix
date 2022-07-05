@@ -1,4 +1,8 @@
-{ config, pkgs, lib, ... }:
+{ lib
+, pkgs
+, ...
+}:
+
 {
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "discord"
@@ -28,6 +32,7 @@
       atuin
       exa
       xclip
+      xsel
       maim
       discord
       gitkraken
@@ -40,7 +45,6 @@
       unzip
       rofi
       stylua
-      ncspot
       zoxide
       ripgrep
       neovim-nightly
@@ -72,6 +76,21 @@
         			'';
       enableAutosuggestions = true;
       enableSyntaxHighlighting = true;
+    };
+    ncspot = {
+      enable = true;
+      package = pkgs.ncspot.overrideAttrs (o: {
+        buildNoDefaultFeatures = false;
+        buildFeatures = [ "cover" "mpris" "notify" "share_clipboard" "cursive/pancurses-backend" "with_pulseaudio" ];
+      });
+      settings = {
+        shuffle = true;
+        gapless = true;
+        use_nerdfont = true;
+        default_keybindings = true;
+        notify = true;
+        repeat = "playlist";
+      };
     };
 
 

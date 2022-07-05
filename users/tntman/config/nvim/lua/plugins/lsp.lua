@@ -159,8 +159,8 @@ lspconfig.eslint.setup(coq.lsp_ensure_capabilities({
 lspconfig.prismals.setup(coq.lsp_ensure_capabilities({ on_attach = on_attach(true, true) }))
 lspconfig.taplo.setup(coq.lsp_ensure_capabilities({ on_attach = on_attach(true, true) }))
 lspconfig.rnix.setup(coq.lsp_ensure_capabilities({ on_attach = on_attach(false, true) }))
-lspconfig.svelte.setup(coq.lsp_ensure_capabilities({ on_attach = on_attach(false, true) }))
-lspconfig.volar.setup(coq.lsp_ensure_capabilities({ on_attach = on_attach(false, true) }))
+lspconfig.svelte.setup(coq.lsp_ensure_capabilities({ on_attach = on_attach(false, false) }))
+lspconfig.volar.setup(coq.lsp_ensure_capabilities({ on_attach = on_attach(false, false) }))
 
 local ufo_handler = function(virtText, lnum, endLnum, width, truncate)
 	local newVirtText = {}
