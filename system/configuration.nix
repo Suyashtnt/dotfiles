@@ -75,6 +75,15 @@
   hardware.opengl.enable = true;
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable; # also this
 
+  services.usbmuxd.enable = true;
+  services.printing.enable = true;
+  services.printing.drivers = [ pkgs.epson-escpr ];
+  services.avahi.enable = true;
+  services.avahi.nssmdns = true;
+
+  hardware.sane.enable = true;
+  hardware.sane.extraBackends = [ pkgs.sane-airscan ];
+
 
   sound.enable = false; # Pipewire doesn't like this on
 
@@ -171,11 +180,19 @@
   };
 
   programs.zsh.enable = true;
+  programs.dconf.enable = true;
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.tntman = {
     isNormalUser = true;
     description = "Tabiasgeee Human"; # Now my real name will not be leaked :)
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "scanner" "lp" ];
     packages = with pkgs; [ ];
     shell = pkgs.zsh;
   };
@@ -187,6 +204,8 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     neovim
+    libimobiledevice
+    ifuse
   ];
   environment.variables.FLAKE = "~/dotfiles";
 

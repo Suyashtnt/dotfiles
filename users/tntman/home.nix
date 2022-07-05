@@ -29,7 +29,9 @@
     packages = with pkgs; [
       firefox
       alacritty
+      easyeffects
       atuin
+      simple-scan
       exa
       xclip
       xsel
