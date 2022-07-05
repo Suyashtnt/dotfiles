@@ -44,7 +44,6 @@ return require("packer").startup(function(use) -- Packer can manage itself
 		requires = { -- All plugins used/using LSP stuff
 			{ "ray-x/guihua.lua", run = "cd lua/fzy && make" }, -- UI libs navigator uses
 			{ "neovim/nvim-lspconfig" }, -- configure LSPs
-			{ "williamboman/nvim-lsp-installer" }, -- Install LSP stuff for you
 			{ "ray-x/lsp_signature.nvim" }, -- Signature hints
 			{ "simrat39/rust-tools.nvim" }, -- Extra rust utils/support
 			{ "jose-elias-alvarez/typescript.nvim" }, -- Better typescript support

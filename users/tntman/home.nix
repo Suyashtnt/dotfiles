@@ -32,11 +32,12 @@
       easyeffects
       atuin
       simple-scan
+      unzip
       exa
       xclip
       xsel
       maim
-      discord
+      (discord.override { nss = nss_latest; })
       gitkraken
       thefuck
       git-crypt
@@ -46,7 +47,6 @@
       pkg-config
       unzip
       rofi
-      stylua
       zoxide
       ripgrep
       neovim-nightly

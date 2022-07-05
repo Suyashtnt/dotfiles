@@ -4,11 +4,6 @@ local coq = require("coq")
 local navic = require("nvim-navic")
 local nlspsettings = require("nlspsettings")
 
--- im too lazy to install LSP stuff
-require("nvim-lsp-installer").setup({
-	automatic_installation = true,
-})
-
 -- Setup nlsp
 nlspsettings.setup({
 	config_home = vim.fn.stdpath("config") .. "/nlsp-settings",
@@ -62,6 +57,7 @@ local function on_attach(useNavic, formatting)
 		end
 	end
 end
+
 -- coq extra stuff
 require("coq_3p")({
 	{ src = "bc", short_name = "MATH", precision = 6 },

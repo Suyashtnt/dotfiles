@@ -12,9 +12,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, home-manager, neovim-nightly-overlay, nh, ... }:
+  outputs = { self, nixpkgs, home-manager, neovim-nightly-overlay, nh, flake-utils, ... }:
     let
       system = "x86_64-linux";
       overlays = [
@@ -50,6 +51,9 @@
             ./system/configuration.nix
           ];
         };
+      };
+      devShell.x86_64-linux = pkgs.mkShell {
+        buildInputs = with pkgs; [ rnix-lsp sumneko-lua-language-server stylua python311 ];
       };
     };
 }
