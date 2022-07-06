@@ -51,7 +51,7 @@
         };
       };
       devShell.${system} = pkgs.mkShell {
-        buildInputs = with pkgs; [ rnix-lsp sumneko-lua-language-server stylua python311 ];
+        buildInputs = with pkgs; [ rnix-lsp sumneko-lua-language-server stylua python311 yaml-language-server ];
       };
     };
 }

@@ -84,11 +84,11 @@
         theme = "robbyrussell";
       };
       initExtra = ''
-        				unset THEME
-        				eval "$(atuin init zsh)"
-        				eval "$(thefuck --alias e)"
-        				eval "$(starship init zsh)"
-        			'';
+        unset THEME
+        eval "$(atuin init zsh)"
+        eval "$(thefuck --alias e)"
+        eval "$(starship init zsh)"
+      '';
       enableAutosuggestions = true;
       enableSyntaxHighlighting = true;
     };
@@ -189,6 +189,10 @@
     };
     rofi = {
       source = ./config/rofi;
+      recursive = true;
+    };
+    zellij = {
+      source = ./config/zellij;
       recursive = true;
     };
   };
