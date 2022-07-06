@@ -1,5 +1,7 @@
 { lib
 , pkgs
+, overlays
+, nh
 , ...
 }:
 
@@ -9,6 +11,7 @@
     "gitkraken"
     "unityhub"
   ];
+  nixpkgs.overlays = overlays;
 
   home = {
     # Home Manager needs a bit of information about you and the
@@ -27,31 +30,41 @@
     stateVersion = "22.05";
 
     packages = with pkgs; [
+      # General
       firefox
       alacritty
       easyeffects
-      atuin
       simple-scan
+      (discord.override { nss = nss_latest; }) # nss is needed for links
+      gitkraken
+      rofi
+      neovim-nightly
+      neovide
+
+      # CLI utils
+      atuin
+      nh.packages.${system}.default
       unzip
       exa
       xclip
       xsel
       maim
-      (discord.override { nss = nss_latest; })
-      gitkraken
       thefuck
+      unzip
+      zoxide
+      ripgrep
+
+      # encryption of dotfiles
       git-crypt
       gnupg
+
+      # libs
       openssl
       pinentry_qt
       pkg-config
-      unzip
-      rofi
-      zoxide
-      ripgrep
-      neovim-nightly
-      neovide
       gcc
+
+      # Fonts
       (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     ];
   };
@@ -63,7 +76,7 @@
         l = "exa --icons";
         ll = "exa --icons -l";
         la = "exa --icons -l -a";
-        update = "sudo nixos-rebuild switch";
+        update = "cd ~/dotfiles && ./update.sh && ./apply-system.sh && ./apply-users.sh && cd -";
       };
       oh-my-zsh = {
         enable = true;
@@ -116,9 +129,9 @@
         "class_g = 'slop'"
       ];
       extraOptions = ''
-        corner-radius = 15;
+        corner-radius = 16;
         blur-method = "dual_kawase";
-        blur-strength = "10";
+        blur-strength = "12";
         xinerama-shadow-crop = true;
       '';
       experimentalBackends = true;

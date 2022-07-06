@@ -34,12 +34,10 @@
         GAMER-PC = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${system};
 
+
           modules = [
+            { _module.args = { inherit overlays nh; }; }
             ./users/tntman/home.nix
-            {
-              nixpkgs.overlays = overlays;
-              home.packages = [ nh.packages.${system}.default ];
-            }
           ];
         };
       };
@@ -48,11 +46,11 @@
           inherit system;
 
           modules = [
-            ./system/configuration.nix
+            ./system/GAMER-PC/configuration.nix
           ];
         };
       };
-      devShell.x86_64-linux = pkgs.mkShell {
+      devShell.${system} = pkgs.mkShell {
         buildInputs = with pkgs; [ rnix-lsp sumneko-lua-language-server stylua python311 ];
       };
     };
