@@ -65,7 +65,6 @@ theme.menu_width = dpi(100)
 
 theme.wallpaper = gears.filesystem.get_configuration_dir() .. "wallpaper.png"
 
-
 theme.layout_fairh = themes_path .. "default/layouts/fairhw.png"
 theme.layout_fairv = themes_path .. "default/layouts/fairvw.png"
 theme.layout_floating = themes_path .. "default/layouts/floatingw.png"
