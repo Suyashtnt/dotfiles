@@ -1,4 +1,5 @@
 local awful = require("awful")
+local machi = require("layout-machi")
 local gears = require("gears")
 
 --  icon path relative to ./icons
@@ -37,7 +38,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 				gears.filesystem.get_configuration_dir() .. "icons/" .. tag.icon .. ".svg",
 				"#FFFFFF"
 			),
-			layout = awful.layout.suit.tile,
+			layout = machi.default_layout,
 			screen = s,
 			icon_only = true,
 		})

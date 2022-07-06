@@ -21,6 +21,10 @@ awful.keyboard.append_global_keybindings({
 		awful.tag.incmwfact(0.05)
 	end, { description = "increase master width factor", group = "layout" }),
 
+	awful.key({ modkey }, "e", function()
+		editor.start_interactive()
+	end, { description = "Start machi editor", group = "layout" }),
+
 	awful.key({ modkey }, "h", function()
 		awful.tag.incmwfact(-0.05)
 	end, { description = "decrease master width factor", group = "layout" }),

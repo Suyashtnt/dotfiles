@@ -12,6 +12,10 @@ local menubar = require("menubar")
 beautiful.init(gears.filesystem.get_configuration_dir() .. "theme.lua")
 
 local bling = require("bling")
+
+local machi = require("layout-machi")
+require("beautiful").layout_machi = machi.get_icon()
+
 playerctl = bling.signal.playerctl.lib()
 dpi = beautiful.xresources.apply_dpi
 

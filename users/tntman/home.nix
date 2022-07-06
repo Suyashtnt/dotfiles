@@ -124,15 +124,23 @@
     picom = {
       enable = true;
       activeOpacity = "0.90";
+      inactiveOpacity = "0.90";
       blur = true;
       blurExclude = [
         "class_g = 'slop'"
       ];
       extraOptions = ''
-        corner-radius = 16;
+        corner-radius = 18;
+        transition-length = 600;
+
         blur-method = "dual_kawase";
-        blur-strength = "12";
+        blur-kernel = "11x11gaussian";
+        blur-strength = "24";
+        blur-size = "36";
+        blur-deviation = 4.0;
+
         xinerama-shadow-crop = true;
+        spawn-center-screen = true;
       '';
       experimentalBackends = true;
 
@@ -141,6 +149,7 @@
       ];
 
       fade = true;
+      backend = "glx";
       fadeDelta = 5;
       vSync = true;
       opacityRule = [
@@ -150,9 +159,9 @@
       package = pkgs.picom.overrideAttrs (o: {
         src = pkgs.fetchFromGitHub {
           repo = "picom";
-          owner = "ibhagwan";
-          rev = "44b4970f70d6b23759a61a2b94d9bfb4351b41b1";
-          sha256 = "0iff4bwpc00xbjad0m000midslgx12aihs33mdvfckr75r114ylh";
+          owner = "jonaburg";
+          rev = "e3c19cd7d1108d114552267f302548c113278d45";
+          sha256 = "4voCAYd0fzJHQjJo4x3RoWz5l3JJbRvgIXn1Kg6nz6Y=";
         };
       });
     };
