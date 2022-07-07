@@ -1,46 +1,22 @@
 local awful = require("awful")
 local machi = require("layout-machi")
-local gears = require("gears")
 
 --  icon path relative to ./icons
 local tags = {
-	{ ["icon"] = "console", ["colour"] = "#11111b" },
-	{
-		["icon"] = "firefox",
-		["colour"] = "#fe7a08",
-	},
-	{
-		["icon"] = "code-tags",
-		["colour"] = "#8ab5fa",
-	},
-	{
-		["icon"] = "discord",
-		["colour"] = "#5662f6",
-	},
-	{
-		["icon"] = "google-controller",
-		["colour"] = "#1e66f5",
-	},
-	{
-		["icon"] = "headphones",
-		["colour"] = "#1dd05d",
-	},
-	{
-		["icon"] = "cog",
-		["colour"] = "#a5acc9",
-	},
+	"\u{f120}",
+	"\u{e007}",
+	"\u{f121}",
+	"\u{f392}",
+	"\u{f1b6}",
+	"\u{f025}",
+	"\u{f013}"
 }
 
 screen.connect_signal("request::desktop_decoration", function(s)
 	for id, tag in pairs(tags) do
-		awful.tag.add(id, {
-			icon = gears.color.recolor_image(
-				gears.filesystem.get_configuration_dir() .. "icons/" .. tag.icon .. ".svg",
-				"#FFFFFF"
-			),
+		awful.tag.add(tag, {
 			layout = machi.default_layout,
 			screen = s,
-			icon_only = true,
 		})
 	end
 end)

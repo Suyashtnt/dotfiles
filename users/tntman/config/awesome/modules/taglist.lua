@@ -1,7 +1,6 @@
 local awful = require("awful")
 local wibox = require("wibox")
 local gears = require("gears")
-local tags = require("modules.tags")
 local beautiful = require("beautiful")
 
 screen.connect_signal("request::desktop_decoration", function(s)
@@ -25,23 +24,18 @@ screen.connect_signal("request::desktop_decoration", function(s)
 		widget_template = {
 			{
 				{
-					id = "icon_role",
-					widget = wibox.widget.imagebox,
+					id = "text_role",
+					widget = wibox.widget.textbox,
 				},
-				top = dpi(4),
-				bottom = dpi(4),
-				left = dpi(10),
-				right = dpi(10),
+				top = dpi(3),
+				bottom = dpi(3),
+				left = dpi(12),
+				right = dpi(12),
 				widget = wibox.container.margin,
 			},
-			id = "bg",
+			id = "background_role",
 			widget = wibox.container.background,
-			shape = function(cr, width, height)
-				gears.shape.rounded_rect(cr, width, height, 4)
-			end,
-			create_callback = function(self, t, index, tagsList)
-				self.bg = tags[tonumber(t.name)].colour or x.color0
-			end,
+			fg = "#FFFFFF",
 		},
 
 		buttons = {

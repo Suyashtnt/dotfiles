@@ -1,7 +1,6 @@
 local awful = require("awful")
 local wibox = require("wibox")
 local gears = require("gears")
-local beautiful = require("beautiful")
 
 screen.connect_signal("request::desktop_decoration", function(s)
 	s.mytasklist = awful.widget.tasklist({

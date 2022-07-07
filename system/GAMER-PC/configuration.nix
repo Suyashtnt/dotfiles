@@ -49,7 +49,9 @@
 
     windowManager.awesome = {
       enable = true;
-      package = pkgs.awesome.overrideAttrs (prev: {
+      package = (pkgs.awesome.override {
+        lua = pkgs.luajit;
+      }).overrideAttrs (prev: {
         GI_TYPELIB_PATH = "${pkgs.playerctl}/lib/girepository-1.0:"
           + "${pkgs.networkmanager}/lib/girepository-1.0:"
           + prev.GI_TYPELIB_PATH;
@@ -64,6 +66,7 @@
       luaModules = with pkgs.luaPackages; [
         luarocks
         lgi
+        vicious
       ];
     };
 

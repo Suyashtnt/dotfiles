@@ -53,6 +53,8 @@
       unzip
       zoxide
       ripgrep
+      ghq
+      gh
 
       # encryption of dotfiles
       git-crypt
@@ -66,6 +68,7 @@
 
       # Fonts
       (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+      font-awesome
     ];
   };
 
@@ -142,7 +145,7 @@
           background-fixed = false;
         }
 
-        animations: true;
+        animations = true;
         animation-stiffness = 100
         animation-window-mass = 0.4
         animation-dampening = 15
@@ -152,13 +155,11 @@
         animation-for-unmap-window = "zoom";
         animation-for-transient-window = "slide-up";
 
-        animation-for-workspace-switch-in = "none";
-        animation-for-workspace-switch-out = "none";
+        animation-for-workspace-switch-in = "slide-down";
+        animation-for-workspace-switch-out = "zoom";
 
         use-ewmh-active-win = true;
-        glx-no-stencil = true;
 
-        xinerama-shadow-crop = true;
         spawn-center-screen = true;
       '';
       experimentalBackends = true;
@@ -187,6 +188,7 @@
       enable = true;
       pinentryFlavor = "qt";
     };
+
   };
 
   xresources.extraConfig = builtins.readFile (
