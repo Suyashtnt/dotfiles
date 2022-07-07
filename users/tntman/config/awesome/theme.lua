@@ -25,7 +25,7 @@ theme.tasklist_fg_normal = "#aaaaaa"
 theme.tasklist_fg_focus = "#aaaaaa"
 theme.tasklist_shape_border_width = dpi(4)
 theme.tasklist_shape_border_color = "#a0d9a9"
-theme.tasklist_shape_border_color_focus = "#96cdfb"
+theme.tasklist_shape_border_color_focus = "#f5c2e7"
 
 theme.fg_normal = "#aaaaaa"
 theme.fg_urgent = "#ffffff"
@@ -41,7 +41,7 @@ theme.taglist_bg_focus = "#74c7ec"
 theme.taglist_bg_empty = "#181825"
 theme.taglist_bg_occupied = "#313244"
 
-theme.taglist_font = "Font Awesome 6 Free 16"
+theme.taglist_font = "Font Awesome 6 Free 18"
 theme.taglist_shape = function(cr, width, height)
 	gears.shape.rounded_rect(cr, width, height, 8)
 end

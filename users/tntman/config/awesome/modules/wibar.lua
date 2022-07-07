@@ -20,7 +20,6 @@ screen.connect_signal("request::desktop_decoration", function(s)
     },
     widget = {
       widget = wibox.container.background,
-      shape_border_width = dpi(10),
       layout = wibox.layout.align.horizontal,
       { -- Left widgets
         s.mytaglist,
@@ -102,12 +101,9 @@ screen.connect_signal("request::desktop_decoration", function(s)
           gears.shape.rounded_rect(cr, width, height, dpi(24))
         end,
       },
-      spacing = dpi(16),
-      width = 1890,
-      height = dpi(80),
-      bg = beautiful.bg_normal .. "00",
     },
     height = dpi(40),
+    bg = beautiful.bg_normal .. "00",
   })
 end)
 -- }}}
