@@ -6,6 +6,7 @@ M.config = function()
   vim.g.mapleader = " "
   vim.opt.clipboard = "unnamedplus"
   vim.opt.mouse = "a"
+  vim.g.neovide_transparency = 0.8
 
   vim.cmd('set nowrap')
 

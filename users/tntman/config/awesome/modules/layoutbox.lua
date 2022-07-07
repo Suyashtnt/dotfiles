@@ -1,8 +1,6 @@
 local awful = require("awful")
 
 screen.connect_signal("request::desktop_decoration", function(s)
-	-- Create an imagebox widget which will contain an icon indicating which layout we're using.
-	-- We need one layoutbox per screen.
 	s.mylayoutbox = awful.widget.layoutbox({
 		screen = s,
 		buttons = {

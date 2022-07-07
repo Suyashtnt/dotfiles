@@ -74,9 +74,7 @@ naughty.connect_signal("request::display_error", function(message, startup)
 	})
 end)
 
-if beautiful.notification_border_radius > 0 then
-	beautiful.notification_shape = helpers.rrect(beautiful.notification_border_radius)
-end
+beautiful.notification_shape = helpers.rrect(dpi(12))
 
 naughty.connect_signal("request::display", function(n)
 	local actions = wibox.widget({

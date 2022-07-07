@@ -4,6 +4,7 @@ window:
   padding:
     x: 12
     y: 0
+  opacity: 0.8
 
 colors:
   # Default colors
@@ -41,6 +42,7 @@ colors:
   indexed_colors:
     - { index: 16, color: "0xF8BD96" }
     - { index: 17, color: "0xF5E0DC" }
+
 
 font:
   normal:

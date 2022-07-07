@@ -3,6 +3,7 @@ local awful = require("awful")
 local helpers = require("helpers")
 local wibox = require("wibox")
 local gears = require("gears")
+local beautiful = require("beautiful")
 
 -- Create the sidebar_left
 local sidebar_left = wibox({ visible = false, ontop = true, type = "dock", screen = screen.primary })
@@ -59,6 +60,16 @@ sidebar_left_activator:connect_signal("mouse::enter", function()
 	sidebar_left.visible = true
 end)
 awful.placement.left(sidebar_left_activator)
+
+local function make_fa_icon(code, icon_color)
+  return wibox.widget{
+    font = beautiful.icon_font .. beautiful.icon_size,
+    markup = ' <span color="'.. icon_color ..'">' .. code .. '</span> ',
+    align  = 'center',
+    valign = 'center',
+    widget = wibox.widget.textbox
+  }
+end
 
 -- sidebar_left placement
 sidebar_left:setup({

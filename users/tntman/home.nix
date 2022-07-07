@@ -123,45 +123,62 @@
   services = {
     picom = {
       enable = true;
-      activeOpacity = "0.90";
-      inactiveOpacity = "0.90";
+      activeOpacity = "0.80";
+      inactiveOpacity = "0.80";
       blur = true;
       blurExclude = [
         "class_g = 'slop'"
+        "class_g = 'awesome'"
       ];
       extraOptions = ''
         corner-radius = 18;
         transition-length = 600;
 
-        blur-method = "dual_kawase";
-        blur-kernel = "11x11gaussian";
-        blur-strength = "24";
-        blur-size = "36";
-        blur-deviation = 4.0;
+        blur: {
+          method = "dual_kawase";
+          strength = 9;
+          background = true;
+          background-frame = false;
+          background-fixed = false;
+        }
+
+        animations: true;
+        animation-stiffness = 100
+        animation-window-mass = 0.4
+        animation-dampening = 15
+        animation-clamping = false
+
+        animation-for-open-window = "zoom";
+        animation-for-unmap-window = "zoom";
+        animation-for-transient-window = "slide-up";
+
+        animation-for-workspace-switch-in = "none";
+        animation-for-workspace-switch-out = "none";
+
+        use-ewmh-active-win = true;
+        glx-no-stencil = true;
 
         xinerama-shadow-crop = true;
         spawn-center-screen = true;
       '';
       experimentalBackends = true;
 
-      shadowExclude = [
-        "bounding_shaped && !rounded_corners"
-      ];
-
-      fade = true;
       backend = "glx";
       fadeDelta = 5;
       vSync = true;
       opacityRule = [
         "100:class_g   *?= 'Chromium-browser'"
         "100:class_g   *?= 'Firefox'"
+        "100:class_g   *?= 'Alacritty'"
+        "100:class_g   *?= 'Neovide'"
+        "85:class_g   *?= 'discord'"
       ];
       package = pkgs.picom.overrideAttrs (o: {
         src = pkgs.fetchFromGitHub {
           repo = "picom";
-          owner = "jonaburg";
-          rev = "e3c19cd7d1108d114552267f302548c113278d45";
-          sha256 = "4voCAYd0fzJHQjJo4x3RoWz5l3JJbRvgIXn1Kg6nz6Y=";
+          owner = "dccsillag";
+          rev = "51b21355696add83f39ccdb8dd82ff5009ba0ae5";
+          sha256 = "crCwRJd859DCIC0pEerpDqdX2j8ZrNAzVaSSB3mTPN8=";
         };
       });
     };

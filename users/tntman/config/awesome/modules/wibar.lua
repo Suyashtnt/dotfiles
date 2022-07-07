@@ -21,9 +21,9 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	s.mywibox = awful.wibar({
 		position = "top",
 		screen = s,
-		widget = wibox.container.margin({
+		widget = {
 			widget = wibox.container.background,
-			shape_border_width = 10,
+			shape_border_width = dpi(10),
 			layout = wibox.layout.align.horizontal,
 			{ -- Left widgets
 				layout = wibox.layout.fixed.horizontal,
@@ -111,13 +111,10 @@ screen.connect_signal("request::desktop_decoration", function(s)
 				end,
 			},
 			spacing = dpi(10),
-		}, lr, lr, tb, tb),
+		},
 		width = 1905,
-		height = dpi(60),
-		shape = function(cr, width, height)
-			gears.shape.rounded_rect(cr, width, height, 30)
-		end,
-		border_width = dpi(6),
+		height = dpi(45),
+		border_width = dpi(10),
 		bg = beautiful.bg_normal .. "00",
 	})
 end)
