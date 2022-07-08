@@ -161,6 +161,8 @@
         use-ewmh-active-win = true;
 
         spawn-center-screen = true;
+
+        unredir-if-possible = true; # for games
       '';
       experimentalBackends = true;
 

@@ -19,8 +19,8 @@ theme.systray_icon_spacing = dpi(8)
 
 theme.tasklist_bg_normal = "#313244"
 theme.tasklist_bg_focus = theme.bg_normal
-theme.tasklist_fg_normal = "#aaaaaa"
-theme.tasklist_fg_focus = "#aaaaaa"
+theme.tasklist_fg_normal = "#cdd6f4"
+theme.tasklist_fg_focus = "#cdd6f4"
 theme.tasklist_shape_border_width = dpi(4)
 theme.tasklist_shape_border_color = "#a0d9a9"
 theme.tasklist_shape_border_color_focus = "#f5c2e7"
