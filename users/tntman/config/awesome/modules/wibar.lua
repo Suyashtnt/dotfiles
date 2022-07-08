@@ -31,15 +31,14 @@ screen.connect_signal("request::desktop_decoration", function(s)
       },
       { -- Middle widget
         {
-          s.mytasklist,
-          widget = wibox.container.background,
-          bg = beautiful.bg_normal,
-          shape = function(cr, width, height)
-            gears.shape.rounded_rect(cr, width, height, dpi(24))
-          end,
+          widget = wibox.container.place(
+            s.mytasklist
+          ),
+          align = "center",
+          valign = "center",
         },
-        right = 16,
-        left = 16,
+        right = 32,
+        left = 32,
         widget = wibox.container.margin,
       },
       { -- Right widgets

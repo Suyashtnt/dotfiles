@@ -35,7 +35,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 			},
 			id = "background_role",
 			widget = wibox.container.background,
-			fg = "#FFFFFF",
+			fg = "#cdd6f4",
 		},
 
 		buttons = {

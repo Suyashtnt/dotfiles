@@ -37,13 +37,13 @@ theme.border_color_normal = "#000000"
 theme.border_color_active = "#535d6c"
 theme.border_color_marked = "#91231c"
 
-theme.taglist_bg_focus = "#74c7ec"
+theme.taglist_bg_focus = "#89b4fa"
 theme.taglist_bg_empty = "#181825"
 theme.taglist_bg_occupied = "#313244"
 
 theme.taglist_font = "Font Awesome 6 Free 18"
 theme.taglist_shape = function(cr, width, height)
-	gears.shape.rounded_rect(cr, width, height, 8)
+  gears.shape.rounded_rect(cr, width, height, 8)
 end
 
 theme.notification_border_width = dpi(3)
