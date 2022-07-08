@@ -10,3 +10,6 @@
 [submodule "users/tntman/config/awesome/layout-machi"]
 	path = users/tntman/config/awesome/layout-machi
 	url = https://github.com/xinhaoyuan/layout-machi
+[submodule "home/tntman/config/awesome/vicious"]
+	path = home/tntman/config/awesome/vicious
+	url = https://github.com/vicious-widgets/vicious.git
