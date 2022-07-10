@@ -8,7 +8,12 @@ M.config = function()
   vim.opt.mouse = "a"
   vim.g.neovide_transparency = 0.8
 
-  vim.cmd('set nowrap')
+  vim.cmd([[
+    set nowrap
+    set expandtab
+    set tabstop=2
+    set shiftwidth=2
+  ]])
 
   -- folding
   vim.wo.foldcolumn = "1"

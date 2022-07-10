@@ -18,7 +18,7 @@ catppuccin.setup({
 				information = "underline",
 			},
 		},
-		lsp_trouble = true,
+
 		cmp = false,
 		lsp_saga = true,
 		gitgutter = true,
@@ -32,7 +32,7 @@ catppuccin.setup({
 		neotree = {
 			enabled = true,
 			show_root = true,
-			transparent_panel = false,
+			transparent_panel = true,
 		},
 		which_key = true,
 		indent_blankline = {

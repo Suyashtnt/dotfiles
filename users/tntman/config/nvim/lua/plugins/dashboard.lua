@@ -1,46 +1,46 @@
 local db = require("dashboard")
 
 local function custom_header()
-	return {
-		"",
-		"",
-		"",
-		" ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗",
-		" ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║",
-		" ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║",
-		" ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║",
-		" ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║",
-		" ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝",
-		"",
-		"",
-	}
+  return {
+    "",
+    "",
+    "",
+    " ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗",
+    " ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║",
+    " ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║",
+    " ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║",
+    " ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║",
+    " ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝",
+    "",
+    "",
+  }
 end
 
 db.custom_header = custom_header
 
 db.custom_center = {
-	{
-		icon = "  ",
-		desc = "Recently laset session                  ",
-		shortcut = "SPC s l",
-		action = "SessionLoad",
-	},
-	{
-		icon = "  ",
-		desc = "Recently opened files                   ",
-		action = "DashboardFindHistory",
-		shortcut = "SPC f h",
-	},
-	{
-		icon = "  ",
-		desc = "Find  File                              ",
-		action = "Telescope find_files find_command=rg,--hidden,--files",
-		shortcut = "SPC f f",
-	},
-	{
-		icon = "  ",
-		desc = "File Browser                            ",
-		action = "Telescope file_browser",
-		shortcut = "SPC f e",
-	},
+  {
+    icon = "  ",
+    desc = "Recently laset session                  ",
+    shortcut = "SPC s l",
+    action = "SessionLoad",
+  },
+  {
+    icon = "  ",
+    desc = "Recently opened files                   ",
+    action = "DashboardFindHistory",
+    shortcut = "SPC f h",
+  },
+  {
+    icon = "  ",
+    desc = "Find  File                              ",
+    action = "Telescope find_files find_command=rg,--hidden,--files",
+    shortcut = "SPC f f",
+  },
+  {
+    icon = "  ",
+    desc = "File Browser                            ",
+    action = "Telescope file_browser",
+    shortcut = "SPC f e",
+  },
 }

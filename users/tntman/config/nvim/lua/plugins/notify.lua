@@ -1,4 +1,4 @@
 require("notify").setup({
-	stages = "slide",
+  stages = "slide",
 })
 vim.notify = require("notify")

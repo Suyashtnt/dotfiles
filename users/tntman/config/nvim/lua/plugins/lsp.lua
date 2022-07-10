@@ -73,7 +73,7 @@ local diagnostics = nullls.builtins.diagnostics
 nullls.setup({
   sources = {
     formatting.stylua,
-    diagnostics.eslint
+    diagnostics.eslint,
   },
   on_attach = on_attach(false, true),
 })
