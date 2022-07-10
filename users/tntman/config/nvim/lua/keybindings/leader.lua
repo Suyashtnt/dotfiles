@@ -1,8 +1,7 @@
 local wk = require("which-key")
 
 wk.register({
-	e = { require("sidebar-nvim").toggle, "Open sidebar / file tree" },
-	b = { "<Cmd>Telescope buffers<CR>", "Open buffer explorer" },
+	e = { "<Cmd>Neotree filesystem toggle<CR>", "Open sidebar / file tree" },
 	z = {
 		function()
 			require("zen-mode").toggle({

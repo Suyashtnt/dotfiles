@@ -30,8 +30,8 @@ catppuccin.setup({
 			transparent_panel = false,
 		},
 		neotree = {
-			enabled = false,
-			show_root = false,
+			enabled = true,
+			show_root = true,
 			transparent_panel = false,
 		},
 		which_key = true,

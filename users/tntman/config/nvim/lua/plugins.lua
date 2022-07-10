@@ -83,6 +83,15 @@ return require("packer").startup(function(use) -- Packer can manage itself
 		end,
 	}) -- UI for keybinds
 
+	use({
+		"akinsho/bufferline.nvim",
+		tag = "v2.*",
+		requires = "kyazdani42/nvim-web-devicons",
+		config = function()
+			require("plugins.bufferline")
+		end,
+	})
+
 	use({ "mrjones2014/legendary.nvim" }) -- Keybinding manager/lookup(<leader><Shift-k>)
 
 	use({
@@ -145,15 +154,24 @@ return require("packer").startup(function(use) -- Packer can manage itself
 		config = function()
 			require("plugins.leap")
 		end,
-	}) -- replaces f/F with a better single search and replaces the s/S key with a super-powered quicksearch
+	}) -- replaces the s/S key with a super-powered quicksearch
 
 	use({
-		"sidebar-nvim/sidebar.nvim",
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v2.x",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"kyazdani42/nvim-web-devicons",
+			"MunifTanjim/nui.nvim",
+		},
+	}) -- file tree
+
+	use({
+		"rmagatti/auto-session",
 		config = function()
-			require("plugins.sidebar")
+			require("plugins.autosession")
 		end,
-		rocks = { "luatz" },
-	}) -- sidebar
+	})
 
 	use("tpope/vim-surround") -- Surround text with ease
 
@@ -177,6 +195,7 @@ return require("packer").startup(function(use) -- Packer can manage itself
 			require("plugins.zenmode")
 		end,
 	}) -- enter t h e c o d e z o n e
+
 	use({
 		"folke/twilight.nvim",
 		config = function()
@@ -190,8 +209,6 @@ return require("packer").startup(function(use) -- Packer can manage itself
 			require("plugins.dashboard")
 		end,
 	}) -- startup dashboard thingy
-
-	use("github/copilot.vim") -- sell your soul to the devil for funni ai
 
 	-- first time install thing
 	if local_packer then
