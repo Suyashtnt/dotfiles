@@ -50,6 +50,7 @@
       ripgrep
       ghq
       gh
+      fzf
 
       # encryption of dotfiles
       git-crypt

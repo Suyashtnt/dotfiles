@@ -40,10 +40,9 @@ return require("packer").startup(function(use) -- Packer can manage itself
   }) -- (win|status)bar
 
   use({
-    "ray-x/navigator.lua",
+    "neovim/nvim-lspconfig",
     requires = { -- All plugins used/using LSP stuff
       { "ray-x/guihua.lua", run = "cd lua/fzy && make" }, -- UI libs navigator uses
-      { "neovim/nvim-lspconfig" }, -- configure LSPs
       { "ray-x/lsp_signature.nvim" }, -- Signature hints
       { "simrat39/rust-tools.nvim" }, -- Extra rust utils/support
       { "jose-elias-alvarez/typescript.nvim" }, -- Better typescript support
@@ -57,7 +56,7 @@ return require("packer").startup(function(use) -- Packer can manage itself
     config = function()
       require("plugins.lsp")
     end,
-  }) -- Makes LSPs not a pain to look nice
+  }) -- Makes LSPs not a pain to look setup
 
   use({
     "Saecki/crates.nvim",
@@ -69,12 +68,18 @@ return require("packer").startup(function(use) -- Packer can manage itself
   }) -- Crates.io support
 
   use({
-    "folke/trouble.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
+    "kevinhwang91/nvim-bqf",
     config = function()
-      require("plugins.trouble")
+      require("plugins.bqf")
     end,
-  }) -- <space>xx to see exactly where you have missed your semicolons
+  }) -- makes quickfix look godlike
+
+  use({
+    "junegunn/fzf",
+    run = function()
+      vim.fn["fzf#install"]()
+    end,
+  }) -- funni fzf
 
   use({
     "folke/which-key.nvim",
