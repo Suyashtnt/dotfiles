@@ -225,5 +225,9 @@
       source = ./config/zellij;
       recursive = true;
     };
+    cava = {
+      source = ./config/cava;
+      recursive = true;
+    };
   };
 }
