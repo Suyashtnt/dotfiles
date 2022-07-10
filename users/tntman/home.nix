@@ -1,9 +1,4 @@
-{ lib
-, pkgs
-, overlays
-, nh
-, ...
-}:
+{ lib, pkgs, overlays, nh, picom, xresources, ... }:
 
 {
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
@@ -177,12 +172,7 @@
         "85:class_g   *?= 'discord'"
       ];
       package = pkgs.picom.overrideAttrs (o: {
-        src = pkgs.fetchFromGitHub {
-          repo = "picom";
-          owner = "dccsillag";
-          rev = "51b21355696add83f39ccdb8dd82ff5009ba0ae5";
-          sha256 = "crCwRJd859DCIC0pEerpDqdX2j8ZrNAzVaSSB3mTPN8=";
-        };
+        src = picom;
       });
     };
 
@@ -194,13 +184,7 @@
   };
 
   xresources.extraConfig = builtins.readFile (
-    pkgs.fetchFromGitHub
-      {
-        owner = "catppuccin";
-        repo = "xresources";
-        rev = "86843e1452f247b1440fc04a883ed920378e4c6b";
-        sha256 = "8tOtRWUBRSwzRX5VA5oPKT5GJgP9g/L3vsD0naPdam8=";
-      } + "/Xresources"
+    xresources + "/mocha.Xresources"
   );
 
 

@@ -13,9 +13,18 @@
     };
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     flake-utils.url = "github:numtide/flake-utils";
+
+    awesomeWM.url = "github:awesomeWM/awesome";
+    awesomeWM.flake = false;
+
+    picom.url = "github:dccsillag/picom/implement-window-animations";
+    picom.flake = false;
+
+    xresources.url = "github:catppuccin/xresources";
+    xresources.flake = false;
   };
 
-  outputs = { self, nixpkgs, home-manager, neovim-nightly-overlay, nh, flake-utils, ... }:
+  outputs = { self, nixpkgs, home-manager, neovim-nightly-overlay, nh, flake-utils, awesomeWM, picom, xresources, ... }:
     let
       system = "x86_64-linux";
       overlays = [
@@ -36,7 +45,7 @@
 
 
           modules = [
-            { _module.args = { inherit overlays nh; }; }
+            { _module.args = { inherit overlays nh picom xresources; }; }
             ./users/tntman/home.nix
           ];
         };
@@ -46,6 +55,7 @@
           inherit system;
 
           modules = [
+            { _module.args = { inherit awesomeWM; }; }
             ./system/GAMER-PC/configuration.nix
           ];
         };

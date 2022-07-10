@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, awesomeWM, ... }:
 
 {
   nix = {
@@ -51,18 +51,14 @@
       enable = true;
       package = (pkgs.awesome.override {
         lua = pkgs.luajit;
-      }).overrideAttrs (prev: {
-        GI_TYPELIB_PATH = "${pkgs.playerctl}/lib/girepository-1.0:"
-          + "${pkgs.networkmanager}/lib/girepository-1.0:"
-          + prev.GI_TYPELIB_PATH;
+      }).overrideAttrs
+        (prev: {
+          GI_TYPELIB_PATH = "${pkgs.playerctl}/lib/girepository-1.0:"
+            + "${pkgs.networkmanager}/lib/girepository-1.0:"
+            + prev.GI_TYPELIB_PATH;
 
-        src = pkgs.fetchFromGitHub {
-          owner = "awesomeWM";
-          repo = "awesome";
-          rev = "9ca7bb487a5d1d2d5c102f94cd9e8cb5b6e7ffaa";
-          sha256 = "RRpwAIYNLkovXI0y/eXO9uRDqB4qQcXlnYYUCEmx/EA=";
-        };
-      });
+          src = awesomeWM;
+        });
       luaModules = with pkgs.luaPackages; [
         luarocks
         lgi
