@@ -15,7 +15,9 @@ BulkStorage is an ext4 partition. Remove the part in hardware-configuration.nix 
 the repo MUST be cloned into ~/dotfiles. It relies numerous times that its cloned there.
 
 ## obligatory screenshots
-![neofetch and right sidebar](https://user-images.githubusercontent.com/45307955/177888293-2c3687a0-2051-49a5-83a5-906812c724de.png)
+### NEW
+![new neofetch](https://user-images.githubusercontent.com/45307955/178158689-225577bc-9dfa-434e-98b9-19ecffaa61b0.png)
+### OLD (to update)
 ![alternative neofetch](https://user-images.githubusercontent.com/45307955/177975823-18ef9724-4aef-4e59-a6a7-e502c6194a49.png)
 ![neovim/neovide](https://user-images.githubusercontent.com/45307955/177888338-1867f86e-c288-4af8-86df-f6c52594b5e8.png)
 ![music player](https://user-images.githubusercontent.com/45307955/177888368-9792007d-f4cc-484d-9760-ad48e3f4d55c.png)
