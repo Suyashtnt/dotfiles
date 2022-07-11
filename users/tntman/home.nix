@@ -1,4 +1,4 @@
-{ lib, pkgs, overlays, nh, picom, xresources, ... }:
+{ lib, pkgs, overlays, nh, xresources, ... }:
 
 {
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
@@ -9,19 +9,9 @@
   nixpkgs.overlays = overlays;
 
   home = {
-    # Home Manager needs a bit of information about you and the
-    # paths it should manage.
     username = "tntman";
     homeDirectory = "/home/tntman";
 
-    # This value determines the Home Manager release that your
-    # configuration is compatible with. This helps avoid breakage
-    # when a new Home Manager release introduces backwards
-    # incompatible changes.
-    #
-    # You can update Home Manager without changing this value. See
-    # the Home Manager release notes for a list of state version
-    # changes in each release.
     stateVersion = "22.05";
 
     packages = with pkgs; [
@@ -51,6 +41,7 @@
       ghq
       gh
       fzf
+      cachix
 
       # encryption of dotfiles
       git-crypt
@@ -91,6 +82,7 @@
       enableAutosuggestions = true;
       enableSyntaxHighlighting = true;
     };
+
     ncspot = {
       enable = true;
       package = pkgs.ncspot.overrideAttrs (o: {
@@ -131,7 +123,6 @@
       ];
       extraOptions = ''
         corner-radius = 18;
-        transition-length = 600;
 
         blur: {
           method = "dual_kawase";
@@ -142,16 +133,16 @@
         }
 
         animations = true;
-        animation-stiffness = 100
-        animation-window-mass = 0.4
-        animation-dampening = 15
-        animation-clamping = false
-
+        animation-stiffness = 200.0;
+        animation-dampening = 30.0;
+        animation-clamping = false;
+        animation-mass = 0.7;
         animation-for-open-window = "zoom";
-        animation-for-unmap-window = "zoom";
-        animation-for-transient-window = "slide-up";
+        animation-for-menu-window = "slide-down";
+        animation-for-transient-window = "slide-down";
 
-        animation-for-workspace-switch-in = "slide-down";
+        # (requires pijulius)
+        animation-for-workspace-switch-in = "zoom";
         animation-for-workspace-switch-out = "zoom";
 
         use-ewmh-active-win = true;
@@ -169,12 +160,10 @@
         "100:class_g   *?= 'Chromium-browser'"
         "100:class_g   *?= 'Firefox'"
         "100:class_g   *?= 'Alacritty'"
-        "100:class_g   *?= 'Neovide'"
+        "100:class_g   *?= 'neovide'"
         "85:class_g   *?= 'discord'"
       ];
-      package = pkgs.picom.overrideAttrs (o: {
-        src = picom;
-      });
+      package = pkgs.picom-dccsillag;
     };
 
     gpg-agent = {

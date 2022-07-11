@@ -1,9 +1,8 @@
-{ config, pkgs, awesomeWM, ... }:
+{ config, pkgs, overlays, ... }:
 
 {
   nix = {
     package = pkgs.nixFlakes;
-    autoOptimiseStore = true;
     gc = {
       automatic = true;
       dates = "weekly";
@@ -11,6 +10,18 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
+    settings = {
+      trusted-users = [ "root" "tntman" ];
+      auto-optimise-store = true;
+      trusted-public-keys = [
+        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+        "fortuneteller2k.cachix.org-1:kXXNkMV5yheEQwT0I4XYh1MaCSz+qg72k8XAi2PthJI="
+      ];
+      substituters = [
+        "https://cache.nixos.org?priority=10"
+        "https://fortuneteller2k.cachix.org"
+      ];
+    };
   };
 
   imports =
@@ -36,7 +47,7 @@
   time.timeZone = "Africa/Johannesburg";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_ZA.utf8";
+  i18n.defaultLocale = "en_ZA.UTF-8";
 
   # Configure keymap in X11
   services.xserver = {
@@ -49,16 +60,9 @@
 
     windowManager.awesome = {
       enable = true;
-      package = (pkgs.awesome.override {
+      package = (pkgs.awesome-git.override {
         lua = pkgs.luajit;
-      }).overrideAttrs
-        (prev: {
-          GI_TYPELIB_PATH = "${pkgs.playerctl}/lib/girepository-1.0:"
-            + "${pkgs.networkmanager}/lib/girepository-1.0:"
-            + prev.GI_TYPELIB_PATH;
-
-          src = awesomeWM;
-        });
+      });
       luaModules = with pkgs.luaPackages; [
         luarocks
         lgi
@@ -198,6 +202,7 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.overlays = overlays;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

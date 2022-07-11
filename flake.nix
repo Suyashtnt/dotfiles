@@ -2,7 +2,7 @@
   description = "Suyashtnt's (maybe) good dotfiles";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-22.05";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -11,24 +11,22 @@
       url = "github:viperML/nh";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
+
     flake-utils.url = "github:numtide/flake-utils";
-
-    awesomeWM.url = "github:awesomeWM/awesome";
-    awesomeWM.flake = false;
-
-    picom.url = "github:dccsillag/picom/implement-window-animations";
-    picom.flake = false;
 
     xresources.url = "github:catppuccin/xresources";
     xresources.flake = false;
   };
 
-  outputs = { self, nixpkgs, home-manager, neovim-nightly-overlay, nh, flake-utils, awesomeWM, picom, xresources, ... }:
+  outputs = { self, nixpkgs, home-manager, neovim-nightly-overlay, nh, flake-utils, nixpkgs-f2k, xresources, ... }:
     let
       system = "x86_64-linux";
       overlays = [
         neovim-nightly-overlay.overlay
+        nixpkgs-f2k.overlays.default
       ];
       pkgs = import nixpkgs {
         inherit system;
@@ -43,9 +41,8 @@
         GAMER-PC = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${system};
 
-
           modules = [
-            { _module.args = { inherit overlays nh picom xresources; }; }
+            { _module.args = { inherit overlays nh xresources; }; }
             ./users/tntman/home.nix
           ];
         };
@@ -55,7 +52,7 @@
           inherit system;
 
           modules = [
-            { _module.args = { inherit awesomeWM; }; }
+            { _module.args = { inherit overlays; }; }
             ./system/GAMER-PC/configuration.nix
           ];
         };

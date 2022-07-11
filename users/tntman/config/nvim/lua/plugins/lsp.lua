@@ -34,31 +34,12 @@ for type, icon in pairs(signs) do
 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
-local config = {
-	-- disable virtual text
-	virtual_text = false,
-	-- show signs
-	signs = { active = signs },
-	update_in_insert = true,
-	underline = true,
-	severity_sort = true,
-	float = {
-		focusable = false,
-		style = "minimal",
-		border = "rounded",
-		source = "always",
-		header = "",
-		prefix = "",
-	},
-}
-
-vim.diagnostic.config(config)
-
--- lsp specific keybinds (TODO: move to /keybindings)
 local opts = { noremap = true, silent = true }
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, opts)
+vim.keymap.set("n", "<space>q", function()
+	vim.diagnostic.setqflist({ open = true })
+end, opts)
 
 -- custom on_attach
 local function on_attach(useNavic, formatting)
@@ -97,8 +78,41 @@ local function on_attach(useNavic, formatting)
 		vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, bufopts)
 		vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
 		vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
-		vim.keymap.set("n", "<space>f", vim.lsp.buf.formatting, bufopts)
+
+		vim.api.nvim_create_autocmd("CursorHold", {
+			buffer = bufnr,
+			callback = function()
+				local opts = {
+					focusable = false,
+					close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+					border = "rounded",
+					source = "always", -- show source in diagnostic popup window
+					prefix = " ",
+				}
+
+				if not vim.b.diagnostics_pos then
+					vim.b.diagnostics_pos = { nil, nil }
+				end
+
+				local cursor_pos = vim.api.nvim_win_get_cursor(0)
+				if
+					(cursor_pos[1] ~= vim.b.diagnostics_pos[1] or cursor_pos[2] ~= vim.b.diagnostics_pos[2])
+					and #vim.diagnostic.get() > 0
+				then
+					vim.diagnostic.open_float(nil, opts)
+				end
+
+				vim.b.diagnostics_pos = cursor_pos
+			end,
+		})
 	end
+end
+
+local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+	opts = opts or {}
+	opts.border = "rounded"
+	return orig_util_open_floating_preview(contents, syntax, opts, ...)
 end
 
 -- coq extra stuff
@@ -131,13 +145,13 @@ require("rust-tools").setup(coq.lsp_ensure_capabilities({
 	},
 }))
 
-require("typescript").setup({
+require("typescript").setup(coq.lsp_ensure_capabilities({
 	disable_commands = false,
 	debug = false,
 	server = {
 		on_attach = on_attach(true, false),
 	},
-})
+}))
 
 -- Custom configs
 lspconfig.sumneko_lua.setup(coq.lsp_ensure_capabilities({
