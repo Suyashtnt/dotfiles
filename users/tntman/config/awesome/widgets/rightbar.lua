@@ -221,13 +221,13 @@ sidebar_right:setup({
 	widget = wibox.container.background,
 })
 
-playerctl:connect_signal("metadata", function(_, title, artist, album_path, album, new, player_name)
+playerctl:connect_signal("metadata", function(_, title, artist, album_path, album, _, player_name)
 	-- Set art widget
 	art:set_image(gears.surface.load_uncached(album_path))
 
 	-- Set player name, title and artist widgets
-	title_widget:set_markup_silently("<b>" .. title .. "</b>")
-	artist_widget:set_markup_silently("By <b>" .. artist .. "</b>")
+	title_widget:set_markup_silently("<b>" .. title .. " [" .. album .. "]" .. "</b>")
+	artist_widget:set_markup_silently("By <b>" .. artist .. " [" .. player_name .. "]</b>")
 end)
 
 local function DecimalsToMinutes(dec)
