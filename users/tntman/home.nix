@@ -122,11 +122,9 @@
         "class_g = 'awesome'"
       ];
       extraOptions = ''
-        corner-radius = 18;
-
         blur: {
           method = "dual_kawase";
-          strength = 9;
+          strength = 7;
           background = true;
           background-frame = false;
           background-fixed = false;
@@ -141,14 +139,14 @@
         animation-for-menu-window = "slide-down";
         animation-for-transient-window = "slide-down";
 
-        # (requires pijulius)
-        animation-for-workspace-switch-in = "zoom";
-        animation-for-workspace-switch-out = "zoom";
+        shadow = true;
+        shadow-radius = 10;
+        shadow-opacity = .75
+        shadow-offset-x = 9;
+        shadow-offset-y = 9;
 
         use-ewmh-active-win = true;
-
         spawn-center-screen = true;
-
         unredir-if-possible = true; # for games
       '';
       experimentalBackends = true;
@@ -157,7 +155,6 @@
       fadeDelta = 5;
       vSync = true;
       opacityRule = [
-        "100:class_g   *?= 'Chromium-browser'"
         "100:class_g   *?= 'Firefox'"
         "100:class_g   *?= 'Alacritty'"
         "100:class_g   *?= 'neovide'"
