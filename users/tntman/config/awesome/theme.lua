@@ -7,7 +7,7 @@ local dpi = xresources.apply_dpi
 
 local theme = {}
 
-theme.font = "JetBrainsMono Nerd Font 12"
+theme.font = "JetBrainsMono Nerd Font 14"
 
 theme.bg_normal = "#1E1E2E"
 theme.bg_focus = "#302D41"
@@ -25,15 +25,15 @@ theme.tasklist_shape_border_width = dpi(4)
 theme.tasklist_shape_border_color = "#a0d9a9"
 theme.tasklist_shape_border_color_focus = "#f5c2e7"
 
-theme.fg_normal = "#aaaaaa"
-theme.fg_urgent = "#ffffff"
-theme.fg_minimize = "#ffffff"
+theme.fg_normal = "#cdd6f4"
+theme.fg_urgent = "#a6e3a1"
+theme.fg_minimize = "#a6adc8"
 
 theme.useless_gap = dpi(6)
-theme.border_width = dpi(0)
+theme.border_width = dpi(4)
 theme.border_color_normal = "#000000"
-theme.border_color_active = "#535d6c"
-theme.border_color_marked = "#91231c"
+theme.border_color_active = "#89b4fa"
+theme.border_color_marked = "#a6e3a1"
 
 theme.taglist_bg_focus = "#89b4fa"
 theme.taglist_bg_empty = "#181825"
@@ -41,7 +41,7 @@ theme.taglist_bg_occupied = "#313244"
 
 theme.taglist_font = "Font Awesome 6 Free 18"
 theme.taglist_shape = function(cr, width, height)
-  gears.shape.rounded_rect(cr, width, height, 8)
+	gears.shape.rounded_rect(cr, width, height, 8)
 end
 
 theme.notification_border_width = dpi(3)
@@ -60,7 +60,18 @@ theme.tabbar_style = "modern"
 theme.tabbar_radius = dpi(8)
 theme.mstab_border_radius = dpi(8)
 
-theme.playerctl_player = { "spotify", "%any" }
+theme.tag_preview_widget_border_radius = 8
+theme.tag_preview_client_border_radius = 8
+theme.tag_preview_client_opacity = 1
+theme.tag_preview_client_bg = "#000000"
+theme.tag_preview_client_border_color = "#ffffff"
+theme.tag_preview_client_border_width = 0
+theme.tag_preview_widget_bg = "#000000"
+theme.tag_preview_widget_border_color = "#96cdfb"
+theme.tag_preview_widget_border_width = 6
+theme.tag_preview_widget_margin = 8
+
+theme.playerctl_player = { "spotify", "ncspot", "%any" }
 theme.playerctl_update_on_activity = true
 
 theme.icon_theme = "/home/tntman/.icons/.default"

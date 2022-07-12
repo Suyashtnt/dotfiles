@@ -1,8 +1,9 @@
 local awful = require("awful")
+local awesome = require("awesome")
 local hotkeys_popup = require("awful.hotkeys_popup")
 
 awful.keyboard.append_global_keybindings({
-	awful.key({ modkey, "Shift" }, "/", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
+	awful.key({ modkey }, "/", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
 
 	awful.key({ modkey, "Control" }, "r", function()
 		awful.spawn.with_shell("$HOME/.config/awesome/picom.sh")

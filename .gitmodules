@@ -13,3 +13,6 @@
 [submodule "home/tntman/config/awesome/vicious"]
 	path = home/tntman/config/awesome/vicious
 	url = https://github.com/vicious-widgets/vicious.git
+[submodule "users/tntman/config/awesome/rubato"]
+	path = users/tntman/config/awesome/rubato
+	url = https://github.com/andOrlando/rubato

@@ -1,9 +1,34 @@
 local awful = require("awful")
+local awesome = require("awesome")
 local wibox = require("wibox")
 local gears = require("gears")
 local beautiful = require("beautiful")
+local bling = require("bling")
 
 screen.connect_signal("request::desktop_decoration", function(s)
+	bling.widget.tag_preview.enable({
+		show_client_content = true,
+		x = 10,
+		y = 10,
+		scale = 0.50,
+		honor_padding = true,
+		honor_workarea = true,
+		placement_fn = function(c)
+			awful.placement.top_left(c, {
+				margins = {
+					top = 30,
+					left = 30,
+				},
+			})
+		end,
+		background_widget = {
+			image = beautiful.wallpaper,
+			horizontal_fit_policy = "fit",
+			vertical_fit_policy = "fit",
+			widget = wibox.widget.imagebox,
+		},
+	})
+
 	-- Create a taglist widget
 	s.mytaglist = awful.widget.taglist({
 		screen = s,
@@ -36,6 +61,18 @@ screen.connect_signal("request::desktop_decoration", function(s)
 			id = "background_role",
 			widget = wibox.container.background,
 			fg = "#cdd6f4",
+
+			create_callback = function(self, c3, index, objects)
+				self:connect_signal("mouse::enter", function()
+					if #c3:clients() > 0 then
+						awesome.emit_signal("bling::tag_preview::update", c3)
+						awesome.emit_signal("bling::tag_preview::visibility", s, true)
+					end
+				end)
+				self:connect_signal("mouse::leave", function()
+					awesome.emit_signal("bling::tag_preview::visibility", s, false)
+				end)
+			end,
 		},
 
 		buttons = {

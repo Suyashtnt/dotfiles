@@ -7,7 +7,7 @@ awful.keyboard.append_global_keybindings({
 
 	awful.key({ modkey, "Shift" }, "s", function()
 		awful.spawn.with_shell(
-			"maim -i $(xdotool getactivewindow) --format png /dev/stdout | xclip -selection clipboard -t image/png -i"
+			"maim -i $(nix run nixpkgs#xdotool -- getactivewindow) --format png /dev/stdout | xclip -selection clipboard -t image/png -i"
 		)
 	end, { description = "Capture Active", group = "screenshot" }),
 

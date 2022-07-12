@@ -1,0 +1,2 @@
+- [  ] add taglist animations
+- [  ] make everything easily themable
