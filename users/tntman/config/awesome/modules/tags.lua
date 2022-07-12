@@ -9,11 +9,11 @@ local tags = {
 	"\u{f392}",
 	"\u{f1b6}",
 	"\u{f025}",
-	"\u{f013}"
+	"\u{f013}",
 }
 
 screen.connect_signal("request::desktop_decoration", function(s)
-	for id, tag in pairs(tags) do
+	for _, tag in pairs(tags) do
 		awful.tag.add(tag, {
 			layout = machi.default_layout,
 			screen = s,

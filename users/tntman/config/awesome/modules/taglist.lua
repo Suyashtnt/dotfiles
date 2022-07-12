@@ -1,5 +1,4 @@
 local awful = require("awful")
-local awesome = require("awesome")
 local wibox = require("wibox")
 local gears = require("gears")
 local beautiful = require("beautiful")

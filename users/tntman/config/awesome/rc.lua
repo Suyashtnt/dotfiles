@@ -2,6 +2,7 @@ pcall(require, "luarocks.loader")
 
 local gears = require("gears")
 local awful = require("awful")
+local helpers = require("helpers")
 require("awful.autofocus")
 
 local beautiful = require("beautiful")
@@ -28,7 +29,6 @@ editor_cmd = terminal .. " -e " .. editor
 modkey = "Mod4"
 
 -- {{{ beautiful conf
-beautiful.gap_single_client = true
 local xrdb = beautiful.xresources.get_current_theme()
 x = {
 	--           xrdb variable
@@ -64,24 +64,16 @@ require("modules.wibar")
 require("widgets.leftbar")
 require("widgets.rightbar")
 
--- Menubar configuration
-menubar.utils.terminal = terminal -- Set the terminal for applications that require it
--- }}}
-
--- {{{ Wallpaper
 screen.connect_signal("request::wallpaper", function(s)
 	gears.wallpaper.maximized(beautiful.wallpaper, s)
 	awful.spawn.with_shell("feh --no-xinerama --bg-center ~/.config/awesome/wallpaper.png")
 end)
--- }}}
 
--- {{{ Mouse bindings
 awful.mouse.append_global_mousebindings({
 	awful.button({}, 4, awful.tag.viewprev),
 	awful.button({}, 5, awful.tag.viewnext),
 })
 
--- {{{ Key bindings
 require("modules.keybinds.awesome")
 require("modules.keybinds.spotify")
 require("modules.keybinds.screenshot")
@@ -104,12 +96,11 @@ client.connect_signal("request::default_mousebindings", function()
 	})
 end)
 
--- }}}
+client.connect_signal("manage", function(c)
+	c.shape = helpers.rrect(beautiful.border_radius)
+end)
 
--- {{{ Rules
--- Rules to apply to new clients.
 ruled.client.connect_signal("request::rules", function()
-	-- All clients will match this rule.
 	ruled.client.append_rule({
 		id = "global",
 		rule = {},
@@ -121,38 +112,19 @@ ruled.client.connect_signal("request::rules", function()
 		},
 	})
 
-	-- Floating clients.
 	ruled.client.append_rule({
 		id = "floating",
 		rule_any = {
 			instance = { "copyq", "pinentry" },
-			class = {
-				"Arandr",
-				"Blueman-manager",
-				"Gpick",
-				"Kruler",
-				"Sxiv",
-				"Tor Browser",
-				"Wpa_gui",
-				"veromix",
-				"xtightvncviewer",
-			},
-			-- Note that the name property shown in xprop might be set slightly after creation of the client
-			-- and the name shown there might not match defined rules here.
-			name = {
-				"Event Tester", -- xev.
-			},
 			role = {
-				"AlarmWindow", -- Thunderbird's calendar.
-				"ConfigManager", -- Thunderbird's about:config.
-				"pop-up", -- e.g. Google Chrome's (detached) Developer Tools.
+				"pop-up",
 			},
 		},
 		properties = { floating = true },
 	})
 
 	ruled.client.append_rule({
-		rule = { class = { "Firefox", "Brave" } },
+		rule = { class = { "Firefox" } },
 		properties = { screen = 1, tag = "2" },
 	})
 
@@ -160,11 +132,13 @@ ruled.client.connect_signal("request::rules", function()
 		rule = { class = { "Steam" } },
 		properties = { screen = 1, tag = "5" },
 	})
+
+	ruled.client.append_rule({
+		rule = { class = { "Discord" } },
+		properties = { screen = 1, tag = "4" },
+	})
 end)
 
--- }}}
-
--- Enable sloppy focus, so that focus follows mouse.
 client.connect_signal("mouse::enter", function(c)
 	c:activate({ context = "mouse_enter", raise = false })
 end)

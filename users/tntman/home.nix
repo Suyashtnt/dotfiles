@@ -140,10 +140,10 @@
         animation-for-transient-window = "slide-down";
 
         shadow = true;
-        shadow-radius = 10;
-        shadow-opacity = .75
-        shadow-offset-x = 9;
-        shadow-offset-y = 9;
+        shadow-radius = 16;
+        shadow-opacity = .7;
+        shadow-offset-x = -4;
+        shadow-offset-y = -4;
 
         use-ewmh-active-win = true;
         spawn-center-screen = true;
@@ -159,6 +159,7 @@
         "100:class_g   *?= 'Alacritty'"
         "100:class_g   *?= 'neovide'"
         "85:class_g   *?= 'discord'"
+        "100:class_g *?= 'awesome'"
       ];
       package = pkgs.picom-dccsillag;
     };

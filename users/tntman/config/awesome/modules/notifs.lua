@@ -1,5 +1,4 @@
 local naughty = require("naughty")
-local gears = require("gears")
 local wibox = require("wibox")
 local helpers = require("helpers")
 local ruled = require("ruled")
@@ -89,8 +88,8 @@ naughty.connect_signal("request::display", function(n)
 			{
 				{
 					{
-						font = "JetBrainsMono Nerd Font Mono 18 bold",
-						markup = helpers.colorize_text(" ", x.color4),
+						font = beautiful.notification_font,
+						markup = helpers.colorize_text(" ", beautiful.notification_action_colour),
 						widget = wibox.widget.textbox,
 					},
 					{
@@ -126,9 +125,7 @@ naughty.connect_signal("request::display", function(n)
 					{
 						{
 							{
-								clip_shape = function(cr, w, h)
-									gears.shape.rounded_rect(cr, w, h, dpi(14))
-								end,
+								clip_shape = helpers.rrect(beautiful.notification_icon_radius),
 								widget = naughty.widget.icon,
 							},
 							{
@@ -178,8 +175,8 @@ naughty.connect_signal("request::display", function(n)
 				widget = wibox.container.margin,
 			},
 			strategy = "min",
-			width = beautiful.notification_min_width or dpi(150),
-			height = beautiful.notification_min_height or dpi(150),
+			width = beautiful.notification_min_width,
+			height = beautiful.notification_min_height,
 			widget = wibox.container.constraint,
 		},
 	})
