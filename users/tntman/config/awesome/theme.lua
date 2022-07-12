@@ -8,10 +8,20 @@ local theme = {}
 theme.font = "JetBrainsMono Nerd Font 14"
 theme.icon_font = "Font Awesome 6 Free 18"
 
+theme.red = "#f38ba8"
+theme.yellow = "#f9e2af"
+theme.green = "#a6e3a1"
+theme.blue = "#89b4fa"
+
 theme.bg_normal = "#1E1E2E"
 theme.bg_focus = "#302D41"
 theme.bg_urgent = "#FAE3B0"
 theme.bg_minimize = "#575268"
+
+theme.gap_single_client = true
+theme.border_color_normal = "#6c7086"
+theme.border_color_active = "#b4befe"
+theme.border_color_marked = "#f8e1ae"
 
 theme.bg_systray = theme.bg_normal
 theme.systray_icon_spacing = dpi(8)
@@ -31,11 +41,6 @@ theme.fg_minimize = "#a6adc8"
 theme.useless_gap = dpi(6)
 theme.border_width = dpi(4)
 theme.border_radius = dpi(8)
-
-theme.gap_single_client = true
-theme.border_color_normal = "#000000"
-theme.border_color_active = "#89b4fa"
-theme.border_color_marked = "#a6e3a1"
 
 theme.taglist_bg_focus = "#89b4fa"
 theme.taglist_bg_empty = "#181825"

@@ -3,12 +3,13 @@ local awful = require("awful")
 local helpers = require("helpers")
 local wibox = require("wibox")
 local gears = require("gears")
+local beautiful = require("beautiful")
 local weather_widget = require("awesome-wm-widgets.weather-widget.weather")
 
 -- Create the sidebar_right
 local sidebar_right = wibox({ visible = false, ontop = true, type = "dock", screen = screen.primary })
 sidebar_right.bg = "#00000000" -- For anti aliasing
-sidebar_right.fg = x.color7
+sidebar_right.fg = beautiful.fg_normal
 sidebar_right.opacity = 1
 sidebar_right.height = screen.primary.geometry.height / 1.5
 sidebar_right.width = dpi(300)
@@ -80,7 +81,7 @@ local create_button = function(symbol, color, command, playpause)
 	end)))
 
 	button:connect_signal("mouse::enter", function()
-		icon.markup = helpers.colorize_text(icon.text, x.foreground)
+		icon.markup = helpers.colorize_text(icon.text, beautiful.fg_normal)
 	end)
 
 	button:connect_signal("mouse::leave", function()
@@ -100,10 +101,10 @@ local next_command = function()
 	playerctl:next()
 end
 
-local playerctl_play_symbol = create_button("", x.color4, play_command, true)
+local playerctl_play_symbol = create_button("", beautiful.blue, play_command, true)
 
-local playerctl_prev_symbol = create_button("玲", x.color4, prev_command, false)
-local playerctl_next_symbol = create_button("怜", x.color4, next_command, false)
+local playerctl_prev_symbol = create_button("玲", beautiful.blue, prev_command, false)
+local playerctl_next_symbol = create_button("怜", beautiful.blue, next_command, false)
 
 local art = wibox.widget({
 	image = "default_image.png",
@@ -153,10 +154,10 @@ local time_bar = wibox.widget({
 	bar_shape = gears.shape.rounded_rect,
 	bar_height = dpi(3),
 	forced_height = dpi(8),
-	bar_color = x.foreground,
-	handle_color = x.foreground,
+	bar_color = beautiful.fg_normal,
+	handle_color = beautiful.fg_normal,
 	handle_shape = gears.shape.circle,
-	handle_border_color = x.foreground,
+	handle_border_color = beautiful.fg_normal,
 	handle_border_width = dpi(8),
 	handle_width = dpi(32),
 	value = 25,
@@ -216,7 +217,7 @@ sidebar_right:setup({
 		layout = wibox.layout.fixed.vertical,
 	},
 	shape = helpers.prrect(dpi(40), true, false, false, true),
-	bg = x.background,
+	bg = beautiful.bg_normal,
 	fg = "#cdd6f4",
 	widget = wibox.container.background,
 })

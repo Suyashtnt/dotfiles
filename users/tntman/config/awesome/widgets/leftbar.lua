@@ -4,11 +4,12 @@ local helpers = require("helpers")
 local wibox = require("wibox")
 local gears = require("gears")
 local vicious = require("vicious")
+local beautiful = require("beautiful")
 
 -- Create the sidebar_left
 local sidebar_left = wibox({ visible = false, ontop = true, type = "dock", screen = screen.primary })
 sidebar_left.bg = "#00000000" -- For anti aliasing
-sidebar_left.fg = x.color7
+sidebar_left.fg = beautiful.fg_normal
 sidebar_left.opacity = 1
 sidebar_left.height = screen.primary.geometry.height / 1.5
 sidebar_left.width = dpi(300)
@@ -49,7 +50,7 @@ end)
 awful.placement.left(sidebar_left_activator)
 
 local function make_fa_icon(code)
-	return "<span color='#cdd6f4' font='Font Awesome 6 Free 18'>" .. code .. "</span> "
+	return "<span color='#cdd6f4' font='" .. beautiful.icon_font .. "'>" .. code .. "</span> "
 end
 
 local function colourize_based_on_number(colour_percentage_map, value, text)
@@ -70,43 +71,31 @@ local function textbox()
 	return tb
 end
 
+local main_col_table = {
+	{
+		v = 0,
+		col = beautiful.green,
+	},
+	{
+		v = 60,
+		col = beautiful.yellow,
+	},
+	{
+		v = 80,
+		col = beautiful.red,
+	},
+}
+
 local cpuwidget = textbox()
 vicious.register(cpuwidget, vicious.widgets.cpu, function(_, args)
-	return make_fa_icon("\u{f2db}")
-		.. colourize_based_on_number({
-			{
-				v = 0,
-				col = "#a6e3a1",
-			},
-			{
-				v = 60,
-				col = "#f9e2af",
-			},
-			{
-				v = 80,
-				col = "#f38ba8",
-			},
-		}, args[1], args[1] .. "%")
+	return make_fa_icon("\u{f2db}") .. colourize_based_on_number(main_col_table, args[1], args[1] .. "%")
 end, 3)
 
 local memwidget = textbox()
 vicious.cache(vicious.widgets.mem)
 vicious.register(memwidget, vicious.widgets.mem, function(_, args)
 	return make_fa_icon("\u{f538}")
-		.. colourize_based_on_number({
-			{
-				v = 0,
-				col = "#a6e3a1",
-			},
-			{
-				v = 60,
-				col = "#f9e2af",
-			},
-			{
-				v = 80,
-				col = "#f38ba8",
-			},
-		}, args[1], ("%s%% (%sMiB/%sMiB)"):format(args[1], args[2], args[3]))
+		.. colourize_based_on_number(main_col_table, args[1], ("%s%% (%sMiB/%sMiB)"):format(args[1], args[2], args[3]))
 end, 13)
 
 -- sidebar_left placement
@@ -119,6 +108,6 @@ sidebar_left:setup({
 		layout = wibox.layout.fixed.vertical,
 	},
 	shape = helpers.prrect(dpi(40), false, true, true, false),
-	bg = x.background,
+	bg = beautiful.bg_normal,
 	widget = wibox.container.background,
 })
