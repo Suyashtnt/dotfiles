@@ -120,6 +120,8 @@
       blurExclude = [
         "class_g = 'slop'"
         "class_g = 'awesome'"
+        "class_g = 'Peek'"
+        "name *= 'rect-overlay'"
       ];
       extraOptions = ''
         blur: {
