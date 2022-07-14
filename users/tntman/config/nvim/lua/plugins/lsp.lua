@@ -75,14 +75,16 @@ local function on_attach(useNavic, formatting)
 		end, bufopts)
 
 		vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, bufopts)
-		vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, bufopts)
+		vim.keymap.set("n", "<leader>rn", function()
+			require("inc_rename").rename({ default = vim.fn.expand("<cword>") })
+		end, bufopts)
 		vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
 		vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
 
 		vim.api.nvim_create_autocmd("CursorHold", {
 			buffer = bufnr,
 			callback = function()
-				local opts = {
+				local cursorHoldOpts = {
 					focusable = false,
 					close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
 					border = "rounded",
@@ -99,7 +101,7 @@ local function on_attach(useNavic, formatting)
 					(cursor_pos[1] ~= vim.b.diagnostics_pos[1] or cursor_pos[2] ~= vim.b.diagnostics_pos[2])
 					and #vim.diagnostic.get() > 0
 				then
-					vim.diagnostic.open_float(nil, opts)
+					vim.diagnostic.open_float(nil, cursorHoldOpts)
 				end
 
 				vim.b.diagnostics_pos = cursor_pos
@@ -109,10 +111,10 @@ local function on_attach(useNavic, formatting)
 end
 
 local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
-function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-	opts = opts or {}
-	opts.border = "rounded"
-	return orig_util_open_floating_preview(contents, syntax, opts, ...)
+function vim.lsp.util.open_floating_preview(contents, syntax, internalOpts, ...)
+	internalOpts = internalOpts or {}
+	internalOpts.border = "rounded"
+	return orig_util_open_floating_preview(contents, syntax, internalOpts, ...)
 end
 
 -- coq extra stuff

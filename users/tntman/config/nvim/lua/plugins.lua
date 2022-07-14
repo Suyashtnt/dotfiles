@@ -46,16 +46,23 @@ return require("packer").startup(function(use) -- Packer can manage itself
 	use({
 		"neovim/nvim-lspconfig",
 		requires = { -- All plugins used/using LSP stuff
-			{ "ray-x/guihua.lua", run = "cd lua/fzy && make" }, -- UI libs navigator uses
-			{ "ray-x/lsp_signature.nvim" }, -- Signature hints
-			{ "simrat39/rust-tools.nvim" }, -- Extra rust utils/support
-			{ "jose-elias-alvarez/typescript.nvim" }, -- Better typescript support
-			{ "SmiteshP/nvim-navic" }, -- Where you are in the document, initialzed via LSP
-			{ "j-hui/fidget.nvim" }, -- Nicer LSP status
-			{ "tamago324/nlsp-settings.nvim" }, -- LSP settings
-			{ "jose-elias-alvarez/null-ls.nvim" }, -- Generic formatting and stuff
-			{ "b0o/schemastore.nvim" }, -- Plugin for better JSON autocomplete
+			"ray-x/guihua.lua",
+			run = "cd lua/fzy && make", -- UI libs navigator uses
+			"ray-x/lsp_signature.nvim", -- Signature hints
+			"simrat39/rust-tools.nvim", -- Extra rust utils/support
+			"jose-elias-alvarez/typescript.nvim", -- Better typescript support
+			"SmiteshP/nvim-navic", -- Where you are in the document, initialzed via LSP
+			"j-hui/fidget.nvim", -- Nicer LSP status
+			"tamago324/nlsp-settings.nvim", -- LSP settings
+			"jose-elias-alvarez/null-ls.nvim", -- Generic formatting and stuff
+			"b0o/schemastore.nvim", -- Plugin for better JSON autocomplete
 			{ "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" }, -- code folding but better
+			{
+				"smjonas/inc-rename.nvim",
+				config = function()
+					require("inc_rename").setup()
+				end,
+			}, -- LSP incremental rename
 		},
 		config = function()
 			require("plugins.lsp")
@@ -113,8 +120,8 @@ return require("packer").startup(function(use) -- Packer can manage itself
 	use({
 		"nvim-treesitter/nvim-treesitter",
 		requires = {
-			{ "windwp/nvim-ts-autotag" }, -- auto close html tags and stuff
-			{ "p00f/nvim-ts-rainbow" },
+			"windwp/nvim-ts-autotag", -- auto close html tags and stuff
+			"p00f/nvim-ts-rainbow",
 		},
 		run = ":TSUpdate",
 		config = function()
@@ -125,9 +132,15 @@ return require("packer").startup(function(use) -- Packer can manage itself
 	use({
 		"nvim-telescope/telescope.nvim",
 		requires = {
-			{ "nvim-lua/plenary.nvim" },
-			{ "nvim-telescope/telescope-file-browser.nvim" },
-			{ "nvim-telescope/telescope-media-files.nvim" },
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope-file-browser.nvim",
+			"nvim-telescope/telescope-media-files.nvim",
+			"nvim-telescope/telescope-ghq.nvim",
+			"jvgrootveld/telescope-zoxide",
+			{
+				"nvim-telescope/telescope-fzf-native.nvim",
+				run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+			},
 		},
 		config = function()
 			require("plugins.telescope")

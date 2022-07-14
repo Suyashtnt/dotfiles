@@ -25,6 +25,7 @@
       rofi
       neovim-nightly
       neovide
+      libresprite
 
       # CLI utils
       atuin
@@ -52,6 +53,7 @@
       pinentry_qt
       pkg-config
       gcc
+      cmake
 
       # Fonts
       (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
