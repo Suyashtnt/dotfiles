@@ -1,5 +1,6 @@
 local wibox = require("wibox")
 local gears = require("gears")
+local beautiful = require("beautiful")
 local helpers = {}
 
 local function file_exists(file)
@@ -31,6 +32,10 @@ end
 
 helpers.colorize_text = function(text, color)
 	return "<span foreground='" .. color .. "'>" .. text .. "</span>"
+end
+
+helpers.create_emoji = function(emojiCode, color)
+	return "<span foreground='" .. color .. "' font='" .. beautiful.icon_font .. "'>" .. emojiCode .. "</span>"
 end
 
 helpers.rrect = function(radius)

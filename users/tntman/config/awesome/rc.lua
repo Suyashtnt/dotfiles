@@ -36,8 +36,7 @@ require("modules.tasklist")
 require("modules.layoutbox")
 require("modules.wibar")
 
-require("widgets.leftbar")
-require("widgets.rightbar")
+require("modules.rightbar")
 
 screen.connect_signal("request::wallpaper", function(s)
 	gears.wallpaper.maximized(beautiful.wallpaper, s)

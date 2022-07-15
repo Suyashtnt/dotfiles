@@ -6,7 +6,7 @@ local helpers = require("helpers")
 local theme = {}
 
 theme.font = "JetBrainsMono Nerd Font 14"
-theme.icon_font = "Font Awesome 6 Free 18"
+theme.icon_font = "Font Awesome 6 Free 14"
 
 theme.red = "#f38ba8"
 theme.yellow = "#f9e2af"
@@ -38,16 +38,17 @@ theme.fg_normal = "#cdd6f4"
 theme.fg_urgent = "#a6e3a1"
 theme.fg_minimize = "#a6adc8"
 
-theme.useless_gap = dpi(6)
-theme.border_width = dpi(4)
-theme.border_radius = dpi(8)
+theme.useless_gap = dpi(4)
+theme.border_width = dpi(3)
+theme.border_radius = dpi(10)
 
 theme.taglist_bg_focus = "#89b4fa"
 theme.taglist_bg_empty = "#181825"
 theme.taglist_bg_occupied = "#313244"
 
-theme.taglist_font = theme.icon_font
-theme.taglist_shape = helpers.rrect(8)
+theme.taglist_font = "Font Awesome 6 Free 18"
+
+theme.taglist_shape = helpers.rrect(12)
 
 theme.notification_border_width = dpi(3)
 theme.notification_border_color = "#96cdfb"
@@ -71,9 +72,12 @@ theme.wibar_margins = {
 theme.wibar_left_section_margins = {
 	left = dpi(16),
 	right = dpi(16),
-	top = dpi(8),
-	bottom = dpi(8),
+	-- top = dpi(8),
+	-- bottom = dpi(8),
 }
+
+theme.radialprogressbar_border_color = theme.blue
+theme.radialprogressbar_color = theme.yellow
 
 theme.wibar_radius = dpi(32)
 theme.wibar_middle_section_margins = dpi(16)
