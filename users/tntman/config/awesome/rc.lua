@@ -8,8 +8,6 @@ require("awful.autofocus")
 local beautiful = require("beautiful")
 
 local ruled = require("ruled")
-local menubar = require("menubar")
-
 beautiful.init(gears.filesystem.get_configuration_dir() .. "theme.lua")
 
 local bling = require("bling")

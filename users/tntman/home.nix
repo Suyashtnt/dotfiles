@@ -134,7 +134,7 @@
           background-fixed = false;
         }
 
-        animations = true;
+        animations = false;
         animation-stiffness = 200.0;
         animation-dampening = 30.0;
         animation-clamping = false;
