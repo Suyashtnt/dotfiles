@@ -119,23 +119,25 @@
   services = {
     picom = {
       enable = true;
-      activeOpacity = "0.80";
-      inactiveOpacity = "0.80";
-      blur = true;
-      blurExclude = [
-        "class_g = 'slop'"
-        "class_g = 'awesome'"
-        "class_g = 'Peek'"
-        "name *= 'rect-overlay'"
-      ];
-      extraOptions = ''
-        blur: {
+      activeOpacity = 0.80;
+      inactiveOpacity = 0.80;
+
+      settings = {
+        blur = {
+          enable = true;
           method = "dual_kawase";
           strength = 7;
           background = true;
           background-frame = false;
           background-fixed = false;
-        }
+        };
+
+        blur-background-exclude = [
+          "class_g = 'slop'"
+          "class_g = 'awesome'"
+          "class_g = 'Peek'"
+          "name *= 'rect-overlay'"
+        ];
 
         animations = false;
         animation-stiffness = 200.0;
@@ -155,13 +157,13 @@
         use-ewmh-active-win = true;
         spawn-center-screen = true;
         unredir-if-possible = true; # for games
-      '';
+      };
       experimentalBackends = true;
 
       backend = "glx";
       fadeDelta = 5;
       vSync = true;
-      opacityRule = [
+      opacityRules = [
         "100:class_g   *?= 'Firefox'"
         "100:class_g   *?= 'Alacritty'"
         "100:class_g   *?= 'neovide'"
