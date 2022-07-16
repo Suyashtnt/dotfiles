@@ -25,6 +25,7 @@ local function textbox()
 	local tb = wibox.widget.textbox()
 	tb.align = "center"
 	tb.valign = "center"
+	tb.font = beautiful.wibar_font
 	return tb
 end
 
@@ -32,6 +33,7 @@ local clock = wibox.widget.textclock(
 	helpers.create_emoji("\u{f017}", beautiful.green)
 		.. " <span foreground='#abe9b3'>%b %d</span> <span foreground='#96cdfb'>%H:%M</span>"
 )
+clock.font = beautiful.wibar_font
 
 local net_speed = textbox()
 vicious.register(net_speed, vicious.widgets.net, function(_, args)

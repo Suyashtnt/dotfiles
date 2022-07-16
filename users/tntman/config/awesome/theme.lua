@@ -6,6 +6,7 @@ local helpers = require("helpers")
 local theme = {}
 
 theme.font = "JetBrainsMono Nerd Font 14"
+theme.wibar_font = "JetBrainsMono Nerd Font 12"
 theme.icon_font = "Font Awesome 6 Free 14"
 
 theme.red = "#f38ba8"

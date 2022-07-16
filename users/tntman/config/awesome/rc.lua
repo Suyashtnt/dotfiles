@@ -73,6 +73,7 @@ client.connect_signal("manage", function(c)
 end)
 
 ruled.client.connect_signal("request::rules", function()
+	local tags = require("modules.tags")
 	ruled.client.append_rule({
 		id = "global",
 		rule = {},
@@ -97,17 +98,27 @@ ruled.client.connect_signal("request::rules", function()
 
 	ruled.client.append_rule({
 		rule = { class = { "Firefox" } },
-		properties = { screen = 1, tag = "2" },
+		properties = { screen = 1, tag = tags[2] },
 	})
 
 	ruled.client.append_rule({
 		rule = { class = { "Steam" } },
-		properties = { screen = 1, tag = "5" },
+		properties = { screen = 1, tag = tags[5] },
 	})
 
 	ruled.client.append_rule({
 		rule = { class = { "Discord" } },
-		properties = { screen = 1, tag = "4" },
+		properties = { screen = 1, tag = tags[4] },
+	})
+
+	ruled.client.append_rule({
+		rule = { class = { "neovide" } },
+		properties = { screen = 1, tag = tags[3] },
+	})
+
+	ruled.client.append_rule({
+		rule = { class = { "Spotify" } },
+		properties = { screen = 1, tag = tags[6] },
 	})
 end)
 

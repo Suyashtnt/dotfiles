@@ -43,6 +43,9 @@
       gh
       fzf
       cachix
+      glib
+      imagemagick
+      scrot
 
       # encryption of dotfiles
       git-crypt

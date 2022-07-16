@@ -86,25 +86,17 @@ naughty.connect_signal("request::display", function(n)
 
 		widget_template = {
 			{
-				{
-					{
-						font = beautiful.notification_font,
-						markup = helpers.colorize_text(" ", beautiful.notification_action_colour),
-						widget = wibox.widget.textbox,
-					},
-					{
-						id = "text_role",
-						font = beautiful.notification_font,
-						widget = wibox.widget.textbox,
-					},
-					forced_height = dpi(35),
-					layout = wibox.layout.fixed.horizontal,
-				},
-				widget = wibox.container.place,
+				font = beautiful.notification_font,
+				markup = helpers.colorize_text(" ", beautiful.notification_action_colour),
+				widget = wibox.widget.textbox,
 			},
-			strategy = "min",
-			width = dpi(60),
-			widget = wibox.container.constraint,
+			{
+				id = "text_role",
+				font = beautiful.notification_font,
+				widget = wibox.widget.textbox,
+			},
+			forced_height = dpi(35),
+			layout = wibox.layout.fixed.horizontal,
 		},
 		style = {
 			underline_normal = false,
@@ -159,7 +151,7 @@ naughty.connect_signal("request::display", function(n)
 							{
 								nil,
 								actions,
-								expand = "none",
+								expand = "inside",
 								layout = wibox.layout.align.horizontal,
 							},
 							visible = n.actions and #n.actions > 0,
