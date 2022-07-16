@@ -175,7 +175,26 @@
       enable = true;
       pinentryFlavor = "qt";
     };
+  };
 
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Sweet";
+      package = pkgs.sweet;
+    };
+    iconTheme = {
+      name = "candy-icons";
+    };
+  };
+
+  qt = {
+    enable = true;
+    platformTheme = "gtk";
+    style = {
+      name = "Sweet";
+      package = pkgs.sweet;
+    };
   };
 
   xresources.extraConfig = builtins.readFile (
