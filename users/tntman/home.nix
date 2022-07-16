@@ -46,6 +46,7 @@
       glib
       imagemagick
       scrot
+      ueberzug
 
       # encryption of dotfiles
       git-crypt
@@ -90,9 +91,22 @@
 
     ncspot = {
       enable = true;
-      package = pkgs.ncspot.overrideAttrs (o: {
-        buildNoDefaultFeatures = false;
-        buildFeatures = [ "cover" "mpris" "notify" "share_clipboard" "cursive/pancurses-backend" "with_pulseaudio" ];
+      package = (pkgs.ncspot.override {
+        withMPRIS = true;
+        withPulseAudio = true;
+      }).overrideAttrs (old: {
+        buildFeatures = (old.buildFeatures or [ ]) ++ [ "cover" "notify" "share_clipboard" ];
+        cargoBuildFeatures = (old.buildFeatures or [ ]) ++ [ "cover" "notify" "share_clipboard" ];
+
+        buildInputs = (old.buildInputs or [ ]) ++ (with pkgs; [
+          ueberzug
+          xorg.libX11
+        ]);
+
+        nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ (with pkgs; [
+          python311
+        ]);
+
       });
       settings = {
         shuffle = true;
@@ -103,7 +117,6 @@
         repeat = "playlist";
       };
     };
-
 
     direnv.enable = true;
     direnv.nix-direnv.enable = true;
