@@ -6,10 +6,12 @@ this repo relies that you use nixOS and that you have 3 partitions labled:
 - BulkStorage (optional)
 
 BOOT is an fat partition for booting into the OS
+
 root is a btrfs partition with the following subvolumes:
 - root
 - nix
 - home
+
 BulkStorage is an ext4 partition. Remove the part in hardware-configuration.nix if you don't use it
 
 the repo MUST be cloned into ~/dotfiles. It relies numerous times that its cloned there.
