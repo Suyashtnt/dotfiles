@@ -75,6 +75,11 @@
     videoDrivers = [ "nvidia" ]; # remember to change this people
   };
 
+  services.plex = {
+    enable = true;
+    openFirewall = true;
+  };
+
   hardware.opengl.enable = true;
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable; # also this
 

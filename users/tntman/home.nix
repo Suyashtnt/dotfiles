@@ -205,8 +205,8 @@
   gtk = {
     enable = true;
     theme = {
-      name = "Sweet";
-      package = pkgs.sweet;
+      name = "Catppuccin";
+      package = pkgs.catppuccin-gtk;
     };
     iconTheme = {
       name = "candy-icons";
