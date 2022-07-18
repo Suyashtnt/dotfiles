@@ -147,9 +147,8 @@
 
         blur-background-exclude = [
           "class_g = 'slop'"
-          "class_g = 'awesome'"
+          "class_g *= 'awesome'"
           "class_g = 'Peek'"
-          "name *= 'rect-overlay'"
         ];
 
         animations = false;
@@ -170,6 +169,17 @@
         use-ewmh-active-win = true;
         spawn-center-screen = true;
         unredir-if-possible = true; # for games
+
+        wintypes =
+          {
+            dock =
+              {
+                fade = true;
+                shadow = false;
+                opacity = 1;
+                focus = true;
+              };
+          };
       };
       experimentalBackends = true;
 

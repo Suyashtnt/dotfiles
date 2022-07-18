@@ -70,18 +70,19 @@ theme.wibar_margins = {
 	right = 16,
 }
 
-theme.wibar_left_section_margins = {
+theme.wibar_right_section_margins = {
 	left = dpi(16),
 	right = dpi(16),
-	-- top = dpi(8),
-	-- bottom = dpi(8),
+	top = dpi(8),
+	bottom = dpi(8),
 }
-
-theme.radialprogressbar_border_color = theme.blue
-theme.radialprogressbar_color = theme.yellow
+theme.separator_border_color = theme.blue
 
 theme.wibar_radius = dpi(32)
 theme.wibar_middle_section_margins = dpi(16)
+
+theme.radialprogressbar_border_color = theme.blue
+theme.radialprogressbar_color = theme.yellow
 
 theme.wallpaper = gears.filesystem.get_configuration_dir() .. "wallpaper.png"
 
