@@ -169,7 +169,7 @@
         shadow-offset-x = -4;
         shadow-offset-y = -4;
 
-        corner-radius = 12;
+        corner-radius = 18;
 
         use-ewmh-active-win = true;
         spawn-center-screen = true;
