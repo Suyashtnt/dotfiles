@@ -41,7 +41,7 @@ theme.fg_minimize = "#a6adc8"
 
 theme.useless_gap = dpi(4)
 theme.border_width = dpi(3)
-theme.border_radius = dpi(10)
+-- theme.border_radius = dpi(10)
 
 theme.taglist_bg_focus = "#89b4fa"
 theme.taglist_bg_empty = "#181825"

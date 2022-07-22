@@ -69,7 +69,19 @@ client.connect_signal("request::default_mousebindings", function()
 end)
 
 client.connect_signal("manage", function(c)
-	c.shape = helpers.rrect(beautiful.border_radius)
+	if beautiful.border_radius ~= nil then
+		c.shape = helpers.rrect(beautiful.border_radius)
+	end
+
+	if awesome.startup and not c.size_hints.user_position and not c.size_hints.program_position then
+		-- Prevent clients from being unreachable after screen count changes.
+		awful.placement.no_offscreen(c)
+	end
+
+	if c.icon == nil then
+		local i = gears.surface(beautiful.theme_assets.awesome_icon(256, beautiful.blue, beautiful.bg_normal))
+		c.icon = i._native
+	end
 end)
 
 ruled.client.connect_signal("request::rules", function()

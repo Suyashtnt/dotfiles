@@ -32,6 +32,7 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.extraModprobeConfig = "options kvm_intel nested=1";
 
   networking.hostName = "GAMER-PC"; # Define your hostname. Remember to change this
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant. Remeber to enable this if you are using wifi
@@ -190,6 +191,17 @@
   programs.zsh.enable = true;
   programs.dconf.enable = true;
 
+  virtualisation = {
+    libvirtd = {
+      enable = true;
+      qemu = {
+        ovmf.enable = true;
+        ovmf.packages = [ pkgs.OVMFFull.fd ];
+        swtpm.enable = true;
+      };
+    };
+  };
+
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
@@ -200,7 +212,7 @@
   users.users.tntman = {
     isNormalUser = true;
     description = "Tabiasgeee Human"; # Now my real name will not be leaked :)
-    extraGroups = [ "networkmanager" "wheel" "scanner" "lp" ];
+    extraGroups = [ "networkmanager" "wheel" "scanner" "lp" "libvirtd" ];
     packages = with pkgs; [ ];
     shell = pkgs.zsh;
   };
@@ -209,12 +221,14 @@
   nixpkgs.config.allowUnfree = true;
   nixpkgs.overlays = overlays;
 
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     neovim
     libimobiledevice
     ifuse
+    virt-manager
   ];
   environment.variables.FLAKE = "~/dotfiles";
 

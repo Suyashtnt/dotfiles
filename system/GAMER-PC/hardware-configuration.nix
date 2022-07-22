@@ -14,6 +14,8 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
+  boot.resumeDevice = "/dev/disk/by-label/root";
+
   fileSystems."/" =
     {
       device = "/dev/disk/by-label/root";
