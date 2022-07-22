@@ -142,7 +142,7 @@
         blur = {
           enable = true;
           method = "dual_kawase";
-          strength = 7;
+          strength = 8;
           background = true;
           background-frame = false;
           background-fixed = false;
