@@ -16,3 +16,7 @@
 [submodule "users/tntman/config/awesome/rubato"]
 	path = users/tntman/config/awesome/rubato
 	url = https://github.com/andOrlando/rubato
+  branch = manager
+[submodule "users/tntman/config/awesome/color"]
+	path = users/tntman/config/awesome/color
+	url = https://github.com/andOrlando/color
