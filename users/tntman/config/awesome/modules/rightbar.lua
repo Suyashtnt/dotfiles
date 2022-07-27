@@ -5,9 +5,11 @@ local wibox = require("wibox")
 local gears = require("gears")
 local beautiful = require("beautiful")
 local weather_widget = require("awesome-wm-widgets.weather-widget.weather")
+local rubato = require("rubato")
 
 -- Create the sidebar_right
-local sidebar_right = wibox({ visible = false, ontop = true, type = "dock", screen = screen.primary })
+local sidebar_right = wibox({ visible = true, ontop = true, type = "dock", screen = screen.primary })
+local width = dpi(300)
 sidebar_right.bg = "#00000000" -- For anti aliasing
 sidebar_right.fg = beautiful.fg_normal
 sidebar_right.opacity = 1
@@ -15,10 +17,22 @@ sidebar_right.height = screen.primary.geometry.height / 1.5
 sidebar_right.width = dpi(300)
 sidebar_right.y = 0
 
+local timed = rubato.timed({
+	intro = 0.1,
+	duration = 0.3,
+	rate = 60, -- S M O O T H animations
+	easing = rubato.quadratic,
+	subscribed = function(pos)
+		sidebar_right.x = pos + screen.primary.geometry.width
+	end,
+})
+
+timed.target = width
+
 awful.placement.right(sidebar_right)
 
 local sidebar_right_hide = function()
-	sidebar_right.visible = false
+	timed.target = width
 end
 
 sidebar_right:buttons(gears.table.join(
@@ -46,7 +60,7 @@ local sidebar_right_activator = wibox({
 
 sidebar_right_activator.height = sidebar_right.height
 sidebar_right_activator:connect_signal("mouse::enter", function()
-	sidebar_right.visible = true
+	timed.target = -width
 end)
 awful.placement.right(sidebar_right_activator)
 
@@ -153,14 +167,14 @@ local artist_widget = wibox.widget({
 local time_bar = wibox.widget({
 	bar_shape = gears.shape.rounded_rect,
 	bar_height = dpi(3),
-	forced_height = dpi(8),
+	forced_height = dpi(16),
 	bar_color = beautiful.fg_normal,
 	handle_color = beautiful.fg_normal,
 	handle_shape = gears.shape.circle,
 	handle_border_color = beautiful.fg_normal,
 	handle_border_width = dpi(8),
-	handle_width = dpi(32),
-	value = 25,
+	handle_width = dpi(4),
+	value = 0,
 	widget = wibox.widget.slider,
 })
 
@@ -218,17 +232,16 @@ sidebar_right:setup({
 	},
 	shape = helpers.prrect(dpi(40), true, false, false, true),
 	bg = beautiful.bg_normal,
-	fg = "#cdd6f4",
 	widget = wibox.container.background,
 })
 
-playerctl:connect_signal("metadata", function(_, title, artist, album_path, album, _, player_name)
+playerctl:connect_signal("metadata", function(_, title, artist, album_path, album, _, _)
 	-- Set art widget
 	art:set_image(gears.surface.load_uncached(album_path))
 
 	-- Set player name, title and artist widgets
 	title_widget:set_markup_silently("<b>" .. title .. " [" .. album .. "]" .. "</b>")
-	artist_widget:set_markup_silently("By <b>" .. artist .. " [" .. player_name .. "]</b>")
+	artist_widget:set_markup_silently("By <b>" .. artist .. "</b>")
 end)
 
 local function DecimalsToMinutes(dec)

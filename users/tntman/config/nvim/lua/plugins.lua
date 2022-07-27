@@ -193,6 +193,13 @@ return require("packer").startup(function(use) -- Packer can manage itself
 	}) -- replaces the s/S key with a super-powered quicksearch
 
 	use({
+		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+		config = function()
+			require("plugins.lsp_lines")
+		end,
+	})
+
+	use({
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "v2.x",
 		requires = {

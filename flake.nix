@@ -19,9 +19,12 @@
 
     xresources.url = "github:catppuccin/xresources";
     xresources.flake = false;
+
+    alac.url = "github:ayosec/alacritty/graphics";
+    alac.flake = false;
   };
 
-  outputs = { self, nixpkgs, home-manager, neovim-nightly-overlay, nh, flake-utils, nixpkgs-f2k, xresources, ... }:
+  outputs = { self, nixpkgs, home-manager, neovim-nightly-overlay, nh, flake-utils, nixpkgs-f2k, xresources, alac, ... }:
     let
       system = "x86_64-linux";
       overlays = [
@@ -42,7 +45,7 @@
           pkgs = nixpkgs.legacyPackages.${system};
 
           modules = [
-            { _module.args = { inherit overlays nh xresources; }; }
+            { _module.args = { inherit overlays nh xresources alac; }; }
             ./users/tntman/home.nix
           ];
         };

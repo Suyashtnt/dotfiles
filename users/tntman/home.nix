@@ -1,4 +1,4 @@
-{ lib, pkgs, overlays, nh, xresources, ... }:
+{ lib, pkgs, overlays, nh, xresources, alac, ... }:
 
 {
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
@@ -197,6 +197,9 @@
         "100:class_g   *?= 'neovide'"
         "85:class_g   *?= 'discord'"
         "100:class_g *?= 'awesome'"
+        "100:class_g *?= 'Glowsquid'"
+        "100:class_g *?= 'Minecraft 1.8.9'"
+        "100:class_g *?= 'steam_app_1366540'"
       ];
       package = pkgs.picom-dccsillag;
     };
@@ -235,6 +238,10 @@
   xdg.configFile = {
     nvim = {
       source = ./config/nvim;
+      recursive = true;
+    };
+    neofetch = {
+      source = ./config/neofetch;
       recursive = true;
     };
     awesome = {

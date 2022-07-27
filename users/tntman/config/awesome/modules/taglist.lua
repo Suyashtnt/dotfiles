@@ -2,6 +2,7 @@ local awful = require("awful")
 local wibox = require("wibox")
 local gears = require("gears")
 local beautiful = require("beautiful")
+local helpers = require("helpers")
 local bling = require("bling")
 
 screen.connect_signal("request::desktop_decoration", function(s)
@@ -60,8 +61,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 			id = "background_role",
 			widget = wibox.container.background,
 			fg = "#cdd6f4",
-
-			create_callback = function(self, c3, index, objects)
+			create_callback = function(self, c3, _, _)
 				self:connect_signal("mouse::enter", function()
 					if #c3:clients() > 0 then
 						awesome.emit_signal("bling::tag_preview::update", c3)

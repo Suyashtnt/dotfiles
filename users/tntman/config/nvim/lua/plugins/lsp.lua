@@ -130,12 +130,16 @@ local formatting = nullls.builtins.formatting
 local diagnostics = nullls.builtins.diagnostics
 local ca = nullls.builtins.code_actions
 
+local eslint_settings = {
+	extra_filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte" },
+}
+
 nullls.setup({
 	sources = {
 		formatting.stylua,
-		diagnostics.eslint,
-		formatting.eslint_d,
-		ca.eslint,
+		diagnostics.eslint_d.with(eslint_settings),
+		formatting.eslint_d.with(eslint_settings),
+		ca.eslint_d.with(eslint_settings),
 	},
 	on_attach = on_attach(false, true),
 })
@@ -192,24 +196,6 @@ lspconfig.yamlls.setup(coq.lsp_ensure_capabilities({
 				enable = true,
 			},
 		},
-	},
-}))
-
-lspconfig.eslint.setup(coq.lsp_ensure_capabilities({
-	on_attach = on_attach(false, true),
-	filetypes = {
-		"javascript",
-		"javascriptreact",
-		"javascript.jsx",
-		"typescript",
-		"typescriptreact",
-		"typescript.tsx",
-		"vue",
-		"svelte",
-	},
-	settings = {
-		autoFixOnSave = true,
-		format = { enable = true },
 	},
 }))
 
