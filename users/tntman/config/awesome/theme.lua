@@ -47,12 +47,15 @@ theme.taglist_bg_focus = theme.blue
 theme.taglist_bg_empty = theme.bg_normal
 theme.taglist_bg_occupied = "#313244"
 
-theme.taglist_font = "Font Awesome 6 Free 18"
-theme.taglist_size = dpi(32)
+theme.taglist_font = "Font Awesome 6 Free 15"
+theme.taglist_size = dpi(34)
+theme.taglist_width = dpi(360)
+-- for the first icon thing
+theme.taglist_icon_x = dpi(11)
 
-theme.notification_border_width = dpi(3)
-theme.notification_border_color = "#96cdfb"
-theme.notification_action_colour = "#96cdfb"
+theme.notification_border_width = dpi(0)
+theme.notification_border_color = theme.blue
+theme.notification_action_colour = theme.blue
 theme.notification_padding = dpi(8)
 theme.notification_min_width = dpi(32)
 theme.notification_min_height = dpi(20)

@@ -28,7 +28,7 @@ local term_scratch = bling.module.scratchpad({
 	geometry = { x = 360, y = 90, height = 900, width = 1200 },
 	reapply = true,
 	dont_focus_before_close = false,
-	rubato = { x = anim_x, y = anim_y },
+	-- rubato = { x = anim_x, y = anim_y },
 })
 
 return term_scratch

@@ -12,7 +12,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	s.mytaglist = (function()
 		local ti = {} --inverse taglist
 		local layout = wibox.layout.manual()
-		layout.forced_width = dpi(330)
+		layout.forced_width = beautiful.taglist_width
 
 		for i, tag in ipairs(s.tags) do
 			ti[tag] = i --add to inverse taglist
@@ -21,7 +21,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 				text = tag.name,
 				align = "center",
 				valign = "center",
-				font = beautiful.icon_font,
+				font = beautiful.taglist_font,
 				widget = wibox.widget.textbox,
 			})
 
@@ -34,7 +34,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 				widget = wibox.container.background,
 			})
 
-			layout:add_at(w, { y = dpi(4), x = i * (beautiful.taglist_size + spacing) - spacing })
+			layout:add_at(w, { y = dpi(4), x = i * (beautiful.taglist_size + spacing) })
 
 			local populated_trans = color.transition(
 				color.color({ hex = beautiful.taglist_bg_empty }),
@@ -69,7 +69,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 			text = s.selected_tag,
 			align = "center",
 			valign = "center",
-			font = beautiful.icon_font,
+			font = beautiful.taglist_font,
 			widget = wibox.widget.textbox,
 		})
 
@@ -105,7 +105,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 			easing = bouncy,
 			debug = true,
 			subscribed = function(pos)
-				layout:move_widget(w, { x = pos * (beautiful.taglist_size + spacing) - spacing, y = dpi(4) })
+				layout:move_widget(w, { x = pos * (beautiful.taglist_size + spacing), y = dpi(4) })
 			end,
 		})
 
@@ -121,6 +121,14 @@ screen.connect_signal("request::desktop_decoration", function(s)
 				w.bg = pos_hover_trans(pos).hex
 			end,
 		})
+
+		layout:add_at({
+			text = "\u{f02b}",
+			font = beautiful.taglist_font,
+			align = "center",
+			valign = "center",
+			widget = wibox.widget.textbox,
+		}, { y = beautiful.taglist_icon_x, x = spacing * 1.5 })
 
 		s:connect_signal("tag::history::update", function()
 			text.text = (s.selected_tag or s.tags[1]).name
@@ -138,72 +146,4 @@ screen.connect_signal("request::desktop_decoration", function(s)
 
 		return layout
 	end)()
-
-	-- awful.widget.taglist({
-	-- screen = s,
-	-- filter = awful.widget.taglist.filter.all,
-	--
-	-- layout = {
-	-- 	spacing = dpi(12),
-	-- 	layout = wibox.layout.fixed.horizontal,
-	-- 	spacing_widget = {
-	-- 		bg = beautiful.bg_normal .. "00",
-	-- 		border_color = beautiful.bg_normal .. "00",
-	-- 		thickness = dpi(0),
-	-- 		shape = gears.shape.rect,
-	-- 		widget = wibox.widget.separator,
-	-- 	},
-	-- },
-	--
-	-- widget_template = {
-	-- 	{
-	-- 		{
-	-- 			id = "text_role",
-	-- 			widget = wibox.widget.textbox,
-	-- 		},
-	-- 		top = dpi(3),
-	-- 		bottom = dpi(3),
-	-- 		left = dpi(12),
-	-- 		right = dpi(12),
-	-- 		widget = wibox.container.margin,
-	-- 	},
-	-- 	id = "background_role",
-	-- 	widget = wibox.container.background,
-	-- 	fg = "#cdd6f4",
-	-- 	create_callback = function(self, c3, _, _)
-	-- 		self:connect_signal("mouse::enter", function()
-	-- 			if #c3:clients() > 0 then
-	-- 				awesome.emit_signal("bling::tag_preview::update", c3)
-	-- 				awesome.emit_signal("bling::tag_preview::visibility", s, true)
-	-- 			end
-	-- 		end)
-	-- 		self:connect_signal("mouse::leave", function()
-	-- 			awesome.emit_signal("bling::tag_preview::visibility", s, false)
-	-- 		end)
-	-- 	end,
-	-- },
-	--
-	-- buttons = {
-	-- 	awful.button({}, 1, function(t)
-	-- 		t:view_only()
-	-- 	end),
-	-- 	awful.button({ modkey }, 1, function(t)
-	-- 		if client.focus then
-	-- 			client.focus:move_to_tag(t)
-	-- 		end
-	-- 	end),
-	-- 	awful.button({}, 3, awful.tag.viewtoggle),
-	-- 	awful.button({ modkey }, 3, function(t)
-	-- 		if client.focus then
-	-- 			client.focus:toggle_tag(t)
-	-- 		end
-	-- 	end),
-	-- 	awful.button({}, 4, function(t)
-	-- 		awful.tag.viewprev(t.screen)
-	-- 	end),
-	-- 	awful.button({}, 5, function(t)
-	-- 		awful.tag.viewnext(t.screen)
-	-- 	end),
-	-- },
-	-- })
 end)
