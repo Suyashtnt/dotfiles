@@ -4,39 +4,15 @@ local gears = require("gears")
 local beautiful = require("beautiful")
 local color = require("color")
 local rubato = require("rubato")
-local bling = require("bling")
 
 screen.connect_signal("request::desktop_decoration", function(s)
-	bling.widget.tag_preview.enable({
-		show_client_content = true,
-		x = 10,
-		y = 10,
-		scale = 0.50,
-		honor_padding = true,
-		honor_workarea = true,
-		placement_fn = function(c)
-			awful.placement.top_left(c, {
-				margins = {
-					top = 30,
-					left = 30,
-				},
-			})
-		end,
-		background_widget = {
-			image = beautiful.wallpaper,
-			horizontal_fit_policy = "fit",
-			vertical_fit_policy = "fit",
-			widget = wibox.widget.imagebox,
-		},
-	})
-
 	local spacing = dpi(12)
 
-	-- Create a taglist widget (stolen from https://github.com/andOrlando/nix-dotfiles/blob/main/bennett/awesome/rc.lua#L525)
+	-- Create a taglist widget (stolen from https://github.com/andOrlando/nix-dotfiles/blob/main/bennett/awesome/rc.lua#L525), modified to work with a horizontal bar and font icons
 	s.mytaglist = (function()
 		local ti = {} --inverse taglist
 		local layout = wibox.layout.manual()
-		layout.forced_width = dpi(380)
+		layout.forced_width = dpi(330)
 
 		for i, tag in ipairs(s.tags) do
 			ti[tag] = i --add to inverse taglist
@@ -58,10 +34,12 @@ screen.connect_signal("request::desktop_decoration", function(s)
 				widget = wibox.container.background,
 			})
 
-			layout:add_at(w, { y = dpi(4), x = i * (beautiful.taglist_size + spacing) })
+			layout:add_at(w, { y = dpi(4), x = i * (beautiful.taglist_size + spacing) - spacing })
 
-			local populated_trans =
-				color.transition(color.color({ hex = beautiful.taglist_bg_empty }), color.color({ hex = beautiful.taglist_bg_occupied }))
+			local populated_trans = color.transition(
+				color.color({ hex = beautiful.taglist_bg_empty }),
+				color.color({ hex = beautiful.taglist_bg_occupied })
+			)
 
 			local populated_timed = rubato.timed({
 				duration = 0.2,
@@ -105,19 +83,36 @@ screen.connect_signal("request::desktop_decoration", function(s)
 		})
 
 		layout:add_at(w, { x = 0, y = 0 })
+
+		local bouncy = {
+			F = (20 * math.sqrt(3) * math.pi - 30 * math.log(2) - 6147)
+				/ (10 * (2 * math.sqrt(3) * math.pi - 6147 * math.log(2))),
+			easing = function(t)
+				return (
+					4096 * math.pi * math.pow(2, 10 * t - 10) * math.cos(20 / 3 * math.pi * t - 43 / 6 * math.pi)
+					+ 6144 * math.pow(2, 10 * t - 10) * math.log(2) * math.sin(20 / 3 * math.pi * t - 43 / 6 * math.pi)
+					+ 2 * math.sqrt(3) * math.pi
+					- 3 * math.log(2)
+				) / (2 * math.pi * math.sqrt(3) - 6147 * math.log(2))
+			end,
+		}
+
 		local pos_timed = rubato.timed({
 			pos = 1,
-			duration = 0.3,
-			intro = 0.1,
-			easing = rubato.quadratic,
+			duration = 0.4,
+			intro = 0,
+			outro = 0.2,
+			easing = bouncy,
 			debug = true,
 			subscribed = function(pos)
-				layout:move_widget(w, { x = pos * (beautiful.taglist_size + spacing), y = dpi(4) })
+				layout:move_widget(w, { x = pos * (beautiful.taglist_size + spacing) - spacing, y = dpi(4) })
 			end,
 		})
 
-		local pos_hover_trans =
-			color.transition(color.color({ hex = beautiful.taglist_bg_focus }), color.color({ hex = beautiful.taglist_bg_focus }) + "0.06l")
+		local pos_hover_trans = color.transition(
+			color.color({ hex = beautiful.taglist_bg_focus }),
+			color.color({ hex = beautiful.taglist_bg_focus }) + "0.06l"
+		)
 
 		local pos_hover_timed = rubato.timed({
 			duration = 0.2,

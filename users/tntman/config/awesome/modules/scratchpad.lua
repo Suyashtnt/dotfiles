@@ -20,7 +20,7 @@ local anim_x = rubato.timed({
 })
 
 local term_scratch = bling.module.scratchpad({
-	command = "alacritty --class=spad",
+	command = "alacritty --class=spad -t spad",
 	rule = { instance = "spad" },
 	sticky = true,
 	autoclose = true,
