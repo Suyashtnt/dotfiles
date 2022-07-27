@@ -1,7 +1,7 @@
 local xresources = require("beautiful.xresources")
 local gears = require("gears")
 local dpi = xresources.apply_dpi
-local helpers = require("helpers")
+-- local helpers = require("helpers")
 
 local theme = {}
 
@@ -48,8 +48,7 @@ theme.taglist_bg_empty = theme.bg_normal
 theme.taglist_bg_occupied = "#313244"
 
 theme.taglist_font = "Font Awesome 6 Free 18"
-
-theme.taglist_shape = helpers.rrect(18)
+theme.taglist_size = dpi(32)
 
 theme.notification_border_width = dpi(3)
 theme.notification_border_color = "#96cdfb"

@@ -5,7 +5,6 @@ local beautiful = require("beautiful")
 local color = require("color")
 local rubato = require("rubato")
 local bling = require("bling")
-local tags = require("modules.tags")
 
 screen.connect_signal("request::desktop_decoration", function(s)
 	bling.widget.tag_preview.enable({
@@ -31,32 +30,39 @@ screen.connect_signal("request::desktop_decoration", function(s)
 		},
 	})
 
+	local spacing = dpi(12)
+
 	-- Create a taglist widget (stolen from https://github.com/andOrlando/nix-dotfiles/blob/main/bennett/awesome/rc.lua#L525)
 	s.mytaglist = (function()
 		local ti = {} --inverse taglist
 		local layout = wibox.layout.manual()
-		layout.forced_width = dpi(14)
+		layout.forced_width = dpi(380)
 
 		for i, tag in ipairs(s.tags) do
 			ti[tag] = i --add to inverse taglist
 
 			local text = wibox.widget({
-				text = "",
+				text = tag.name,
 				align = "center",
+				valign = "center",
+				font = beautiful.icon_font,
 				widget = wibox.widget.textbox,
 			})
+
 			local w = wibox.widget({
 				text,
-				bg = "#444956",
-				forced_width = dpi(6),
-				forced_height = dpi(30),
-				shape = gears.shape.rounded_rect,
+				bg = beautiful.taglist_bg_empty,
+				forced_width = beautiful.taglist_size,
+				forced_height = beautiful.taglist_size,
+				shape = gears.shape.circle,
 				widget = wibox.container.background,
 			})
-			layout:add_at(w, { x = dpi(4), y = i * dpi(36) - dpi(30) })
+
+			layout:add_at(w, { y = dpi(4), x = i * (beautiful.taglist_size + spacing) })
 
 			local populated_trans =
-				color.transition(color.color({ hex = "#444956" }), color.color({ hex = "#444956" }) + "0.2l")
+				color.transition(color.color({ hex = beautiful.taglist_bg_empty }), color.color({ hex = beautiful.taglist_bg_occupied }))
+
 			local populated_timed = rubato.timed({
 				duration = 0.2,
 				intro = 0.075,
@@ -64,6 +70,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 					w.bg = populated_trans(pos).hex
 				end,
 			})
+
 			client.connect_signal("tagged", function()
 				populated_timed.target = math.min(#tag:clients(), 1)
 			end)
@@ -73,34 +80,44 @@ screen.connect_signal("request::desktop_decoration", function(s)
 
 			tag:connect_signal("property::urgent", function()
 				if awful.tag.getproperty(tag, "urgent") then
-					text.text = "!"
+					text.text = tag.name .. "!"
 				else
-					text.text = ""
+					text.text = tag.name .. ""
 				end
 			end)
 		end
 
+		local text = wibox.widget({
+			text = s.selected_tag,
+			align = "center",
+			valign = "center",
+			font = beautiful.icon_font,
+			widget = wibox.widget.textbox,
+		})
+
 		local w = wibox.widget({
-			wibox.widget({}),
+			text,
 			bg = "#489568",
-			forced_width = dpi(8),
-			forced_height = dpi(30),
-			shape = gears.shape.rounded_rect,
+			forced_width = beautiful.taglist_size,
+			forced_height = beautiful.taglist_size,
+			shape = gears.shape.circle,
 			widget = wibox.container.background,
 		})
+
 		layout:add_at(w, { x = 0, y = 0 })
 		local pos_timed = rubato.timed({
 			pos = 1,
 			duration = 0.3,
 			intro = 0.1,
+			easing = rubato.quadratic,
 			debug = true,
 			subscribed = function(pos)
-				layout:move_widget(w, { x = dpi(3), y = pos * dpi(36) - dpi(30) })
+				layout:move_widget(w, { x = pos * (beautiful.taglist_size + spacing), y = dpi(4) })
 			end,
 		})
 
 		local pos_hover_trans =
-			color.transition(color.color({ hex = "#489568" }), color.color({ hex = "#489568" }) + "0.06l")
+			color.transition(color.color({ hex = beautiful.taglist_bg_focus }), color.color({ hex = beautiful.taglist_bg_focus }) + "0.06l")
 
 		local pos_hover_timed = rubato.timed({
 			duration = 0.2,
@@ -111,7 +128,8 @@ screen.connect_signal("request::desktop_decoration", function(s)
 		})
 
 		s:connect_signal("tag::history::update", function()
-			pos_timed.target = ti[s.selected_tag]
+			text.text = (s.selected_tag or s.tags[1]).name
+			pos_timed.target = ti[s.selected_tag or s.tags[1]]
 			pos_hover_timed.target = 0
 		end)
 
