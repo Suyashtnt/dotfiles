@@ -3,8 +3,6 @@ local machi = require("layout-machi")
 local bling = require("bling")
 
 machi.editor.nested_layouts["4"] = bling.layout.deck
-machi.editor.nested_layouts["5"] = bling.layout.mstab
-local editor = machi.editor.create()
 
 awful.keyboard.append_global_keybindings({
 	awful.key({ modkey, "Shift" }, "j", function()
@@ -22,8 +20,12 @@ awful.keyboard.append_global_keybindings({
 	end, { description = "increase master width factor", group = "layout" }),
 
 	awful.key({ modkey }, "e", function()
-		editor.start_interactive()
-	end, { description = "Start machi editor", group = "layout" }),
+		machi.default_editor.start_interactive(awful.screen.focused())
+	end, { description = "edit the current layout if it is a machi layout", group = "layout" }),
+
+	awful.key({ modkey }, "/", function()
+		machi.switcher.start(client.focus)
+	end, { description = "switch between windows for a machi layout", group = "layout" }),
 
 	awful.key({ modkey }, "h", function()
 		awful.tag.incmwfact(-0.05)
@@ -40,8 +42,4 @@ awful.keyboard.append_global_keybindings({
 	awful.key({ modkey }, "space", function()
 		awful.layout.inc(1)
 	end, { description = "select next", group = "layout" }),
-
-	awful.key({ modkey, "Shift" }, "space", function()
-		awful.layout.inc(-1)
-	end, { description = "select previous", group = "layout" }),
 })
