@@ -248,12 +248,12 @@
 
 (local winbar {:init utils.pick_child_on_condition
                1 {:condition (fn []
-                               (conditions.buffer_matches {:buftype {1 :nofile
-                                                                     2 :prompt
-                                                                     3 :help
-                                                                     4 :quickfix}
-                                                           :filetype {1 :^git.*
-                                                                      2 :fugitive}}))
+                               (conditions.buffer_matches {:buftype [:nofile
+                                                                     :prompt
+                                                                     :help
+                                                                     :quickfix]
+                                                           :filetype [:^git.*
+                                                                      :fugitive]}))
                   :init (fn []
                           (set vim.opt_local.winbar nil))}
                2 {:condition (fn []
@@ -272,4 +272,5 @@
                                               :reset_highlights))
                                           ((. (require :heirline) :load_colors) (setup-colors)))
                               :group :Heirline})
-((. (require :heirline) :setup) statusline)	
+
+((. (require :heirline) :setup) statusline)
