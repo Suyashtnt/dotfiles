@@ -1,4 +1,4 @@
-local cp_api = require("catppuccin.api.colors")
+local colors = require("catppuccin.palettes").get_palette()
 
 require("bufferline").setup({
   diagnostic = "nvim_lsp",
@@ -30,19 +30,19 @@ require("bufferline").setup({
       local hint = #vim.diagnostic.get(0, { severity = seve.HINT })
 
       if error ~= 0 then
-        table.insert(result, { text = "  " .. error, guifg = cp_api.get_colors().red })
+        table.insert(result, { text = "  " .. error, guifg = colors.red })
       end
 
       if warning ~= 0 then
-        table.insert(result, { text = "  " .. warning, guifg = cp_api.get_colors().yellow })
+        table.insert(result, { text = "  " .. warning, guifg = colors.yellow })
       end
 
       if hint ~= 0 then
-        table.insert(result, { text = "  " .. hint, guifg = cp_api.get_colors().blue })
+        table.insert(result, { text = "  " .. hint, guifg = colors.blue })
       end
 
       if info ~= 0 then
-        table.insert(result, { text = "  " .. info, guifg = cp_api.get_colors().text })
+        table.insert(result, { text = "  " .. info, guifg = colors.text })
       end
       return result
     end,

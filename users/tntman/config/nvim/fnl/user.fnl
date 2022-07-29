@@ -7,10 +7,10 @@
        (set vim.opt.mouse :a)
        (set vim.g.neovide_transparency 0.8)
        (vim.cmd "    
-	    set nowrap
-	    set expandtab
-	    set tabstop=2
-	    set shiftwidth=2
+          set nowrap
+          set expandtab
+          set tabstop=2
+          set shiftwidth=2
         ")
        (set vim.wo.foldcolumn :1)
        (set vim.wo.foldlevel 99)
