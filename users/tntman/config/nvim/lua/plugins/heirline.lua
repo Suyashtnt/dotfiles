@@ -356,4 +356,4 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   group = "Heirline",
 })
 
-require("heirline").setup(statusline, winbar)
+require("heirline").setup(statusline--[[ , winbar ]]) --https://github.com/neovim/neovim/issues/19458 

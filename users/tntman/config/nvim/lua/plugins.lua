@@ -19,6 +19,7 @@ require("packer").init({
 
 return require("packer").startup(function(use) -- Packer can manage itself
 	use("wbthomason/packer.nvim")
+	use({ "rktjmp/hotpot.nvim", branch = "nightly" })
 
 	use({
 		"kyazdani42/nvim-web-devicons",
@@ -28,8 +29,7 @@ return require("packer").startup(function(use) -- Packer can manage itself
 	}) -- Icons n stuff
 
 	use({
-		"suyashtnt/nvim-1",
-		branch = "feature/leap",
+		"catppuccin/nvim",
 		as = "catppuccin",
 		config = function()
 			require("plugins.catppuccin")
