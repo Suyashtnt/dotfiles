@@ -39,8 +39,7 @@
                           (pack :kevinhwang91/nvim-ufo
                                 {:requires [(pack :kevinhwang91/promise-async)]})
                           (pack :smjonas/inc-rename.nvim
-                                {:config (fn []
-                                           ((. (require :inc_rename) :setup)))})]
+                                {:config (call-setup :inc-rename)})]
                :config (load-file lsp)})
 
 (use-package! :Saecki/crates.nvim
@@ -55,16 +54,13 @@
                       ((. vim.fn "fzf#install")))})
 
 (use-package! :folke/which-key.nvim
-              {:config (fn []
-                         (. (require :which-key) :setup))})
+              {:config (call-setup :which-key)})
 
 (use-package! :akinsho/bufferline.nvim
               {:tag :v2.* :config (load-file bufferline)})
 
 (use-package! :lukas-reineke/indent-blankline.nvim
               {:config (load-file indent_blankline)})
-
-(use-package! :mrjones2014/legendary.nvim)
 
 (use-package! :nvim-treesitter/nvim-treesitter
               {:requires [(pack :windwp/nvim-ts-autotag)

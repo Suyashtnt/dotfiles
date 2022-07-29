@@ -29,4 +29,5 @@
          (local hl (.. :DiagnosticSign type))
          (vim.fn.sign_define hl {:text icon :texthl hl :numhl hl}))
        (set vim.g.markdown_fenced_languages {1 :ts=typescript})))
+
 M

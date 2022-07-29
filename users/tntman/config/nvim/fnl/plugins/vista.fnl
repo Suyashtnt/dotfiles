@@ -15,4 +15,4 @@
                                 :go :nvim_lsp
                                 :lua :nvim_lsp
                                 :python :nvim_lsp
-                                :rust :nvim_lsp})	
+                                :rust :nvim_lsp})

@@ -1,2 +1,2 @@
 ((. (require :leap) :setup) {})
-((. (require :leap) :set_default_keymaps) true)	
+((. (require :leap) :set_default_keymaps) true)

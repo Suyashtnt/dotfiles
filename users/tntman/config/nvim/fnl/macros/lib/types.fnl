@@ -23,11 +23,4 @@
 (fn ->bool [x]
   (if x true false))
 
-{: nil?
- : str?
- : num?
- : bool?
- : fn?
- : tbl?
- : ->str
- : ->bool}
+{: nil? : str? : num? : bool? : fn? : tbl? : ->str : ->bool}

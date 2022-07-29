@@ -1,5 +1,5 @@
 (local colors ((. (require :catppuccin.palettes) :get_palette)))
-(local setup (. (require :bufferline) :setup))	
+(local setup (. (require :bufferline) :setup))
 
 (setup {:diagnostic :nvim_lsp
         :diagnostics_indicator (fn [_ _ diagnostics-dict _]

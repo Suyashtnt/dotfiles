@@ -10,7 +10,8 @@
   See https://github.com/wbthomason/packer.nvim for information about the
   options."
   (assert-compile (str? identifier) "expected string for identifier" identifier)
-  (if (not (nil? ?options)) (assert-compile (tbl? ?options) "expected table for options" ?options))
+  (if (not (nil? ?options))
+      (assert-compile (tbl? ?options) "expected table for options" ?options))
   (let [options (or ?options {})]
     (doto options (tset 1 identifier))))
 
@@ -20,7 +21,8 @@
   See https://github.com/wbthomason/packer.nvim for information about the
   options."
   (assert-compile (str? identifier) "expected string for identifier" identifier)
-  (if (not (nil? ?options)) (assert-compile (tbl? ?options) "expected table for options" ?options))
+  (if (not (nil? ?options))
+      (assert-compile (tbl? ?options) "expected table for options" ?options))
   (let [options (or ?options {})]
     (doto options (tset 1 identifier))))
 
@@ -30,7 +32,8 @@
   See https://github.com/wbthomason/packer.nvim for information about the
   options."
   (assert-compile (str? identifier) "expected string for identifier" identifier)
-  (if (not (nil? ?options)) (assert-compile (tbl? ?options) "expected table for options" ?options))
+  (if (not (nil? ?options))
+      (assert-compile (tbl? ?options) "expected table for options" ?options))
   (table.insert _G.nyoom/pack (pack identifier ?options)))
 
 (λ rock! [identifier ?options]
@@ -39,7 +42,8 @@
   See https://github.com/wbthomason/packer.nvim for information about the
   options."
   (assert-compile (str? identifier) "expected string for identifier" identifier)
-  (if (not (nil? ?options)) (assert-compile (tbl? ?options) "expected table for options" ?options))
+  (if (not (nil? ?options))
+      (assert-compile (tbl? ?options) "expected table for options" ?options))
   (table.insert _G.nyoom/rock (rock identifier ?options)))
 
 ;; make life easier
@@ -53,7 +57,7 @@
   ```"
   (assert-compile (sym? file) "expected symbol for file" file)
   (let [file (->str file)]
-    `#(require (.. "fnl.plugins." ,file))))
+    `#(require (.. :fnl.plugins. ,file))))
 
 (λ load-lang [lang]
   "Configure a language-specific plugin by loading a file from the lang/ folder
@@ -65,28 +69,29 @@
   ```"
   (assert-compile (sym? lang) "expected symbol for lang" lang)
   (let [lang (->str lang)]
-    `#(require (.. "lang." ,lang))))
+    `#(require (.. :lang. ,lang))))
 
 (fn call-setup [name config]
- "Configures a plugin by calling its setup function
+  "Configures a plugin by calling its setup function
   Example of use:
   ```fennel
   (use-package! :j-hui/fidget.nvim {:config (call-setup :fidget)})
   ```"
   `(λ []
-      ((. (require ,name) :setup)
-       ,config)))
+     ((. (require ,name) :setup) ,config)))
 
 (λ unpack! []
   "Initializes the plugin manager with the plugins previously declared and
   their respective options."
-  (let [packs (icollect [_ v (ipairs _G.nyoom/pack)] `(use ,v))
-        rocks (icollect [_ v (ipairs _G.nyoom/rock)] `(use_rocks ,v))]
+  (let [packs (icollect [_ v (ipairs _G.nyoom/pack)]
+                `(use ,v))
+        rocks (icollect [_ v (ipairs _G.nyoom/rock)]
+                `(use_rocks ,v))]
     (tset _G :nyoom/pack [])
     (tset _G :nyoom/rock [])
-    `((. (require :packer) :startup)
-      (fn []
-        ,(unpack (icollect [_ v (ipairs packs) :into rocks] v))))))
+    `((. (require :packer) :startup) (fn []
+                                       ,(unpack (icollect [_ v (ipairs packs) :into rocks]
+                                                  v))))))
 
 {: rock
  : pack
@@ -96,5 +101,3 @@
  : load-lang
  : call-setup
  : unpack!}
-
-

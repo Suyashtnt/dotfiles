@@ -1,7 +1,9 @@
 (local telescope (require :telescope))
-(local setup telescope.setup)	
+(local setup telescope.setup)
 
-(fn load_exts [exts] (each [_ ext (ipairs exts)] (telescope.load_extension ext)))
+(fn load_exts [exts]
+  (each [_ ext (ipairs exts)]
+    (telescope.load_extension ext)))
 
 (setup {:extensions {:fzf {:fuzzy true
                            :override_generic_sorter true
