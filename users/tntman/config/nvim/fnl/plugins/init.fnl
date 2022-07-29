@@ -1,4 +1,4 @@
-(require-macros :fnl.macros.package-macros)
+(require-macros :macros.package-macros)
 
 ;; Setup packer
 (let [packer (require :packer)]
@@ -39,7 +39,7 @@
                           (pack :kevinhwang91/nvim-ufo
                                 {:requires [(pack :kevinhwang91/promise-async)]})
                           (pack :smjonas/inc-rename.nvim
-                                {:config (call-setup :inc-rename)})]
+                                {:config (call-setup :inc_rename)})]
                :config (load-file lsp)})
 
 (use-package! :Saecki/crates.nvim

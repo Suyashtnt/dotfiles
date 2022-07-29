@@ -1,5 +1,5 @@
 ;; stolen from nyoom.nvim
-(local {: str? : nil? : tbl? : ->str} (require :fnl.macros.lib.types))
+(local {: str? : nil? : tbl? : ->str} (require :macros.lib.types))
 
 (tset _G :nyoom/pack [])
 (tset _G :nyoom/rock [])
@@ -57,7 +57,7 @@
   ```"
   (assert-compile (sym? file) "expected symbol for file" file)
   (let [file (->str file)]
-    `#(require (.. :fnl.plugins. ,file))))
+    `#(require (.. :plugins. ,file))))
 
 (λ load-lang [lang]
   "Configure a language-specific plugin by loading a file from the lang/ folder
