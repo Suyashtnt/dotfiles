@@ -5,7 +5,7 @@
      (load-compiled)
      (. (require :packer) :sync)))
 
-((. (require :user) :config))
+((. (require :fnl.user) :config))
 
 (local (_ err) (pcall require :notify))
 (when (not err)

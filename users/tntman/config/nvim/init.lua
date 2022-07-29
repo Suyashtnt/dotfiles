@@ -14,6 +14,7 @@ local function assert_installed_plugin(plugin, branch)
     local plugin_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/" .. plugin_name
     if vim.fn.empty(vim.fn.glob(plugin_path)) ~= 0 then
         fprint("Couldn't find '%s', cloning new copy to %s", plugin_name, plugin_path)
+
         if branch ~= nil then
             vim.fn.system({
                 "git",
@@ -43,5 +44,8 @@ assert_installed_plugin("wbthomason/packer.nvim")
 assert_installed_plugin("rktjmp/hotpot.nvim", "nightly")
 
 -- load/cache config
-require("hotpot").setup()
+require("hotpot").setup({
+  enable_hotpot_diagnostics = true,
+})
+
 require("init")
