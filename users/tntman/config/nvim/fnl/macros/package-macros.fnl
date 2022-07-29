@@ -53,7 +53,7 @@
   ```"
   (assert-compile (sym? file) "expected symbol for file" file)
   (let [file (->str file)]
-    `#(require (.. "lua.plugins." ,file))))
+    `#(require (.. "fnl.plugins." ,file))))
 
 (λ load-lang [lang]
   "Configure a language-specific plugin by loading a file from the lang/ folder
