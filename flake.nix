@@ -20,11 +20,11 @@
     xresources.url = "github:catppuccin/xresources";
     xresources.flake = false;
 
-    alac.url = "github:ayosec/alacritty/graphics";
-    alac.flake = false;
+    fnlfmt-git.url = "sourcehut:~technomancy/fnlfmt";
+    fnlfmt-git.flake = false;
   };
 
-  outputs = { self, nixpkgs, home-manager, neovim-nightly-overlay, nh, flake-utils, nixpkgs-f2k, xresources, alac, ... }:
+  outputs = { self, nixpkgs, home-manager, neovim-nightly-overlay, nh, flake-utils, nixpkgs-f2k, xresources, fnlfmt-git, ... }:
     let
       system = "x86_64-linux";
       overlays = [
@@ -45,7 +45,7 @@
           pkgs = nixpkgs.legacyPackages.${system};
 
           modules = [
-            { _module.args = { inherit overlays nh xresources alac; }; }
+            { _module.args = { inherit overlays nh xresources; }; }
             ./users/tntman/home.nix
           ];
         };
@@ -61,7 +61,18 @@
         };
       };
       devShell.${system} = pkgs.mkShell {
-        buildInputs = with pkgs; [ rnix-lsp sumneko-lua-language-server stylua python311 yaml-language-server fennel fnlfmt ];
+        buildInputs = with pkgs; [
+          rnix-lsp
+          sumneko-lua-language-server
+          stylua
+          python311
+          yaml-language-server
+          fennel
+          (fnlfmt.overrideAttrs (old: {
+            version = "git";
+            src = fnlfmt-git;
+          }))
+        ];
       };
     };
 }

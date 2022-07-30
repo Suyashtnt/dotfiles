@@ -96,10 +96,10 @@
 ;; this function breaks fnlfmt for some reason
 
 ;; fnlfmt: skip
-(fn vim.lsp.util.open_floating_preview [contents syntax internalopts ...]
-  (local internalopts (or internalopts {}))
-  (set internal-opts.border :rounded)
-  (orig-util-open-floating-preview contents syntax internalopts ...))
+;; (fn vim.lsp.util.open_floating_preview [contents syntax internalopts ...]
+;;   (local internalopts (or internalopts {}))
+;;   (set internal-opts.border :rounded)
+;;   (orig-util-open-floating-preview contents syntax internalopts ...))
 
 ((require :coq_3p) [{:src :bc :short_name :MATH :precision 6} {:src :dap}])
 
