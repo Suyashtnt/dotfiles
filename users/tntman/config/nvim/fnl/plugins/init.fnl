@@ -89,8 +89,6 @@
 (use-package! :ziontee113/syntax-tree-surfer)
 (use-package! :tpope/vim-surround)
 
-(use-package! :liuchengxu/vista.vim {:config (load-file vista)})
-
 (use-package! :mfussenegger/nvim-dap {:config (load-file dap)})
 (use-package! :rcarriga/nvim-dap-ui)
 (use-package! :theHamsta/nvim-dap-virtual-text)
