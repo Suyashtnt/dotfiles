@@ -1,6 +1,7 @@
 local awful = require("awful")
 local wibox = require("wibox")
 local gears = require("gears")
+local dpi = require("beautiful").xresources.apply_dpi
 
 screen.connect_signal("request::desktop_decoration", function(s)
   s.mytasklist = awful.widget.tasklist({

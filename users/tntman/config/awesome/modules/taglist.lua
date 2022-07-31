@@ -4,6 +4,7 @@ local gears = require("gears")
 local beautiful = require("beautiful")
 local color = require("color")
 local rubato = require("rubato")
+local dpi = beautiful.xresources.apply_dpi
 
 screen.connect_signal("request::desktop_decoration", function(s)
 	local spacing = dpi(12)
