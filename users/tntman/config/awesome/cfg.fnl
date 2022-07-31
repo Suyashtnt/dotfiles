@@ -34,13 +34,17 @@
 (global modkey :Mod4)
 
 (load-mods! :notifs :layouts :tags :taglist :tasklist :layoutbox :wibar
-            :rightbar)
+            :rightbar :keybinds)
 
 (local scs screen.connect_signal)
 
-;; TODO: replace with bling
-(scs "request::wallpaper"
-     #(awful.spawn.with_shell "feh --no-xinerama --bg-center ~/.config/awesome/wallpaper.png"))
+;; TODO add night wallpaper
+#(bling.module.wallpaper.setup {:set_function bling.module.wallpaper.setters.simple_schedule
+                                :schedule_set_function bling.module.wallpaper.setters.random
+                                :change_timer 600
+                                :wallpaper {"07:00:00" (.. (os.getenv :HOME)
+                                                           :/.config/awesome/wallpapers/day)}
+                                :position :maximized})
 
 (local ccs client.connect_signal)
 (ccs "request::default_mousebindings"
