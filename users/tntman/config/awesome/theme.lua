@@ -1,3 +1,5 @@
+-- this cannot be fennel sadly
+
 local xresources = require("beautiful.xresources")
 local gears = require("gears")
 local dpi = xresources.apply_dpi
@@ -85,8 +87,6 @@ theme.wibar_middle_section_margins = dpi(16)
 
 theme.radialprogressbar_border_color = theme.blue
 theme.radialprogressbar_color = theme.yellow
-
-theme.wallpaper = gears.filesystem.get_configuration_dir() .. "wallpaper.png"
 
 theme.tabbar_style = "modern"
 theme.tabbar_radius = dpi(8)

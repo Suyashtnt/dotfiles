@@ -39,12 +39,10 @@
 (local scs screen.connect_signal)
 
 ;; TODO add night wallpaper
-#(bling.module.wallpaper.setup {:set_function bling.module.wallpaper.setters.simple_schedule
-                                :schedule_set_function bling.module.wallpaper.setters.random
-                                :change_timer 600
-                                :wallpaper {"07:00:00" (.. (os.getenv :HOME)
-                                                           :/.config/awesome/wallpapers/day)}
-                                :position :maximized})
+(bling.module.wallpaper.setup {:set_function bling.module.wallpaper.setters.simple_schedule
+                               :wallpaper {"07:00:00" (.. (os.getenv :HOME)
+                                                          :/dotfiles/users/tntman/config/awesome/wallpapers/day.png)}
+                               :position :maximized})
 
 (local ccs client.connect_signal)
 (ccs "request::default_mousebindings"
