@@ -3,12 +3,11 @@ local wibox = require("wibox")
 local helpers = require("helpers")
 local ruled = require("ruled")
 local beautiful = require("beautiful")
-
 local dpi = beautiful.xresources.apply_dpi
 
 -- Presets / rules
 
-playerctl:connect_signal("metadata", function(_, title, artist, album_path, album, new, player_name)
+_G.playerctl:connect_signal("metadata", function(_, title, artist, album_path, album, new, player_name)
 	if new == true then
 		naughty.notify({
 			title = title,
@@ -74,13 +73,13 @@ naughty.connect_signal("request::display_error", function(message, startup)
 end)
 
 naughty.connect_signal("request::display", function(n)
-	local actions = wibox.widget({
+	local actions = {
 		notification = n,
 
-		base_layout = wibox.widget({
+		base_layout = {
 			spacing = dpi(5),
 			layout = wibox.layout.flex.horizontal,
-		}),
+		},
 
 		widget_template = {
 			{
@@ -101,7 +100,53 @@ naughty.connect_signal("request::display", function(n)
 			underline_selected = true,
 		},
 		widget = naughty.list.actions,
-	})
+	}
+
+	local template = {
+		{
+			{
+				{
+					{
+						clip_shape = helpers.rrect(beautiful.notification_icon_radius),
+						widget = naughty.widget.icon,
+					},
+					{
+						{
+							{
+								align = "left",
+								font = beautiful.notification_font,
+								markup = "<b>" .. n.title .. "</b>",
+								widget = wibox.widget.textbox,
+							},
+							{
+								align = "left",
+								font = beautiful.notification_font_small,
+								markup = n.message,
+								widget = wibox.widget.textbox,
+							},
+							layout = wibox.layout.fixed.vertical,
+						},
+						left = n.icon and beautiful.notification_padding or 0,
+						widget = wibox.container.margin,
+					},
+					layout = wibox.layout.align.horizontal,
+				},
+				{
+					helpers.vertical_pad(dpi(8)),
+					actions,
+					visible = n.actions and #n.actions > 0,
+					layout = wibox.layout.fixed.vertical,
+				},
+				layout = wibox.layout.fixed.vertical,
+			},
+			margins = beautiful.notification_padding,
+			widget = wibox.container.margin,
+		},
+		strategy = "min",
+		width = beautiful.notification_min_width,
+		height = beautiful.notification_min_height,
+		widget = wibox.container.constraint,
+	}
 
 	naughty.layout.box({
 		notification = n,
@@ -109,65 +154,6 @@ naughty.connect_signal("request::display", function(n)
 		border_width = beautiful.notification_border_width,
 		border_color = beautiful.notification_border_color,
 		position = beautiful.notification_position,
-		widget_template = {
-			{
-				{
-					{
-						{
-							{
-								clip_shape = helpers.rrect(beautiful.notification_icon_radius),
-								widget = naughty.widget.icon,
-							},
-							{
-								{
-									nil,
-									{
-										{
-											align = "left",
-											font = beautiful.notification_font,
-											markup = "<b>" .. n.title .. "</b>",
-											widget = wibox.widget.textbox,
-										},
-										{
-											align = "left",
-											font = beautiful.notification_font_small,
-											markup = n.message,
-											widget = wibox.widget.textbox,
-										},
-										layout = wibox.layout.fixed.vertical,
-									},
-									expand = "none",
-									layout = wibox.layout.align.vertical,
-								},
-								left = n.icon and beautiful.notification_padding or 0,
-								widget = wibox.container.margin,
-							},
-							layout = wibox.layout.align.horizontal,
-						},
-						{
-							helpers.vertical_pad(dpi(8)),
-							{
-								nil,
-								actions,
-								expand = "inside",
-								layout = wibox.layout.align.horizontal,
-							},
-							visible = n.actions and #n.actions > 0,
-							layout = wibox.layout.fixed.vertical,
-						},
-						layout = wibox.layout.fixed.vertical,
-					},
-					margins = beautiful.notification_padding,
-					widget = wibox.container.margin,
-				},
-				margins = beautiful.notification_border_width,
-				color = beautiful.border_color_active,
-				widget = wibox.container.margin,
-			},
-			strategy = "min",
-			width = beautiful.notification_min_width,
-			height = beautiful.notification_min_height,
-			widget = wibox.container.constraint,
-		},
+		widget_template = template,
 	})
 end)
