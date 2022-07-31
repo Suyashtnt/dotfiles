@@ -1,2 +1,4 @@
-- [  ] add taglist animations
-- [  ] make everything easily themable
+- [x] add taglist animations
+- [x] make everything easily themable
+- [  ] full fennel rewrite
+- [  ] tasklist anims

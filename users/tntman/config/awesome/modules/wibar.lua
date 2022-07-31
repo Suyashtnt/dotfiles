@@ -141,7 +141,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 								},
 								cpu_radial,
 								wibox.widget.systray(),
-								s.mylayoutbox,
+								s.layoutbox,
 
 								layout = wibox.layout.fixed.horizontal,
 								spacing = beautiful.systray_icon_spacing,
