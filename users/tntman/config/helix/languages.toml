@@ -1,0 +1,6 @@
+[[language]]
+name = "rust"
+[language.config.cargo]
+features = "all"
+[language.config.checkOnSave]
+command = "clippy"
