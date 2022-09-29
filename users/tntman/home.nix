@@ -210,7 +210,7 @@
   services = {
     spotifyd = {
       enable = true;
-      settings = builtins.fromTOML (builtins.readFile ../../.secrets/spotifyd.toml);
+      settings = builtins.fromTOML (builtins.readFile ./config/spotifyd.toml);
     };
 
     dunst = {
