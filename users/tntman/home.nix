@@ -16,7 +16,7 @@
       gitkraken
       rofi
       wofi
-      neovim-nightly
+      neovim
       neovide
       virt-manager
       obsidian
@@ -76,11 +76,6 @@
       pkg-config
       gcc
       cmake
-
-      # Fonts
-      (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
-      font-awesome
-      emacs-all-the-icons-fonts
     ];
 
     file.btop = {
@@ -148,11 +143,6 @@
         fade-in = "0.1";
         ignore-empty-password = true;
       };
-    };
-
-    doom-emacs = {
-      enable = true;
-      doomPrivateDir = ./config/doom.d;
     };
 
     eww = {
@@ -273,10 +263,6 @@
     gpg-agent = {
       enable = true;
       pinentryFlavor = "qt";
-    };
-
-    emacs = {
-      enable = true;
     };
   };
 

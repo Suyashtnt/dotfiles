@@ -94,6 +94,22 @@ in
     videoDrivers = [ "nvidia" ]; # remember to change this people
   };
 
+
+  fonts = {
+    enableDefaultFonts = true;
+    fonts = with pkgs; [ 
+      (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+      font-awesome
+      emacs-all-the-icons-fonts
+    ];
+
+    fontconfig = {
+      defaultFonts = {
+        monospace = [ "JetBrainsMono Nerd Font Mono" ];
+      };
+    };
+  };
+
   programs.xwayland.enable = true;
   services.plex = {
     enable = true;
@@ -226,6 +242,8 @@ in
       };
     };
     docker.enable = true;
+    waydroid.enable = true;
+    lxd.enable = true;  
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.

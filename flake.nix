@@ -28,8 +28,6 @@
 
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
     nixpkgs-wayland.inputs.nixpkgs.follows = "nixpkgs";
-
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
 
     flake-utils.url = "github:numtide/flake-utils";
@@ -48,8 +46,6 @@
       flake = false;
     };
 
-    nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
-
     webcord.url = "github:fufexan/webcord-flake";
 
     geticons-source.url = "sourcehut:~zethra/geticons";
@@ -62,11 +58,10 @@
     catppuccin-discord.flake = false;
   };
 
-  outputs = { self, nixpkgs, home-manager, neovim-nightly-overlay, flake-utils, nixpkgs-f2k, xresources, fnlfmt-git, nix-doom-emacs, grub-theme, catppuccin-discord, hyprland, nixpkgs-wayland, webcord, geticons-source, crane, hyprpaper, hyprpicker, waybar-src, btop-theme, ... }:
+  outputs = { self, nixpkgs, home-manager, flake-utils, nixpkgs-f2k, xresources, fnlfmt-git, grub-theme, catppuccin-discord, hyprland, nixpkgs-wayland, webcord, geticons-source, crane, hyprpaper, hyprpicker, waybar-src, btop-theme, ... }:
     let
       system = "x86_64-linux";
       overlays = [
-        neovim-nightly-overlay.overlay
         nixpkgs-f2k.overlays.default
         nixpkgs-wayland.overlay
       ];
@@ -103,7 +98,6 @@
             ({
               home-manager.useGlobalPkgs = true;
               home-manager.sharedModules = [
-                nix-doom-emacs.hmModule
                 hyprland.homeManagerModules.default
               ];
               home-manager.users.tntman = lib.mkMerge [

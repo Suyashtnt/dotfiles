@@ -11,3 +11,14 @@ select = "underline"
 [editor.indent-guides]
 render = true
 character = "╎"
+
+[editor.lsp]
+display-messages = true
+display-signature-help-docs = false
+
+[editor.whitespace.render]
+newline = "all"
+
+[editor.whitespace.characters]
+newline = "⏎"
+
