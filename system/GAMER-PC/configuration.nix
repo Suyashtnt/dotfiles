@@ -80,24 +80,9 @@ in
   # Select internationalisation properties.
   i18n.defaultLocale = "en_ZA.UTF-8";
 
-  # Configure keymap in X11
-  services.xserver = {
-    enable = true;
-
-    displayManager = {
-      gdm.enable = true;
-      gdm.wayland = true;
-    };
-
-    layout = "za";
-    xkbVariant = "";
-    videoDrivers = [ "nvidia" ]; # remember to change this people
-  };
-
-
   fonts = {
     enableDefaultFonts = true;
-    fonts = with pkgs; [ 
+    fonts = with pkgs; [
       (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
       font-awesome
       emacs-all-the-icons-fonts
@@ -136,8 +121,11 @@ in
 
   sound.enable = false; # Pipewire doesn't like this on
 
-  # rtkit is optional but recommended
-  security.rtkit.enable = true;
+  security = {
+    # allow wayland lockers to unlock the screen
+    pam.services.swaylock.text = "auth include login";
+    rtkit.enable = true;
+  };
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -243,7 +231,7 @@ in
     };
     docker.enable = true;
     waydroid.enable = true;
-    lxd.enable = true;  
+    lxd.enable = true;
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -260,7 +248,7 @@ in
 
 
   environment.systemPackages = with pkgs; [
-    neovim
+    vim
     xdg-desktop-portal-wlr
     libimobiledevice
     gnome.adwaita-icon-theme
@@ -301,10 +289,16 @@ in
     '';
 
   services.openssh.enable = true;
+
   services.udev.packages = with pkgs; [
     gnome.gnome-settings-daemon
   ];
 
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
 
   networking.firewall.enable = false;
 

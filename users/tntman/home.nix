@@ -1,4 +1,4 @@
-{ lib, pkgs, overlays, xresources, config, discord-theme, hyprland, webcord, geticons, hyprpaper, hyprpicker, waybar-src, btop-theme, ... }:
+{ lib, pkgs, overlays, xresources, config, discord-theme, hyprland, webcord, hyprpaper, btop-theme, neovim-nightly, ... }:
 {
 
   nixpkgs.overlays = overlays;
@@ -16,7 +16,6 @@
       gitkraken
       rofi
       wofi
-      neovim
       neovide
       virt-manager
       obsidian
@@ -25,22 +24,13 @@
       swaylock-effects
       btop
       sptlrx
-      helix # experimental
+      helix
       nix-index
+      neovim-nightly.packages.${pkgs.system}.neovim
 
       # from flakes
       webcord.packages.${pkgs.system}.default
       hyprpaper.packages.${pkgs.system}.default
-      #hyprpicker.packages.${pkgs.system}.default doesnt work on nvidia
-      geticons
-      (waybar.overrideAttrs (old: {
-        src = waybar-src;
-        mesonFlags = old.mesonFlags
-          ++ [ "-Dexperimental=true" ];
-        patchPhase = ''
-          substituteInPlace src/modules/wlr/workspace_manager.cpp --replace "zext_workspace_handle_v1_activate(workspace_handle_);" "const std::string command = \"hyprctl dispatch workspace \" + name_; system(command.c_str());"
-        '';
-      }))
 
       # CLI utils
       atuin
@@ -73,6 +63,7 @@
       # libs
       openssl
       pinentry-qt
+      libsForQt5.qt5.qtwayland
       pkg-config
       gcc
       cmake
@@ -278,7 +269,6 @@
     });
   };
 
-
   gtk = {
     enable = true;
     theme = {
@@ -323,10 +313,6 @@
     };
     hypr = {
       source = ./config/hypr;
-      recursive = true;
-    };
-    waybar = {
-      source = ./config/waybar;
       recursive = true;
     };
     helix = {

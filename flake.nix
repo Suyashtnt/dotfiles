@@ -21,10 +21,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprpicker = {
-      url = "github:hyprwm/hyprpicker";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
 
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
     nixpkgs-wayland.inputs.nixpkgs.follows = "nixpkgs";
@@ -41,11 +38,6 @@
     fnlfmt-git.url = "sourcehut:~technomancy/fnlfmt";
     fnlfmt-git.flake = false;
 
-    waybar-src = {
-      url = "github:Alexays/Waybar";
-      flake = false;
-    };
-
     webcord.url = "github:fufexan/webcord-flake";
 
     geticons-source.url = "sourcehut:~zethra/geticons";
@@ -58,7 +50,7 @@
     catppuccin-discord.flake = false;
   };
 
-  outputs = { self, nixpkgs, home-manager, flake-utils, nixpkgs-f2k, xresources, fnlfmt-git, grub-theme, catppuccin-discord, hyprland, nixpkgs-wayland, webcord, geticons-source, crane, hyprpaper, hyprpicker, waybar-src, btop-theme, ... }:
+  outputs = { self, nixpkgs, home-manager, flake-utils, nixpkgs-f2k, xresources, fnlfmt-git, grub-theme, catppuccin-discord, hyprland, nixpkgs-wayland, webcord, geticons-source, crane, hyprpaper, btop-theme, neovim-nightly, ... }:
     let
       system = "x86_64-linux";
       overlays = [
@@ -75,15 +67,6 @@
       lib = nixpkgs.lib;
 
       craneLib = crane.lib.${system};
-      commonArgs = {
-        src = craneLib.cleanCargoSource geticons-source;
-      };
-      cargoArtifacts = craneLib.buildDepsOnly (commonArgs // {
-        pname = "geticons-deps";
-      });
-      geticons = craneLib.buildPackage (commonArgs // {
-        inherit cargoArtifacts;
-      });
     in
     {
       nixosConfigurations = {
@@ -101,7 +84,7 @@
                 hyprland.homeManagerModules.default
               ];
               home-manager.users.tntman = lib.mkMerge [
-                { _module.args = { inherit overlays xresources pkgs lib discord-theme hyprland hyprpicker hyprpaper webcord geticons waybar-src btop-theme; }; }
+                { _module.args = { inherit overlays xresources pkgs lib discord-theme hyprland hyprpaper webcord btop-theme neovim-nightly; }; }
                 ./users/tntman/home.nix
               ];
             })
