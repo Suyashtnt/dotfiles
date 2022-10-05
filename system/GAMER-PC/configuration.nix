@@ -63,6 +63,14 @@ in
   boot.extraModprobeConfig = "options kvm_intel nested=1";
   boot.supportedFilesystems = [ "ntfs" ];
   boot.kernelModules = [ "kvm-amd" ];
+  
+  services.xserver = {
+    enable = true;
+    
+    layout = "za";
+    xkbVariant = "";
+    videoDrivers = [ "nvidia" ]; # Change if not nvidia card
+  };
 
   networking.hostName = "GAMER-PC"; # Define your hostname. Remember to change this
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant. Remeber to enable this if you are using wifi
