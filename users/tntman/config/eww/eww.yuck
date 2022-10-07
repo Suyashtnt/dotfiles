@@ -10,6 +10,9 @@
     (bgSelImg :path "/home/tntman/dotfiles/wallpapers/gabriel.png" :name "Gabriel Ultrakill")
     (bgSelImg :path "/home/tntman/dotfiles/wallpapers/nixShilling.png" :name "NixOS shill mode")
     (bgSelImg :path "/home/tntman/dotfiles/wallpapers/rustShilling.png" :name "Rust shill mode")
+    (bgSelImg :path "/home/tntman/dotfiles/wallpapers/rustShillingAlt.png" :name "Rust shill mode alt")
+    (bgSelImg :path "/home/tntman/dotfiles/wallpapers/oceanWaves.jpg" :name "Ocean Current")
+    (bgSelImg :path "/home/tntman/dotfiles/wallpapers/universeBox.png" :name "unzip universe.zip")
     (bgSelImg :path "/home/tntman/dotfiles/wallpapers/waves.png" :name "W A V E S")))
 
 (defwidget bgSelImg [path name]
