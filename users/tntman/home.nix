@@ -56,6 +56,7 @@
       spotify-tui
       pfetch
       neofetch
+      alsa-utils
 
       # encryption of dotfiles
       git-crypt
