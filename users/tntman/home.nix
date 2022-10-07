@@ -1,4 +1,4 @@
-{ lib, pkgs, overlays, xresources, config, discord-theme, hyprland, webcord, hyprpaper, btop-theme, neovim-nightly, ... }:
+{ lib, pkgs, overlays, xresources, config, discord-theme, hyprland, webcord, hyprpaper, btop-theme, neovim-nightly, swww, ... }:
 {
 
   nixpkgs.overlays = overlays;
@@ -27,6 +27,7 @@
       helix
       nix-index
       neovim-nightly.packages.${pkgs.system}.neovim
+      swww
 
       # from flakes
       webcord.packages.${pkgs.system}.default

@@ -1,0 +1,23 @@
+(defwindow bgSel
+           :monitor 0
+           :geometry (geometry :x "0%"
+                               :y "0%"
+                               :anchor "center")
+          :stacking "fg"
+  (box
+    :orientation "h"
+    :space-evenly true
+    (bgSelImg :path "/home/tntman/dotfiles/wallpapers/gabriel.png" :name "Gabriel Ultrakill")
+    (bgSelImg :path "/home/tntman/dotfiles/wallpapers/nixShilling.png" :name "NixOS shill mode")
+    (bgSelImg :path "/home/tntman/dotfiles/wallpapers/rustShilling.png" :name "Rust shill mode")
+    (bgSelImg :path "/home/tntman/dotfiles/wallpapers/waves.png" :name "W A V E S")))
+
+(defwidget bgSelImg [path name]
+  (button
+    :onclick "swww img -t random --transition-step 1 --transition-fps 60 --transition-speed 20 ${path} && eww close bgSel"
+    (box 
+     :orientation "v"
+     (image 
+       :path path
+       :image-height 200)
+     name)))

@@ -836,6 +836,7 @@
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-f2k": "nixpkgs-f2k",
         "nixpkgs-wayland": "nixpkgs-wayland",
+        "swww-src": "swww-src",
         "webcord": "webcord",
         "xresources": "xresources"
       }
@@ -871,6 +872,22 @@
         "owner": "rust-lang",
         "ref": "nightly",
         "repo": "rust-analyzer",
+        "type": "github"
+      }
+    },
+    "swww-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1664590263,
+        "narHash": "sha256-BYF8bUdBUu/9StgWwW71JjcC5cFHU80pSCgwogKCAbE=",
+        "owner": "Horus645",
+        "repo": "swww",
+        "rev": "09bc4310c47dd9c0c88cf55557a1e5e4ec9b259c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Horus645",
+        "repo": "swww",
         "type": "github"
       }
     },

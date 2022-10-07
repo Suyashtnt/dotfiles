@@ -48,9 +48,12 @@
 
     catppuccin-discord.url = "github:catppuccin/discord";
     catppuccin-discord.flake = false;
+
+    swww-src.url = "github:Horus645/swww";
+    swww-src.flake = false;
   };
 
-  outputs = { self, nixpkgs, home-manager, flake-utils, nixpkgs-f2k, xresources, fnlfmt-git, grub-theme, catppuccin-discord, hyprland, nixpkgs-wayland, webcord, geticons-source, crane, hyprpaper, btop-theme, neovim-nightly, ... }:
+  outputs = { self, nixpkgs, home-manager, flake-utils, nixpkgs-f2k, xresources, fnlfmt-git, grub-theme, catppuccin-discord, hyprland, nixpkgs-wayland, webcord, geticons-source, crane, hyprpaper, btop-theme, neovim-nightly, swww-src, ... }:
     let
       system = "x86_64-linux";
       overlays = [
@@ -67,6 +70,17 @@
       lib = nixpkgs.lib;
 
       craneLib = crane.lib.${system};
+
+      swww = craneLib.buildPackage {
+        src = craneLib.cleanCargoSource swww-src;
+
+        nativeBuildInputs = with pkgs; [
+          pkg-config
+          libxkbcommon
+        ];
+        
+        doCheck = false; #breaks on nixOS
+      };
     in
     {
       nixosConfigurations = {
@@ -84,7 +98,7 @@
                 hyprland.homeManagerModules.default
               ];
               home-manager.users.tntman = lib.mkMerge [
-                { _module.args = { inherit overlays xresources pkgs lib discord-theme hyprland hyprpaper webcord btop-theme neovim-nightly; }; }
+                { _module.args = { inherit overlays xresources pkgs lib discord-theme hyprland hyprpaper webcord btop-theme neovim-nightly swww; }; }
                 ./users/tntman/home.nix
               ];
             })
