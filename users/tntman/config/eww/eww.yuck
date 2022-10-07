@@ -5,18 +5,32 @@
                                :anchor "center")
           :stacking "fg"
   (box
-    :orientation "h"
+    :orientation "v"
     :space-evenly true
-    (bgSelImg :path "/home/tntman/dotfiles/wallpapers/gabriel.png" :name "Gabriel Ultrakill")
-    (bgSelImg :path "/home/tntman/dotfiles/wallpapers/nixShilling.png" :name "NixOS shill mode")
-    (bgSelImg :path "/home/tntman/dotfiles/wallpapers/rustShilling.png" :name "Rust shill mode")
-    (bgSelImg :path "/home/tntman/dotfiles/wallpapers/rustShillingAlt.png" :name "Rust shill mode alt")
-    (bgSelImg :path "/home/tntman/dotfiles/wallpapers/oceanWaves.jpg" :name "Ocean Current")
-    (bgSelImg :path "/home/tntman/dotfiles/wallpapers/universeBox.png" :name "unzip universe.zip")
-    (bgSelImg :path "/home/tntman/dotfiles/wallpapers/waves.png" :name "W A V E S")))
+    :class "bg-base p-sm rounded-lg"
+    (box
+      :orientation "h"
+      :space-evenly true
+      (bgSelImg :path "/home/tntman/dotfiles/wallpapers/gabriel.png" :name "Gabriel Ultrakill")
+      (bgSelImg :path "/home/tntman/dotfiles/wallpapers/oceanWaves.jpg" :name "Ocean Current")
+      (bgSelImg :path "/home/tntman/dotfiles/wallpapers/universeBox.png" :name "unzip universe.zip")
+      (bgSelImg :path "/home/tntman/dotfiles/wallpapers/waves.png" :name "W A V E S"))
+    (box
+      :orientation "h"
+      :space-evenly true
+      (bgSelImg :path "/home/tntman/dotfiles/wallpapers/nixShilling.png" :name "NixOS shill mode")
+      (bgSelImg :path "/home/tntman/dotfiles/wallpapers/rustShilling.png" :name "Rust shill mode")
+      (bgSelImg :path "/home/tntman/dotfiles/wallpapers/rustShillingAlt.png" :name "Rust shill mode alt")
+      (bgSelImg :path "/home/tntman/dotfiles/wallpapers/JsPain.png" :name "Experiencing pain"))))
+
+(defwindow systemStats
+  (box
+    :orientation "v"
+    :space-evenly true))
 
 (defwidget bgSelImg [path name]
   (button
+    :class "bg-base rounded-none p-none m-sm"
     :onclick "swww img -t random --transition-step 1 --transition-fps 60 --transition-speed 20 ${path} && eww close bgSel"
     (box 
      :orientation "v"

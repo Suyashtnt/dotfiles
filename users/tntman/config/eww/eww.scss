@@ -1,0 +1,49 @@
+@import "mocha";
+
+.bg-base {
+  background-color: $base;
+}
+
+.rounded-none {
+  border-radius: 0px;
+}
+
+.rounded {
+  border-radius: 0.5rem;
+}
+
+.rounded-lg {
+  border-radius: 0.75rem;
+}
+
+.rounded-xl {
+  border-radius: 1.25rem;
+}
+
+.p-none {
+  padding: 0px;
+}
+
+.p-sm {
+  padding: 0.5rem;
+}
+
+.p-md {
+  padding: 1.5rem;
+}
+
+.p-lg {
+  padding: 2rem;
+}
+
+.m-sm {
+  margin: 0.5rem;
+}
+
+.m-md {
+  margin: 1.5rem;
+}
+
+.m-lg {
+  margin: 2rem;
+}
