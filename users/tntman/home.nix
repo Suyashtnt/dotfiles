@@ -1,6 +1,5 @@
 { lib, pkgs, overlays, xresources, config, discord-theme, hyprland, webcord, hyprpaper, btop-theme, neovim-nightly, swww, ... }:
 {
-
   nixpkgs.overlays = overlays;
 
   home = {
@@ -13,6 +12,7 @@
       # General
       firefox
       alacritty
+      foot
       gitkraken
       rofi
       wofi
@@ -319,6 +319,10 @@
     };
     helix = {
       source = ./config/helix;
+      recursive = true;
+    };
+    foot = {
+      source = ./config/foot;
       recursive = true;
     };
   };

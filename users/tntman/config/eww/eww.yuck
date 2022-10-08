@@ -51,7 +51,7 @@
           :geometry (geometry :x "1%"
                               :y "4%"
                               :anchor "top right")
-          :stacking "fg"
+          :stacking "bottom"
   (box
     :orientation "v"
     :class "rounded-xl bg-base p-xl"
