@@ -60,6 +60,9 @@
     (metric :name "🔊"
            :value volume
            :onchange "amixer sset Master {}%")
+    (metric :name "﬙"
+            :value {EWW_CPU.avg}
+            :onchange "")
     (metric :name ""
             :value {EWW_RAM.used_mem_perc}
             :onchange "")
