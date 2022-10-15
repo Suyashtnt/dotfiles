@@ -1,15 +1,8 @@
-(defpoll time :interval "1s"
-  "date '+%H:%M:%S %b %d, %Y'")
-
-(defpoll volume :interval "1s"
-  "scripts/getvol")
-
+;; background selector
 (defwindow bgSel
           :monitor 0
           :class "bg-none"
-          :geometry (geometry :x "0%"
-                              :y "0%"
-                              :anchor "center")
+          :geometry (geometry :x "0%" :y "0%" :anchor "center")
           :stacking "fg"
   (box
     :orientation "v"
@@ -46,6 +39,14 @@
        :image-height 200)
      name)))
 
+;; system monitor
+
+(defpoll time :interval "1s"
+  "date '+%H:%M:%S %b %d, %Y'")
+
+(defpoll volume :interval "1s"
+  "scripts/getvol")
+
 (defwindow systemStats
           :monitor 0
           :geometry (geometry :x "1%"
@@ -68,8 +69,8 @@
             :onchange "")
     (metric :name "💾"
             :value {EWW_DISK["/"].used_perc}
-            :onchange "")
-    ))
+            :onchange "")))
+    
 
 (defwidget metric [name value onchange]
   (box :orientation "h"
@@ -82,3 +83,38 @@
            :active {onchange != ""}
            :value value
            :onchange onchange)))
+
+;; POWER MODE
+
+(defwindow powerModeRight
+  :monitor 0
+  :geometry (geometry :height "80%"
+                      :width "9%"
+                      :anchor "right center")
+  :exclusive true
+  (box :class "bg-base pmr" "sample text"))
+
+(defwindow powerModeLeft
+  :monitor 0
+  :geometry (geometry :height "80%"
+                      :width "9%"
+                      :anchor "left center")
+  :exclusive true
+  (box :class "bg-base pml" "sample text"))
+
+(defwindow powerModeTop
+  :monitor 0
+  :geometry (geometry :height "9%"
+                      :width "98%"
+                      :anchor "top center")
+  :exclusive true
+  (box :class "bg-base pmt" "sample text"))
+
+(defwindow powerModeBottom
+  :monitor 0
+  :geometry (geometry :x "0%"
+                      :height "9%"
+                      :width "98%"
+                      :anchor "bottom center")
+  :exclusive true
+  (box :class "bg-base pmb" "sample text"))

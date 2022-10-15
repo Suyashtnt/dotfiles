@@ -98,7 +98,7 @@ in
 
     fontconfig = {
       defaultFonts = {
-        monospace = [ "JetBrainsMono Nerd Font Mono" ];
+        monospace = [ "ComicCodeLigatures Nerd Font" ];
       };
     };
   };

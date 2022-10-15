@@ -13,19 +13,13 @@
       firefox
       alacritty
       foot
-      gitkraken
-      rofi
       wofi
       neovide
-      virt-manager
       obsidian
-      android-studio
-      thunderbird
       swaylock-effects
       btop
       sptlrx
       helix
-      nix-index
       neovim-nightly.packages.${pkgs.system}.neovim
       swww
 
@@ -54,7 +48,6 @@
       gitui
       cava
       spotify-tui
-      pfetch
       neofetch
       alsa-utils
 
@@ -299,10 +292,6 @@
     };
     alacritty = {
       source = ./config/alacritty;
-      recursive = true;
-    };
-    rofi = {
-      source = ./config/rofi;
       recursive = true;
     };
     zellij = {
