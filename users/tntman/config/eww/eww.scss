@@ -38,6 +38,34 @@ $sizes: ("none": 0px, "sm": 0.5rem, "md": 1rem, "lg": 1.5rem, "xl": 2rem);
   }
 }
 
+@each $size, $value in $sizes {
+    .pl-#{$size} {
+      padding-left: $value;
+    }
+
+    .pr-#{$size} {
+      padding-right: $value;
+    }
+
+    .pt-#{$size} {
+      padding-top: $value;
+    }
+
+    .pb-#{$size} {
+      padding-bottom: $value;
+    }
+
+    .px-#{$size} {
+      padding-left: $value;
+      padding-right: $value;
+    }
+
+    .py-#{$size} {
+      padding-top: $value;
+      padding-bottom: $value;
+    }
+}
+
 @each $name, $value in $mocha {
   .bg-#{$name} {
     background-color: $value;
@@ -74,6 +102,10 @@ $sizes: ("none": 0px, "sm": 0.5rem, "md": 1rem, "lg": 1.5rem, "xl": 2rem);
 
 .pmb {
   border-radius: 1.5rem 1.5rem 0 0;
+}
+
+.cmicon {
+  font-size: 5rem;
 }
 
 .metric {

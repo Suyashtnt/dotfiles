@@ -16,13 +16,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprpaper = {
-      url = "github:hyprwm/hyprpaper";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
-
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
     nixpkgs-wayland.inputs.nixpkgs.follows = "nixpkgs";
     nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
@@ -38,11 +31,6 @@
     fnlfmt-git.url = "sourcehut:~technomancy/fnlfmt";
     fnlfmt-git.flake = false;
 
-    webcord.url = "github:fufexan/webcord-flake";
-
-    geticons-source.url = "sourcehut:~zethra/geticons";
-    geticons-source.flake = false;
-
     grub-theme.url = "github:catppuccin/grub";
     grub-theme.flake = false;
 
@@ -53,7 +41,7 @@
     swww-src.flake = false;
   };
 
-  outputs = { self, nixpkgs, home-manager, flake-utils, nixpkgs-f2k, xresources, fnlfmt-git, grub-theme, catppuccin-discord, hyprland, nixpkgs-wayland, webcord, geticons-source, crane, hyprpaper, btop-theme, neovim-nightly, swww-src, ... }:
+  outputs = { self, nixpkgs, home-manager, flake-utils, nixpkgs-f2k, xresources, fnlfmt-git, grub-theme, catppuccin-discord, hyprland, nixpkgs-wayland, crane, btop-theme, swww-src, ... }:
     let
       system = "x86_64-linux";
       overlays = [
@@ -98,7 +86,7 @@
                 hyprland.homeManagerModules.default
               ];
               home-manager.users.tntman = lib.mkMerge [
-                { _module.args = { inherit overlays xresources pkgs lib discord-theme hyprland hyprpaper webcord btop-theme neovim-nightly swww; }; }
+                { _module.args = { inherit overlays xresources pkgs lib discord-theme hyprland btop-theme swww; }; }
                 ./users/tntman/home.nix
               ];
             })

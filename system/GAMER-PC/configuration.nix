@@ -118,6 +118,7 @@ in
   services.printing.drivers = [ pkgs.epson-escpr ];
   services.avahi.enable = true;
   services.avahi.nssmdns = true;
+  services.flatpak.enable = true;
   services.gnome = {
     glib-networking.enable = true;
     gnome-keyring.enable = true;

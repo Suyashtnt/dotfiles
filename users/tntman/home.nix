@@ -1,4 +1,4 @@
-{ lib, pkgs, overlays, xresources, config, discord-theme, hyprland, webcord, hyprpaper, btop-theme, neovim-nightly, swww, ... }:
+{ lib, pkgs, overlays, xresources, config, discord-theme, hyprland, btop-theme, swww, ... }:
 {
   nixpkgs.overlays = overlays;
 
@@ -11,21 +11,13 @@
     packages = with pkgs; [
       # General
       firefox
-      alacritty
       foot
       wofi
-      neovide
-      obsidian
       swaylock-effects
       btop
       sptlrx
       helix
-      neovim-nightly.packages.${pkgs.system}.neovim
       swww
-
-      # from flakes
-      webcord.packages.${pkgs.system}.default
-      hyprpaper.packages.${pkgs.system}.default
 
       # CLI utils
       atuin
@@ -282,16 +274,8 @@
 
 
   xdg.configFile = {
-    nvim = {
-      source = ./config/nvim;
-      recursive = true;
-    };
     neofetch = {
       source = ./config/neofetch;
-      recursive = true;
-    };
-    alacritty = {
-      source = ./config/alacritty;
       recursive = true;
     };
     zellij = {

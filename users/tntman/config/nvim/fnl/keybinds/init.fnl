@@ -1,7 +1,0 @@
-(require :keybinds.buffers)
-(require :keybinds.comment)
-(require :keybinds.cycle)
-(require :keybinds.dap)
-(require :keybinds.leader)
-(require :keybinds.splits)
-(require :keybinds.telescope)
