@@ -163,6 +163,11 @@
         wlrobs
       ];
     };
+    
+    doom-emacs = {
+      enable = true;
+      doomPrivateDir = ./config/doom.d;
+    };
 
     direnv.enable = true;
     direnv.nix-direnv.enable = true;
@@ -242,6 +247,8 @@
       enable = true;
       pinentryFlavor = "qt";
     };
+    
+    emacs.enable = true;
   };
 
   home.pointerCursor.package = pkgs.nordzy-cursor-theme;

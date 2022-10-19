@@ -39,9 +39,11 @@
 
     swww-src.url = "github:Horus645/swww";
     swww-src.flake = false;
+
+    nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
   };
 
-  outputs = { self, nixpkgs, home-manager, flake-utils, nixpkgs-f2k, xresources, fnlfmt-git, grub-theme, catppuccin-discord, hyprland, nixpkgs-wayland, crane, btop-theme, swww-src, ... }:
+  outputs = { self, nixpkgs, home-manager, flake-utils, nixpkgs-f2k, xresources, fnlfmt-git, grub-theme, catppuccin-discord, hyprland, nixpkgs-wayland, crane, btop-theme, swww-src, nix-doom-emacs, ... }:
     let
       system = "x86_64-linux";
       overlays = [
@@ -84,6 +86,7 @@
               home-manager.useGlobalPkgs = true;
               home-manager.sharedModules = [
                 hyprland.homeManagerModules.default
+                nix-doom-emacs.hmModule
               ];
               home-manager.users.tntman = lib.mkMerge [
                 { _module.args = { inherit overlays xresources pkgs lib discord-theme hyprland btop-theme swww; }; }
