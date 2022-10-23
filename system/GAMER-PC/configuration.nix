@@ -44,9 +44,6 @@ in
     };
   };
 
-  # who needs documentation anyways :clueless:
-  documentation = { enable = false; man.enable = false; };
-
   imports =
     [
       ./hardware-configuration.nix

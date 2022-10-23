@@ -1,12 +1,14 @@
-{ lib, pkgs, overlays, xresources, config, discord-theme, hyprland, btop-theme, swww, ... }:
+{ lib, pkgs, overlays, xresources, config, hyprland, btop-theme, swww, ... }:
 {
   nixpkgs.overlays = overlays;
+  manual.manpages.enable = false;
 
   home = {
     username = "tntman";
     homeDirectory = "/home/tntman";
 
     stateVersion = "22.05";
+
 
     packages = with pkgs; [
       # General
@@ -18,8 +20,12 @@
       sptlrx
       helix
       swww
+      authy
+      dolphin
+      spotify # used as a way to give auth creds to spotifyd, rather use spt when actually playing music
 
       # CLI utils
+      xorg.xhost
       atuin
       unzip
       exa
@@ -166,6 +172,7 @@
     
     doom-emacs = {
       enable = true;
+      emacsPackage = pkgs.emacsGitNativeComp;
       doomPrivateDir = ./config/doom.d;
     };
 
