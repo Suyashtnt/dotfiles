@@ -227,7 +227,6 @@ in
 
   programs.zsh.enable = true;
   programs.dconf.enable = true;
-  programs.adb.enable = true;
 
   virtualisation = {
     libvirtd = {
@@ -239,7 +238,6 @@ in
       };
     };
     docker.enable = true;
-    waydroid.enable = true;
     lxd.enable = true;
   };
 
@@ -247,7 +245,7 @@ in
   users.users.tntman = {
     isNormalUser = true;
     description = "Tabiasgeee Human"; # Now my real name will not be leaked :)
-    extraGroups = [ "networkmanager" "wheel" "scanner" "lp" "libvirtd" "docker" "podman" "adbusers" ];
+    extraGroups = [ "networkmanager" "wheel" "scanner" "lp" "libvirtd" "docker" "podman" ];
     packages = with pkgs; [ ];
     shell = pkgs.zsh;
   };
