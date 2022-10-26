@@ -13,6 +13,7 @@
     packages = with pkgs; [
       # General
       firefox
+      chromium #for js debugging and lighthoouse
       foot
       wofi
       swaylock-effects
