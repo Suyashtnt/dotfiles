@@ -24,11 +24,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    emacs-overlay = {
-      url = "github:nix-community/emacs-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     flake-utils.url = "github:numtide/flake-utils";
 
     xresources = {
@@ -55,20 +50,14 @@
       url = "github:Horus645/swww";
       flake = false;
     };
-
-    nix-doom-emacs = {
-      url = "github:nix-community/nix-doom-emacs";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-  outputs = { self, nixpkgs, home-manager, flake-utils, nixpkgs-f2k, xresources, fnlfmt-git, grub-theme, hyprland, nixpkgs-wayland, crane, btop-theme, swww-src, nix-doom-emacs, emacs-overlay, ... }:
+  outputs = { self, nixpkgs, home-manager, flake-utils, nixpkgs-f2k, xresources, fnlfmt-git, grub-theme, hyprland, nixpkgs-wayland, crane, btop-theme, swww-src, ... }:
     let
       system = "x86_64-linux";
       overlays = [
         nixpkgs-f2k.overlays.default
         nixpkgs-wayland.overlay
-        emacs-overlay.overlays.default
       ];
       pkgs = import nixpkgs {
         inherit system overlays;
@@ -105,7 +94,6 @@
               home-manager.useGlobalPkgs = true;
               home-manager.sharedModules = [
                 hyprland.homeManagerModules.default
-                nix-doom-emacs.hmModule
               ];
               home-manager.users.tntman = lib.mkMerge [
                 { _module.args = { inherit overlays xresources pkgs lib hyprland btop-theme swww; }; }

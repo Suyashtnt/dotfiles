@@ -173,12 +173,6 @@
       ];
     };
 
-    doom-emacs = {
-      enable = true;
-      emacsPackage = pkgs.emacsGitNativeComp;
-      doomPrivateDir = ./config/doom.d;
-    };
-
     vscode = {
       enable = true;
       extensions = with pkgs.vscode-extensions; [
@@ -275,8 +269,6 @@
       enable = true;
       pinentryFlavor = "qt";
     };
-
-    emacs.enable = true;
   };
 
   home.pointerCursor.package = pkgs.nordzy-cursor-theme;
