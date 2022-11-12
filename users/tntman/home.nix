@@ -24,6 +24,7 @@
       authy
       dolphin
       spotify # used as a way to give auth creds to spotifyd, rather use spt when actually playing music
+      easyeffects
 
       # CLI utils
       xorg.xhost
