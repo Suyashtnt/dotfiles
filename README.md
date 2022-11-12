@@ -19,4 +19,5 @@ Games is an ntfs partition. Remove the part in hardware-configuration.nix if you
 the repo **MUST** be cloned into ~/dotfiles. It relies numerous times that its cloned there.
 
 ## obligatory screenshots
-TODO: update screenshots
+![Image of desktop](https://cdn.discordapp.com/attachments/273539705595756544/1041109605268328538/image.png)
+![Another one](https://cdn.discordapp.com/attachments/273539705595756544/1041109217534296124/image.png)
