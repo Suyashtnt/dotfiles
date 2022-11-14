@@ -4,7 +4,6 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
 
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -52,13 +51,12 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, flake-utils, nixpkgs-f2k, xresources, fnlfmt-git, grub-theme, hyprland, nixpkgs-wayland, crane, btop-theme, swww-src, ... }:
+  outputs = { self, nixpkgs, home-manager, flake-utils, nixpkgs-f2k, xresources
+    , fnlfmt-git, grub-theme, hyprland, nixpkgs-wayland, crane, btop-theme
+    , swww-src, ... }:
     let
       system = "x86_64-linux";
-      overlays = [
-        nixpkgs-f2k.overlays.default
-        nixpkgs-wayland.overlay
-      ];
+      overlays = [ nixpkgs-f2k.overlays.default nixpkgs-wayland.overlay ];
       pkgs = import nixpkgs {
         inherit system overlays;
         config = {
@@ -72,15 +70,11 @@
       swww = craneLib.buildPackage {
         src = craneLib.cleanCargoSource swww-src;
 
-        nativeBuildInputs = with pkgs; [
-          pkg-config
-          libxkbcommon
-        ];
+        nativeBuildInputs = with pkgs; [ pkg-config libxkbcommon ];
 
-        doCheck = false; #breaks on nixOS
+        doCheck = false; # breaks on nixOS
       };
-    in
-    {
+    in {
       nixosConfigurations = {
         GAMER-PC = lib.nixosSystem {
           inherit system;
@@ -92,11 +86,15 @@
             # HM config configurer
             ({
               home-manager.useGlobalPkgs = true;
-              home-manager.sharedModules = [
-                hyprland.homeManagerModules.default
-              ];
+              home-manager.sharedModules =
+                [ hyprland.homeManagerModules.default ];
               home-manager.users.tntman = lib.mkMerge [
-                { _module.args = { inherit overlays xresources pkgs lib hyprland btop-theme swww; }; }
+                {
+                  _module.args = {
+                    inherit overlays xresources pkgs lib hyprland btop-theme
+                      swww;
+                  };
+                }
                 ./users/tntman/home.nix
               ];
             })
