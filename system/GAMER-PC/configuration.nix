@@ -63,13 +63,14 @@ in
   boot.extraModprobeConfig = "options kvm_intel nested=1";
   boot.supportedFilesystems = [ "ntfs" ];
   boot.kernelModules = [ "kvm-amd" ];
-  
+	boot.kernelPackages = pkgs.linuxPackages_latest;
+
   services.xserver = {
     enable = true;
-    
+
     layout = "za";
     xkbVariant = "";
-    videoDrivers = [ "nvidia" ]; # Change if not nvidia card
+    videoDrivers = [ "nvidia" "intel" ]; # Change if not nvidia card
   };
 
   networking.hostName = "GAMER-PC"; # Define your hostname. Remember to change this

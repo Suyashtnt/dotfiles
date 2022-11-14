@@ -113,6 +113,7 @@
           python311
           yaml-language-server
           fennel
+          nixfmt
           (fnlfmt.overrideAttrs (old: {
             version = "git";
             src = fnlfmt-git;
