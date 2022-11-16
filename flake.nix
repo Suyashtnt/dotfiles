@@ -61,13 +61,15 @@
     };
   in {
     nixosConfigurations = import ./systems inputs;
-    devShell.x86_64-linux = pkgs.mkShell {
+
+    devShells.x86_64-linux.default = pkgs.mkShell {
       packages = with pkgs; [
         rnix-lsp
         yaml-language-server
         alejandra
       ];
     };
+
     packages.${system} = {
       catppuccin-folders = pkgs.callPackage ./pkgs/catppuccin-folders.nix {};
       catppuccin-gtk = pkgs.callPackage ./pkgs/catppuccin-gtk.nix {};
