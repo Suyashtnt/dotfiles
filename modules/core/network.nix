@@ -5,9 +5,9 @@
 }: {
   networking = {
     firewall = {
-      enable = true;
-      allowedTCPPorts = [443 80 22];
-      allowedUDPPorts = [443 80];
+      enable = false;
+      allowedTCPPorts = [443 80 22 631];
+      allowedUDPPorts = [443 80 631];
     };
 
     hostName = hostname;

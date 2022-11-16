@@ -9,6 +9,7 @@
   intel = ../modules/intel;
   nvidia = ../modules/nvidia;
   wayland = ../modules/wayland;
+  printing = ../modules/printing;
   hmModule = inputs.home-manager.nixosModules.home-manager;
 in {
   GAMER-PC = nixpkgs.lib.nixosSystem {
@@ -23,6 +24,7 @@ in {
       bootloader
       core
       intel
+      printing
       nvidia
       wayland
       hmModule
