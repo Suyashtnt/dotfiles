@@ -1,46 +1,46 @@
 ;; system monitor
 
 (defpoll time :interval "1s"
-  "date '+%H:%M:%S'")
+"date '+%H:%M:%S'")
 
 (defpoll volume :interval "1s"
-  "scripts/getvol")
+"scripts/getvol")
 
 (defwindow systemStats
-          :monitor 0
-          :geometry (geometry :x "1%"
-                              :y "4%"
-                              :anchor "top right")
-          :stacking "bottom"
+  :monitor 0
+  :geometry (geometry :x "1%"
+    :y "4%"
+  :anchor "top right")
+  :stacking "bottom"
   (box
     :orientation "v"
     :class "rounded-xl bg-base p-xl"
     :space-evenly false
     (label :class "text-xl" :text time)
     (metric :name "🔊"
-           :value volume
-           :onchange "amixer sset Master {}%")
+      :value volume
+    :onchange "amixer sset Master {}%")
     (metric :name "﬙"
-            :value {EWW_CPU.avg}
-            :onchange "")
+      :value {EWW_CPU.avg}
+    :onchange "")
     (metric :name ""
-            :value {EWW_RAM.used_mem_perc}
-            :onchange "")
+      :value {EWW_RAM.used_mem_perc}
+    :onchange "")
     (metric :name "💾"
-            :value {EWW_DISK["/"].used_perc}
-            :onchange "")))
-    
+      :value {EWW_DISK["/"].used_perc}
+    :onchange "")))
+
 (defwidget metric [name value onchange]
   (box :orientation "h"
-       :class "metric mx-md"
-       :space-evenly false
+    :class "metric mx-md"
+    :space-evenly false
     (label :class "text-xl icon" :text name)
     (scale :min 0
-           :max 101
-           :width 200
-           :active {onchange != ""}
-           :value value
-           :onchange onchange)))
+      :max 101
+      :width 200
+      :active {onchange != ""}
+      :value value
+    :onchange onchange)))
 
 ;; POWER MODE
 
@@ -48,83 +48,83 @@
   (button
     :class "bg-base rounded-lg p-md m-lg"
     :onclick "swww img -t random --transition-step 1 --transition-fps 60 --transition-speed 20 ${path}"
-    (box 
-     :orientation "v"
-     :space-evenly false
-     (image 
-       :path path
-       :image-height 200)
-     name)))
+    (box
+      :orientation "v"
+      :space-evenly false
+      (image
+        :path path
+      :image-height 200)
+    name)))
 
 (defwidget circularMetric [name icon value color]
   (box :orientation "h" :space-evenly true
-    (circular-progress :class "${color}" :height 100 :width 100 :value value :thickness 10 :start-at 76 (label :text icon :class "cmicon")) 
+    (circular-progress :class "${color}" :height 100 :width 100 :value value :thickness 10 :start-at 76 (label :text icon :class "cmicon"))
     (label :text "${name} ${round(value, 0)}%" :class "text-xl")))
 
 (defwindow powerModeRight
   :monitor 0
   :geometry (geometry :height "80%"
-                      :width "17%"
-                      :anchor "right center")
+    :width "17%"
+  :anchor "right center")
   :exclusive true
-  (box :class "bg-base pmr p-lg" :orientation "v" :space-evenly false :spacing 20
+  (box :class "bg-base pmr p-lg" :orientation "v" :space-evenly false :spacing 10
     (label :class "text-xl" :text time)
-
-    (box :orientation "v" :spacing 50 
-      (circularMetric 
+    
+    (box :orientation "v" :spacing 50
+      (circularMetric
         :name "CPU"
-        :icon "﬙" 
+        :icon "﬙"
         :value {EWW_CPU.avg}
-        :color "blue")
+      :color "blue")
       (circularMetric
         :name "RAM"
         :icon ""
         :value {EWW_RAM.used_mem_perc}
-        :color "green")
-      (circularMetric 
-         :name "DISK"
-         :icon ""
-         :value {EWW_DISK["/"].used_perc}
-         :color "sapphire")
-      (label :class "text-xl" :text " ${EWW_NET["eno1"].up}  ${EWW_NET["eno1"].down}")))) 
+      :color "green")
+      (circularMetric
+        :name "DISK"
+        :icon ""
+        :value {EWW_DISK["/"].used_perc}
+      :color "sapphire")
+      (label :class "text-xl" :text " ${EWW_NET["eno1"].up}  ${EWW_NET["eno1"].down}"))))
 
 (defwindow powerModeLeft
   :monitor 0
   :geometry (geometry :height "80%"
-                      :width "18%"
-                      :anchor "left center")
+    :width "18%"
+  :anchor "left center")
   :exclusive true
-  (box :orientation "v" :space-evenly false :spacing 20 :class "bg-base pml p-lg" 
-    (calendar :class "rounded-lg py-sm")
+  (box :orientation "v" :space-evenly false :spacing 20 :class "bg-base pml p-lg"
+    (calendar :class "rounded-lg")
     (scroll :hscroll false :height 530
-     (box 
-      :orientation "v"
-      :space-evenly false
-      (bgSelImg :path "/home/tntman/dotfiles/wallpapers/gabriel.png" :name "Gabriel Ultrakill")
-      (bgSelImg :path "/home/tntman/dotfiles/wallpapers/oceanWaves.jpg" :name "Ocean Current")
-      (bgSelImg :path "/home/tntman/dotfiles/wallpapers/universeBox.png" :name "unzip universe.zip")
-      (bgSelImg :path "/home/tntman/dotfiles/wallpapers/waves.png" :name "W A V E S")
-      (bgSelImg :path "/home/tntman/dotfiles/wallpapers/nixShilling.png" :name "NixOS shill mode")
-      (bgSelImg :path "/home/tntman/dotfiles/wallpapers/rustShilling.png" :name "Rust shill mode")
-      (bgSelImg :path "/home/tntman/dotfiles/wallpapers/rustShillingAlt.png" :name "Rust shill mode alt")
-      (bgSelImg :path "/home/tntman/dotfiles/wallpapers/nixAtNight.png" :name "Using nix at 00:00")
-      (bgSelImg :path "/home/tntman/dotfiles/wallpapers/intoTheCatrix.png" :name "Into The Catrix")
-      (bgSelImg :path "/home/tntman/dotfiles/wallpapers/longRoadAhead.png" :name "A long road ahead")
-      (bgSelImg :path "/home/tntman/dotfiles/wallpapers/JsPain.jpg" :name "Experiencing pain")))))
+      (box
+        :orientation "v"
+        :space-evenly false
+        (bgSelImg :path "/home/tntman/dotfiles/wallpapers/gabriel.png" :name "Gabriel Ultrakill")
+        (bgSelImg :path "/home/tntman/dotfiles/wallpapers/oceanWaves.jpg" :name "Ocean Current")
+        (bgSelImg :path "/home/tntman/dotfiles/wallpapers/universeBox.png" :name "unzip universe.zip")
+        (bgSelImg :path "/home/tntman/dotfiles/wallpapers/waves.png" :name "W A V E S")
+        (bgSelImg :path "/home/tntman/dotfiles/wallpapers/nixShilling.png" :name "NixOS shill mode")
+        (bgSelImg :path "/home/tntman/dotfiles/wallpapers/rustShilling.png" :name "Rust shill mode")
+        (bgSelImg :path "/home/tntman/dotfiles/wallpapers/rustShillingAlt.png" :name "Rust shill mode alt")
+        (bgSelImg :path "/home/tntman/dotfiles/wallpapers/nixAtNight.png" :name "Using nix at 00:00")
+        (bgSelImg :path "/home/tntman/dotfiles/wallpapers/intoTheCatrix.png" :name "Into The Catrix")
+        (bgSelImg :path "/home/tntman/dotfiles/wallpapers/longRoadAhead.png" :name "A long road ahead")
+        (bgSelImg :path "/home/tntman/dotfiles/wallpapers/JsPain.jpg" :name "Experiencing pain")))))
 
 (defwindow powerModeTop
   :monitor 0
   :geometry (geometry :height "9%"
-                      :width "98%"
-                      :anchor "top center")
+    :width "98%"
+  :anchor "top center")
   :exclusive true
   (box :class "bg-base pmt" "sample text"))
 
 (defwindow powerModeBottom
   :monitor 0
   :geometry (geometry :x "0%"
-                      :height "9%"
-                      :width "98%"
-                      :anchor "bottom center")
+    :height "9%"
+    :width "98%"
+  :anchor "bottom center")
   :exclusive true
   (box :class "bg-base pmb" "sample text"))
