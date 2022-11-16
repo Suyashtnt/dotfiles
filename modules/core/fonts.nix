@@ -10,7 +10,8 @@
 
     fontconfig = {
       defaultFonts = {
-        monospace = ["ComicCodeLigatures Nerd Font"]; # or "JetBrainsMono Nerd Font" if you don't have ComicCodeLigatures
+        sansSerif = ["Inter"];
+        monospace = ["ComicCodeLigatures Nerd Font" "JetBrainsMono Nerd Font"];
       };
     };
   };
