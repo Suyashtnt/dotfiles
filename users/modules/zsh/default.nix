@@ -1,8 +1,7 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    exa
     thefuck
-    zoxide
+    atuin
   ];
 
   programs.zsh = {
@@ -22,11 +21,38 @@
       unset THEME
       eval "$(atuin init zsh)"
       eval "$(thefuck --alias e)"
-      eval "$(starship init zsh)"
     '';
     enableAutosuggestions = true;
     enableSyntaxHighlighting = true;
   };
 
-  programs.starship.enable = true;
+  programs = {
+    git = {
+      enable = true;
+      userName = "Suyashtnt";
+      userEmail = "suyashtnt@gmail.com";
+      extraConfig = {
+        init = {defaultBranch = "main";};
+        delta = {
+          syntax-theme = "Nord";
+          line-numbers = true;
+        };
+      };
+      lfs.enable = true;
+      delta.enable = true;
+    };
+
+    zoxide = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
+    dircolors = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
+    starship.enable = true;
+    exa.enable = true;
+  };
 }

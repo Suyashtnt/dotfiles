@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
+    nur.url = github:nix-community/NUR;
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -17,6 +18,12 @@
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
     nixpkgs-wayland.inputs.nixpkgs.follows = "nixpkgs";
     nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
+    webcord.url = "github:fufexan/webcord-flake";
+
+    discord = {
+      url = "github:catppuccin/discord";
+      flake = false;
+    };
 
     crane = {
       url = "github:ipetkov/crane";
@@ -60,6 +67,11 @@
         yaml-language-server
         alejandra
       ];
+    };
+    packages.${system} = {
+      catppuccin-folders = pkgs.callPackage ./pkgs/catppuccin-folders.nix {};
+      catppuccin-gtk = pkgs.callPackage ./pkgs/catppuccin-gtk.nix {};
+      catppuccin-cursors = pkgs.callPackage ./pkgs/catppuccin-cursors.nix {};
     };
   };
 }

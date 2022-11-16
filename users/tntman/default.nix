@@ -5,14 +5,20 @@
   ...
 }: {
   imports = [
-    ../modules/direnv
     ../modules/dunst
     ../modules/eww
+    ../modules/firefox
+    ../modules/gtk
     ../modules/hyprland
     ../modules/spotify
     ../modules/swaylock
+    ../modules/tools/btop.nix
+    ../modules/tools/direnv.nix
+    ../modules/tools/xdg.nix
+    ../modules/webcord
     ../modules/zsh
     inputs.hyprland.homeManagerModules.default
+    inputs.webcord.homeManagerModules.default
   ];
   manual.manpages.enable = false;
 
@@ -23,12 +29,9 @@
     stateVersion = "22.05";
 
     packages = with pkgs; [
-      # General
-      firefox
       chromium #for js debugging and lighthoouse
       foot
       wofi
-      btop
       helix
       authy
       dolphin
@@ -36,7 +39,6 @@
 
       # CLI utils
       xorg.xhost
-      atuin
       unzip
       ripgrep
       ghq
@@ -60,11 +62,6 @@
       gcc
       cmake
     ];
-
-    file.btop = {
-      source = inputs.btop-theme;
-      target = ".config/btop/themes";
-    };
   };
 
   programs = {
@@ -128,7 +125,6 @@
     };
 
     gpg.enable = true;
-    git.enable = true;
     zellij.enable = true;
 
     # Let Home Manager install and manage itself.
@@ -140,24 +136,6 @@
       enable = true;
       pinentryFlavor = "qt";
     };
-  };
-
-  home.pointerCursor.package = pkgs.nordzy-cursor-theme;
-  home.pointerCursor.name = "Nordzy-cursors";
-  home.pointerCursor.size = 16;
-  home.pointerCursor.gtk.enable = true;
-
-  gtk = {
-    enable = true;
-    theme = {
-      name = "Catppuccin-Dark";
-      package = pkgs.catppuccin-gtk;
-    };
-  };
-
-  qt = {
-    enable = true;
-    platformTheme = "gtk";
   };
 
   xresources.extraConfig = builtins.readFile (
