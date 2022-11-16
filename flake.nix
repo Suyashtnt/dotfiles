@@ -35,11 +35,6 @@
       flake = false;
     };
 
-    fnlfmt-git = {
-      url = "sourcehut:~technomancy/fnlfmt";
-      flake = false;
-    };
-
     grub-theme = {
       url = "github:catppuccin/grub";
       flake = false;
@@ -51,72 +46,20 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, flake-utils, nixpkgs-f2k, xresources
-    , fnlfmt-git, grub-theme, hyprland, nixpkgs-wayland, crane, btop-theme
-    , swww-src, ... }:
-    let
-      system = "x86_64-linux";
-      overlays = [ nixpkgs-f2k.overlays.default nixpkgs-wayland.overlay ];
-      pkgs = import nixpkgs {
-        inherit system overlays;
-        config = {
-          allowUnfree = true; # for nvidia, gitkraken, discord, etc
-        };
-      };
-      lib = nixpkgs.lib;
+  outputs = {self, ...} @ inputs: let
+    system = "x86_64-linux";
 
-      craneLib = crane.lib.${system};
-
-      swww = craneLib.buildPackage {
-        src = craneLib.cleanCargoSource swww-src;
-
-        nativeBuildInputs = with pkgs; [ pkg-config libxkbcommon ];
-
-        doCheck = false; # breaks on nixOS
-      };
-    in {
-      nixosConfigurations = {
-        GAMER-PC = lib.nixosSystem {
-          inherit system;
-
-          modules = [
-            { _module.args = { inherit overlays grub-theme; }; }
-            ./system/GAMER-PC/configuration.nix
-            home-manager.nixosModules.home-manager
-            # HM config configurer
-            ({
-              home-manager.useGlobalPkgs = true;
-              home-manager.sharedModules =
-                [ hyprland.homeManagerModules.default ];
-              home-manager.users.tntman = lib.mkMerge [
-                {
-                  _module.args = {
-                    inherit overlays xresources pkgs lib hyprland btop-theme
-                      swww;
-                  };
-                }
-                ./users/tntman/home.nix
-              ];
-            })
-          ];
-        };
-      };
-      devShell.${system} = pkgs.mkShell {
-        packages = with pkgs; [
-          rnix-lsp
-          rustc
-          cargo
-          sumneko-lua-language-server
-          stylua
-          python311
-          yaml-language-server
-          fennel
-          nixfmt
-          (fnlfmt.overrideAttrs (old: {
-            version = "git";
-            src = fnlfmt-git;
-          }))
-        ];
-      };
+    pkgs = import inputs.nixpkgs {
+      inherit system;
     };
+  in {
+    nixosConfigurations = import ./systems inputs;
+    devShell.x86_64-linux = pkgs.mkShell {
+      packages = with pkgs; [
+        rnix-lsp
+        yaml-language-server
+        alejandra
+      ];
+    };
+  };
 }

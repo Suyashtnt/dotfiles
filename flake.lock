@@ -224,22 +224,6 @@
         "type": "github"
       }
     },
-    "fnlfmt-git": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1653241551,
-        "narHash": "sha256-j2w1C4AVXtV+bt1V9ovaVQKQtxds+0+HZ2a+sl8rMIQ=",
-        "owner": "~technomancy",
-        "repo": "fnlfmt",
-        "rev": "b2e81ab0d9dfe1214b4ea80b9b6f67ce546d0805",
-        "type": "sourcehut"
-      },
-      "original": {
-        "owner": "~technomancy",
-        "repo": "fnlfmt",
-        "type": "sourcehut"
-      }
-    },
     "grub-theme": {
       "flake": false,
       "locked": {
@@ -476,7 +460,6 @@
         "btop-theme": "btop-theme",
         "crane": "crane",
         "flake-utils": "flake-utils_2",
-        "fnlfmt-git": "fnlfmt-git",
         "grub-theme": "grub-theme",
         "home-manager": "home-manager",
         "hyprland": "hyprland",
