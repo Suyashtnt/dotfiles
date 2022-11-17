@@ -38,14 +38,12 @@
       wofi
       authy
       dolphin
-      easyeffects
 
       # CLI utils
       xorg.xhost
       unzip
       ripgrep
       cachix
-      glib
       docker-compose
 
       openssl
