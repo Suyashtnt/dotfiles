@@ -5,20 +5,23 @@
   ...
 }: {
   imports = [
-    ../modules/dunst
-    ../modules/eww
-    ../modules/firefox
+    ../modules/git
     ../modules/gtk
     ../modules/hyprland
-    ../modules/spotify
+    ../modules/programs/btop
+    ../modules/programs/cava
+    ../modules/programs/dunst
+    ../modules/programs/eww
+    ../modules/programs/firefox
+    ../modules/programs/foot
+    ../modules/programs/neofetch
+    ../modules/programs/obs
+    ../modules/programs/spotify
+    ../modules/programs/vscode
     ../modules/swaylock
-    ../modules/tools/btop.nix
     ../modules/tools/direnv.nix
     ../modules/tools/xdg.nix
-    ../modules/webcord
     ../modules/zsh
-    ../modules/vscode
-    ../modules/obs
     inputs.hyprland.homeManagerModules.default
     inputs.webcord.homeManagerModules.default
   ];
@@ -32,9 +35,7 @@
 
     packages = with pkgs; [
       chromium #for js debugging and lighthoouse
-      foot
       wofi
-      helix
       authy
       dolphin
       easyeffects
@@ -43,65 +44,20 @@
       xorg.xhost
       unzip
       ripgrep
-      ghq
-      gh
-      fzf
       cachix
       glib
       docker-compose
-      gitui
-      cava
-      neofetch
-      alsa-utils
 
-      # libs
       openssl
-      pinentry-qt
-      pkg-config
-      gcc
-      cmake
     ];
   };
 
   programs = {
-    gpg.enable = true;
-    zellij.enable = true;
-
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
-  };
-
-  services = {
-    gpg-agent = {
-      enable = true;
-      pinentryFlavor = "qt";
-    };
   };
 
   xresources.extraConfig = builtins.readFile (
     inputs.xresources + "/mocha.Xresources"
   );
-
-  xdg.configFile = {
-    neofetch = {
-      source = ./config/neofetch;
-      recursive = true;
-    };
-    zellij = {
-      source = ./config/zellij;
-      recursive = true;
-    };
-    cava = {
-      source = ./config/cava;
-      recursive = true;
-    };
-    helix = {
-      source = ./config/helix;
-      recursive = true;
-    };
-    foot = {
-      source = ./config/foot;
-      recursive = true;
-    };
-  };
 }

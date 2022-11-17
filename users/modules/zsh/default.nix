@@ -27,21 +27,6 @@
   };
 
   programs = {
-    git = {
-      enable = true;
-      userName = "Suyashtnt";
-      userEmail = "suyashtnt@gmail.com";
-      extraConfig = {
-        init = {defaultBranch = "main";};
-        delta = {
-          syntax-theme = "Nord";
-          line-numbers = true;
-        };
-      };
-      lfs.enable = true;
-      delta.enable = true;
-    };
-
     zoxide = {
       enable = true;
       enableZshIntegration = true;
