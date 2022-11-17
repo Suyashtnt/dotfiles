@@ -1,26 +1,38 @@
-# the maybe good dotfiles
+<h1 align="center"> the maybe good (NixOS) dotfiles </h1>
+<h2 align="center"> <i>I think they are pretty good</i> </h2>
 
-## idk
+## Install
+1. Grab and flash the latest NixOS ISO
+2. Boot up into it and format your drives
+3. Enter the following (steps taken from https://github.com/rxyhn/dotfiles/blob/28b6550c4b812ff0edaa0db14d22ea107d8fd9a0/.github/README.md)
+Replace GAMER-PC with the system you want (currently available: `GAMER-PC`)
+```
+# Switch to root user:
+sudo su -
 
-this repo relies that you use nixOS and that you have 4 partitions labled:
+# Get into a Nix shell with Nix unstable and git
+nix-shell -p git nixUnstable
 
-- root
-- BOOT
-- BulkStorage (optional)
-- Games (optional)
+# Clone my dotfiles
+git clone https://github.com/Suyashtnt/dotfiles /mnt/etc/nixos
 
-BOOT is an fat partition for booting into the OS
+# Remove this file
+rm /mnt/etc/nixos/systems/GAMER-PC/hardware-configuration.nix
 
-root is a btrfs partition with the following subvolumes:
+# Generate a config and copy the hardware configuration, disregarding the generated configuration.nix
+nixos-generate-config --root /mnt
+cp /mnt/etc/nixos/hardware-configuration.nix /mnt/etc/nixos/systems/GAMER-PC/hardware-configuration.nix
+rm /mnt/etc/nixos/configuration.nix
 
-- root
-- nix
-- home
+# Make sure you're in the configuration directory
+cd /mnt/etc/nixos
 
-BulkStorage is an ext4 partition. Remove the part in hardware-configuration.nix if you don't use it
-Games is an ntfs partition. Remove the part in hardware-configuration.nix if you don't use it
+# Install desktop config
+nixos-install --flake '.#GAMER-PC'
+```
+4. Once you are into Hyprland, reclone the dotfiles into `~/dotfiles`
 
-the repo **MUST** be cloned into ~/dotfiles. It relies numerous times that its cloned there.
+the repo **MUST** be cloned into ~/dotfiles. It relies that its cloned there.
 
 ## obligatory screenshots
 
@@ -36,5 +48,5 @@ https://user-images.githubusercontent.com/45307955/202267624-130ba057-320a-46ee-
 
 ## Inspired by
 
-- @sioodmy The basis of my original hyprland config. Helped a lot with nvidia.
+- @sioodmy The basis of my original hyprland config. Helped a lot with nvidia. Stole a bit of their config for getting hyprland to work + some of their catppuccin modules
 - @rxyhn Their rices got me into ricing. I also may or may not have stolen a lot of my refactored config from them.
