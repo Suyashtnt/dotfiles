@@ -39,6 +39,7 @@ in {
     wl-clipboard
     pngquant
     swww
+    libsForQt5.qt5.qtwayland
   ];
 
   wayland.windowManager.hyprland = {

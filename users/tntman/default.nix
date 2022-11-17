@@ -17,6 +17,8 @@
     ../modules/tools/xdg.nix
     ../modules/webcord
     ../modules/zsh
+    ../modules/vscode
+    ../modules/obs
     inputs.hyprland.homeManagerModules.default
     inputs.webcord.homeManagerModules.default
   ];
@@ -51,13 +53,10 @@
       cava
       neofetch
       alsa-utils
-      nixopsUnstable
-      wakatime
 
       # libs
       openssl
       pinentry-qt
-      libsForQt5.qt5.qtwayland
       pkg-config
       gcc
       cmake
@@ -65,65 +64,6 @@
   };
 
   programs = {
-    ncspot = {
-      enable = true;
-      package =
-        (pkgs.ncspot.override {
-          withMPRIS = true;
-          withPulseAudio = true;
-        })
-        .overrideAttrs (old: {
-          buildFeatures = (old.buildFeatures or []) ++ ["cover" "share_clipboard"];
-          cargoBuildFeatures = (old.buildFeatures or []) ++ ["cover" "share_clipboard"];
-
-          buildInputs =
-            (old.buildInputs or [])
-            ++ (with pkgs; [
-              ueberzug
-              xorg.libX11
-            ]);
-
-          nativeBuildInputs =
-            (old.nativeBuildInputs or [])
-            ++ (with pkgs; [
-              python311
-            ]);
-        });
-      settings = {
-        shuffle = true;
-        gapless = true;
-        use_nerdfont = true;
-        default_keybindings = true;
-        notify = true;
-        repeat = "playlist";
-      };
-    };
-
-    obs-studio = {
-      enable = true;
-      plugins = with pkgs.obs-studio-plugins; [
-        wlrobs
-      ];
-    };
-
-    vscode = {
-      enable = true;
-      extensions = with pkgs.vscode-extensions; [
-        vscodevim.vim
-        yzhang.markdown-all-in-one
-        bbenoist.nix
-        WakaTime.vscode-wakatime
-        catppuccin.catppuccin-vsc
-        mkhl.direnv
-        dbaeumer.vscode-eslint
-        eamodio.gitlens
-        svelte.svelte-vscode
-        denoland.vscode-deno
-        lokalise.i18n-ally
-        vadimcn.vscode-lldb
-      ];
-    };
-
     gpg.enable = true;
     zellij.enable = true;
 
