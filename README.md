@@ -49,4 +49,4 @@ https://user-images.githubusercontent.com/45307955/202267624-130ba057-320a-46ee-
 ## Inspired by
 
 - @sioodmy The basis of my original hyprland config. Helped a lot with nvidia. Stole a bit of their config for getting hyprland to work + some of their catppuccin modules
-- @rxyhn Their rices got me into ricing. I also may or may not have stolen a lot of my refactored config from them.
+- @rxyhn Their rices got me into ricing. I also may or may not have stolen a few (like 6) of their modules

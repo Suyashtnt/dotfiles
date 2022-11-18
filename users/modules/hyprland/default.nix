@@ -68,10 +68,8 @@ in {
     provider = "geoclue2";
   };
 
-  systemd.user.services = {
-    swww = mkService {
-      Unit.Description = "Wallpaper chooser";
-      Service.ExecStart = "${pkgs.swww}/bin/swww init";
-    };
+  systemd.user.services.swww = mkService {
+    Unit.Description = "Wallpaper chooser";
+    Service.ExecStart = "${pkgs.swww}/bin/swww init --no-daemon";
   };
 }
