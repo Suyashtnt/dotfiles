@@ -2,11 +2,13 @@
 <h2 align="center"> <i>I think they are pretty good</i> </h2>
 
 ## Install
+
 1. Grab and flash the latest NixOS ISO
 2. Boot up into it and format your drives
 3. Enter the following (steps taken from https://github.com/rxyhn/dotfiles/blob/28b6550c4b812ff0edaa0db14d22ea107d8fd9a0/.github/README.md)
 Replace GAMER-PC with the system you want (currently available: `GAMER-PC`)
-```
+
+```bash
 # Switch to root user:
 sudo su -
 
@@ -30,6 +32,7 @@ cd /mnt/etc/nixos
 # Install desktop config
 nixos-install --flake '.#GAMER-PC'
 ```
+
 4. Once you are into Hyprland, reclone the dotfiles into `~/dotfiles`
 
 the repo **MUST** be cloned into ~/dotfiles. It relies that its cloned there.
