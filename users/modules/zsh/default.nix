@@ -27,6 +27,11 @@
   };
 
   programs = {
+    starship = {
+      enable = true;
+      settings = builtins.fromTOML (builtins.readFile ./starship.toml);
+    };
+
     zoxide = {
       enable = true;
       enableZshIntegration = true;
@@ -37,7 +42,6 @@
       enableZshIntegration = true;
     };
 
-    starship.enable = true;
     exa.enable = true;
   };
 }

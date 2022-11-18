@@ -16,6 +16,7 @@ in {
   nixpkgs.config.allowBroken = false;
 
   nixpkgs.overlays = [
+    inputs.nixpkgs-f2k.overlays.default
     (final: super: {
       makeModulesClosure = x:
         super.makeModulesClosure (x // {allowMissing = true;});

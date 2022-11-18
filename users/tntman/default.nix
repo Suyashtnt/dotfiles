@@ -18,6 +18,7 @@
     ../modules/programs/obs
     ../modules/programs/spotify
     ../modules/programs/vscode
+    ../modules/programs/wezterm
     ../modules/swaylock
     ../modules/tools/direnv.nix
     ../modules/tools/xdg.nix

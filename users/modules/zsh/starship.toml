@@ -1,0 +1,84 @@
+## ░█▀▀░▀█▀░█▀█░█▀▄░█▀▀░█░█░▀█▀░█▀█
+## ░▀▀█░░█░░█▀█░█▀▄░▀▀█░█▀█░░█░░█▀▀
+## ░▀▀▀░░▀░░▀░▀░▀░▀░▀▀▀░▀░▀░▀▀▀░▀░░
+## CROSS-SHELL PROMPT
+##
+## The minimal, blazing-fast, and infinitely customizable prompt for any shell!
+## modified from @Syndrizzle (https://github.com/Syndrizzle)
+
+format = "$all"
+right_format = """$git_branch$git_status$cmd_duration$directory"""
+command_timeout = 3000
+
+# Disable the blank line at the start of the prompt
+add_newline = false
+
+[line_break]
+disabled = true
+
+[character]
+success_symbol = "[](fg:#313244 bg:none)[](fg:#89b4fa bg:#313244)[](fg:#313244 bg:none)" # The "success_symbol" segment is being set to "➜" with the color "bold green"
+error_symbol = "[](fg:#313244 bg:none)[](fg:#f38ba8 bg:#313244)[](fg:#313244 bg:none)"
+vicmd_symbol = "[](fg:#313244 bg:none)[](fg:#a6e3a1 bg:#313244)[](fg:#313244 bg:none)"
+
+[hostname]
+ssh_only = true
+format = "[$hostname](bold blue) "
+disabled = false
+
+[cmd_duration]
+min_time = 1
+format = "[](fg:#313244 bg:none)[$duration]($style)[](fg:#313244 bg:#313244)[](fg:#cba6f7 bg:#313244)[](fg:#313244 bg:#cba6f7)[](fg:#cba6f7 bg:none) "
+disabled = false
+style = "fg:#cdd6f4 bg:#313244"
+
+[directory]
+format = "[](fg:#313244 bg:none)[$path]($style)[](fg:#313244 bg:#313244)[](fg:#89b4fa bg:#313244)[](fg:#313244 bg:#89b4fa)[](fg:#89b4fa bg:none)"
+style = "fg:#cdd6f4 bg:#313244"
+use_os_path_sep = false                                                                                                                                # fuck windows :verynice:
+truncate_to_repo = true
+truncation_length = 3
+truncation_symbol = "../"
+
+[directory.substitutions]
+'.config' = ' '
+'Desktop' = ' '
+'Documents' = ' '
+'Downloads' = ' '
+'Music' = ' '
+'Pictures' = ' '
+
+[git_branch]
+format = "[](fg:#313244 bg:none)[$branch]($style)[](fg:#313244 bg:#313244)[](fg:#fab387 bg:#313244)[](fg:#313244 bg:#fab387)[](fg:#fab387 bg:none) "
+style = "fg:#cdd6f4 bg:#313244"
+
+[git_status]
+format = "[](fg:#313244 bg:none)[$all_status$ahead_behind]($style)[](fg:#313244 bg:#313244)[](fg:#f9e2af bg:#313244)[](fg:#313244 bg:#f9e2af)[](fg:#f9e2af bg:none) "
+style = "fg:#cdd6f4 bg:#313244"
+
+conflicted = "="
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+up_to_date = ""
+untracked = "?${count}"
+stashed = ""
+modified = "!${count}"
+staged = "+${count}"
+renamed = "»${count}"
+deleted = "${count}"
+
+[git_commit]
+format = "[\\($hash\\)]($style) [\\($tag\\)]($style)"
+style = "green"
+
+[git_state]
+rebase = "REBASE"
+merge = "MERGE"
+revert = "REVERT"
+cherry_pick = "CHERRY"
+bisect = "BISECT"
+am = "AM"
+am_or_rebase = "AM/REBASE"
+style = "yellow"
+format = '\([$state( $progress_current/$progress_total)]($style)\) '

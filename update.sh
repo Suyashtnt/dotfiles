@@ -2,5 +2,5 @@
 
 pushd ~/dotfiles
 nix flake update
-./apply-system.sh
+./rebuild.sh
 popd
