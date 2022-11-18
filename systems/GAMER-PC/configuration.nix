@@ -2,7 +2,7 @@
   users.users.tntman = {
     isNormalUser = true;
     description = "Tabiasgeee Human";
-    extraGroups = ["networkmanager" "wheel" "scanner" "lp" "libvirtd" "docker" "podman"];
+    extraGroups = ["networkmanager" "wheel" "scanner" "lp" "docker"];
     initialPassword = "password"; # Change this with passwd
     packages = with pkgs; [];
     shell = pkgs.zsh;
@@ -18,6 +18,17 @@
     xserver = {
       layout = "za";
       xkbVariant = "";
+    };
+
+    greetd = {
+      enable = true;
+      settings = rec {
+        initial_session = {
+          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+          user = "tntman";
+        };
+        default_session = initial_session;
+      };
     };
 
     plex = {
@@ -41,6 +52,13 @@
     openssh.enable = true;
   };
 
+  systemd.services.greetd = {
+    unitConfig = {
+      ExecStartPre = "kill -SIGRTMIN+21 1";
+      ExecStartPost = "kill -SIGRTMIN+20 1";
+    };
+  };
+
   security = {
     # allow wayland lockers to unlock the screen
     pam.services.swaylock.text = "auth include login";
@@ -50,16 +68,7 @@
   programs.dconf.enable = true;
 
   virtualisation = {
-    libvirtd = {
-      enable = true;
-      qemu = {
-        ovmf.enable = true;
-        ovmf.packages = [pkgs.OVMFFull.fd];
-        swtpm.enable = true;
-      };
-    };
     docker.enable = true;
-    lxd.enable = true;
   };
 
   environment.systemPackages = with pkgs; [
@@ -69,6 +78,7 @@
     ifuse
     virt-manager
     docker-client
+    pkgs.greetd.tuigreet
   ];
 
   environment.variables = {

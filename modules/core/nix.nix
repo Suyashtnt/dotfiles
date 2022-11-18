@@ -10,6 +10,24 @@
     nativeBuildInputs = with pkgs; [pkg-config libxkbcommon];
     doCheck = false; # breaks on nixOS
   };
+
+  hyprland-nvidia = inputs.hyprland.packages.${pkgs.system}.default.override {
+    nvidiaPatches = true;
+    wlroots =
+      inputs.hyprland.packages.${pkgs.system}.wlroots-hyprland.overrideAttrs
+      (old: {
+        patches =
+          (old.patches or [])
+          ++ [
+            (pkgs.fetchpatch {
+              url = "https://aur.archlinux.org/cgit/aur.git/plain/0001-nvidia-format-workaround.patch?h=hyprland-nvidia-screenshare-git"; # proper screen sharing through aur patch
+              sha256 = "A9f1p5EW++mGCaNq8w7ZJfeWmvTfUm4iO+1KDcnqYX8=";
+            })
+          ];
+      });
+  };
+
+  hyprland = inputs.hyprland.packages.${pkgs.system}.default;
 in {
   environment.defaultPackages = [];
   nixpkgs.config.allowUnfree = true;
@@ -20,7 +38,7 @@ in {
     (final: super: {
       makeModulesClosure = x:
         super.makeModulesClosure (x // {allowMissing = true;});
-      inherit swww;
+      inherit swww hyprland-nvidia hyprland;
     })
   ];
 
