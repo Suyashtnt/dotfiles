@@ -1,4 +1,5 @@
 local wezterm = require "wezterm"
+local gpus = wezterm.gui.enumerate_gpus()
 
 return {
 	color_scheme = "Catppuccin Mocha",
@@ -8,16 +9,17 @@ return {
 	},
 	font_size = 13,
 	line_height = 1.6,
-	font_antialias = "Subpixel",
-        harfbuzz_features = {
-          "cv06=1",
-          "cv14=1",
-          "cv32=1",
-          "ss04=1",
-          "ss07=1",
-          "ss09=1",
-        },
-	enable_wayland = false, -- https://github.com/wez/wezterm/issues/2755
+	harfbuzz_features = {
+		"cv06=1",
+		"cv14=1",
+		"cv32=1",
+		"ss04=1",
+		"ss07=1",
+		"ss09=1",
+	},
+	webgpu_preferred_adapter = gpus[1],
+	front_end = "WebGpu",
+	enable_wayland = true, -- https://github.com/wez/wezterm/issues/1701
 	cursor_blink_ease_in = "EaseIn",
 	cursor_blink_ease_out = "EaseOut",
 	animation_fps = 120,

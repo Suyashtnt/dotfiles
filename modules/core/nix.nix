@@ -38,6 +38,7 @@ in {
     (final: super: {
       makeModulesClosure = x:
         super.makeModulesClosure (x // {allowMissing = true;});
+
       inherit swww hyprland-nvidia hyprland;
     })
   ];
