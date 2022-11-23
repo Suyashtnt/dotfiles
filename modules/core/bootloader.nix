@@ -21,7 +21,11 @@
 
     extraModprobeConfig = "options kvm_intel nested=1";
     supportedFilesystems = ["ntfs"];
+
     kernelModules = ["kvm-amd"];
     kernelPackages = pkgs.linuxPackages_latest;
+    kernelParams = [
+      "quiet"
+    ];
   };
 }
