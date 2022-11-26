@@ -37,17 +37,15 @@ nixos-install --flake '.#GAMER-PC'
 
 the repo **MUST** be cloned into ~/dotfiles. It relies that its cloned there.
 
-## obligatory screenshots
+## Obligatory screenshots
+
+<https://user-images.githubusercontent.com/45307955/204083443-4c586a4f-2a16-43d7-9ddc-bf274814a8d9.mp4>
+
+### Older ones
 
 ![Image of desktop](https://cdn.discordapp.com/attachments/273539705595756544/1041109605268328538/image.png)
 ![Another one](https://cdn.discordapp.com/attachments/273539705595756544/1041109217534296124/image.png)
 ![Firefox theme + github theme](https://user-images.githubusercontent.com/45307955/202266026-843597c3-8f46-45bc-b289-d1bbe192a050.png)
-
-### WIP: powermode
-
-![WIP showcase of powermode](https://user-images.githubusercontent.com/45307955/202266864-6738de16-3ebf-41c1-a1ed-1e9526ed5038.png)
-
-https://user-images.githubusercontent.com/45307955/202267624-130ba057-320a-46ee-b3d3-d09a347b9a0a.mp4
 
 ## Inspired by
 
