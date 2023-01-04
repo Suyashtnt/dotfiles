@@ -1,6 +1,8 @@
 <h1 align="center"> the maybe good (NixOS) dotfiles </h1>
 <h2 align="center"> <i>I think they are pretty good</i> </h2>
 
+# VERY BAIE OLD, check out my commafiles now at <https://github.com/Suyashtnt/commafiles>
+
 ## Install
 
 1. Grab and flash the latest NixOS ISO
